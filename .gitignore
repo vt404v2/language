@@ -1,0 +1,12 @@
+/cmake-build-debug/
+/cmake-build-debug-coverage/
+/.idea/
+/CMakeFiles/
+/.ninja_deps
+/.ninja_log
+/build.ninja
+/.cmake/
+/CMakeCache.txt
+/cmake_install.cmake
+/Testing/Temporary/LastTest.log
+/language

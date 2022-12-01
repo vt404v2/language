@@ -1,0 +1,45 @@
+digraph TREE {
+    rankdir=TB;
+    node_0x55805d137700[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55805d137640} | {INDEX | 0x55805d137700} | {RIGHT | 0x55805d1376d0}}}"]
+    node_0x55805d137640[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {+ |
+            {{LEFT | 0x55805d1375e0} | {INDEX | 0x55805d137640} | {RIGHT | 0x55805d137610}}}"]
+    node_0x55805d1375e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {x |
+            {{LEFT | (nil)} | {INDEX | 0x55805d1375e0} | {RIGHT | (nil)}}}"]
+    node_0x55805d137610[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55805d137610} | {RIGHT | (nil)}}}"]
+    node_0x55805d1376d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {+ |
+            {{LEFT | 0x55805d137670} | {INDEX | 0x55805d1376d0} | {RIGHT | 0x55805d1376a0}}}"]
+    node_0x55805d137670[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {4 |
+            {{LEFT | (nil)} | {INDEX | 0x55805d137670} | {RIGHT | (nil)}}}"]
+    node_0x55805d1376a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {8 |
+            {{LEFT | (nil)} | {INDEX | 0x55805d1376a0} | {RIGHT | (nil)}}}"]
+    node_0x55805d137700->node_0x55805d137640[color="#a66be8", fontcolor="#6be871"];    node_0x55805d137640->node_0x55805d1375e0[color="#a66be8", fontcolor="#6be871"];    node_0x55805d137640->node_0x55805d137610[color="#a66be8", fontcolor="#e87b6b"];    node_0x55805d137700->node_0x55805d1376d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55805d1376d0->node_0x55805d137670[color="#a66be8", fontcolor="#6be871"];    node_0x55805d1376d0->node_0x55805d1376a0[color="#a66be8", fontcolor="#e87b6b"];}
