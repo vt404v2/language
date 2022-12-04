@@ -157,6 +157,12 @@ size_t tokenize(char *filename,
             tokens->tokens[tokens->size].value.bracket = *readPtr;
             readPtr++;
         }
+        else if (*readPtr == ',')
+        {
+            tokens->tokens[tokens->size].type = SPECIAL_TOKEN;
+            tokens->tokens[tokens->size].value.special_token = *readPtr;
+            readPtr++;
+        }
         else
         {
             if (*readPtr == 0)

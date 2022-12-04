@@ -364,13 +364,72 @@ Node *getCodeBlock(Tokens *tokens,
     return root;
 }
 
+Node *getDefFunction(Tokens *tokens,
+                     size_t *index,
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        IS_NAME_TOKEN("def"))
+    {
+        (*index)++;
+
+        size_t func_id = TOKEN.value.id_in_table;
+        Node *params_root = createNode(FICTIVE_NODE,
+                                       {},
+                                       nullptr,
+                                       nullptr);
+        Node *params_last = params_root;
+
+        (*index)++;
+        ASSERT_OK(TOKEN.value.bracket == '(',
+                  "Expected (, but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+
+        while (TOKEN.value.bracket != ')')
+        {
+            params_last->left = getVariable(tokens, index, name_table);
+            params_last->right = createNode(FICTIVE_NODE,
+                                            {},
+                                            nullptr,
+                                            nullptr);
+            params_last = params_last->right;
+            if (TOKEN.value.bracket == ')')
+                break;
+            ASSERT_OK(TOKEN.value.bracket == ',',
+                      "Expected ',', but got _%c_\n",
+                      TOKEN.value.bracket)
+            (*index)++;
+
+        }
+
+        ASSERT_OK(TOKEN.value.bracket == ')',
+                  "Expected ), but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+
+        (*index)++;
+        Node *body = getCodeBlock(tokens, index, name_table);
+        (*index)++;
+
+        Node *func_def_node = createNode(DEF,
+                                         {.def_value = func_id},
+                                         params_root,
+                                         body);
+        return createNode(FICTIVE_NODE, {}, func_def_node, nullptr);
+    }
+    return nullptr;
+}
+
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
-
+    ASSERT_OK(TOKEN.value.bracket != '}',
+              "Expected not }, but got _%c_\n",
+              TOKEN.value.bracket)
     Node *value = getVarDec(tokens, index, name_table);
     if (value)
         return value;
@@ -381,6 +440,9 @@ Node *getPrimaryExpression(Tokens *tokens,
     if (value)
         return value;
     value = getWhile(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getDefFunction(tokens, index, name_table);
     if (value)
         return value;
     if (TOKEN.type == BRACKET_TOKEN &&
@@ -405,18 +467,20 @@ Node *getPrimaryExpression(Tokens *tokens,
         (*index)++;
     }
     else if (TOKEN.type == KEYWORD_TOKEN)
-        value = getVariable(tokens, index);
+        value = getVariable(tokens, index, name_table);
     else
     {
         //        fprintf(stderr, "get value index: %zu\n", *index);
-        value = getValue(tokens, index);
+        value = getValue(tokens, index, name_table);
         //        fprintf(stderr, "after get value index: %zu\n", *index);
     }
 
     return value;
 }
 
-Node *getValue(Tokens *tokens, size_t *index)
+Node *getValue(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
@@ -431,7 +495,9 @@ Node *getValue(Tokens *tokens, size_t *index)
     return value;
 }
 
-Node *getVariable(Tokens *tokens, size_t *index)
+Node *getVariable(Tokens *tokens,
+                  size_t *index,
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
 
@@ -447,8 +513,9 @@ Node *getVariable(Tokens *tokens, size_t *index)
 
 bool is_keyword(char *word)
 {
-    return strcasecmp(word, "if") == 0 ||
-        strcasecmp(word, "else") == 0 ||
-        strcasecmp(word, "while") == 0 ||
-        strcasecmp(word, "var") == 0;
+    return strcasecmp(word, "if")    == 0 ||
+           strcasecmp(word, "else")  == 0 ||
+           strcasecmp(word, "while") == 0 ||
+           strcasecmp(word, "var")   == 0 ||
+           strcasecmp(word, "def")   == 0;
 }

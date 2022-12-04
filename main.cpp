@@ -30,9 +30,13 @@ int main()
                 case BRACKET_TOKEN:
                     printf("Value: %c\n", tokens.tokens[i].value.bracket);
                     break;
+                case SPECIAL_TOKEN:
+                    printf("Value: %c\n", tokens.tokens[i].value.special_token);
+                    break;
                 case INCORRECT_TYPE_TOKEN:
                     printf("Value: INCORRECT VALUE\n");
                     break;
+
             }
         }
     }

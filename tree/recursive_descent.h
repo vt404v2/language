@@ -74,13 +74,21 @@ Node *getCodeBlock(Tokens *tokens,
                    size_t *index,
                    char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getDefFunction(Tokens *tokens,
+                     size_t *index,
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getValue(Tokens *tokens, size_t *index);
+Node *getValue(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getVariable(Tokens *tokens, size_t *index);
+Node *getVariable(Tokens *tokens,
+                  size_t *index,
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 bool is_keyword(char *word);
 

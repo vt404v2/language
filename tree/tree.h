@@ -22,6 +22,7 @@ enum TokenType
     KEYWORD_TOKEN        =  2,
     OPERATOR_TOKEN       =  3,
     BRACKET_TOKEN        =  4,
+    SPECIAL_TOKEN        =  5,
 };
 
 enum OperationType
@@ -56,6 +57,7 @@ union TokenValue
     size_t id_in_table;
     OperationType operation;
     char bracket;
+    char special_token;
 };
 
 struct Token_t
