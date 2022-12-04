@@ -59,7 +59,7 @@ Node *getLogOp(Tokens *tokens,
         OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
 
-        Node *rightValue = getMulDiv(tokens, index, name_table);
+        Node *rightValue = getAddSub(tokens, index, name_table);
         leftValue = createNewNode(OPERATOR,
                                   {.op_value = tokenValue},
                                   leftValue,
