@@ -282,9 +282,10 @@ Node *getIf(Tokens *tokens,
     {
         (*index)++;
         Node *condition_node = getPrimaryExpression(tokens, index, name_table);
-        Node *positive_branch = getPrimaryExpression(tokens, index, name_table);
 
+        Node *positive_branch = getPrimaryExpression(tokens, index, name_table);
         Node *negative_branch = nullptr;
+
         if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("else"))
         {
             (*index)++;
@@ -299,6 +300,26 @@ Node *getIf(Tokens *tokens,
         return createNode(FICTIVE_NODE,
                           {},
                           if_node, nullptr);
+    }
+    return nullptr;
+}
+
+Node *getWhile(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("while"))
+    {
+        (*index)++;
+        Node *condition_node = getPrimaryExpression(tokens, index, name_table);
+        Node *action = getPrimaryExpression(tokens, index, name_table);
+        Node *while_node = createNode(WHILE,
+                                      {},
+                                      condition_node,
+                                      action);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          while_node, nullptr);
     }
     return nullptr;
 }
@@ -339,6 +360,9 @@ Node *getPrimaryExpression(Tokens *tokens,
     if (value)
         return value;
     value = getIf(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getWhile(tokens, index, name_table);
     if (value)
         return value;
     if (TOKEN.type == BRACKET_TOKEN &&

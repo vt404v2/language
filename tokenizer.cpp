@@ -81,7 +81,7 @@ size_t tokenize(char *filename,
         {
             if (*readPtr == 0)
                 break;
-            ASSERT_OK(0, "Incorrect token _%d_", *readPtr)
+            ASSERT_OK(0, "Incorrect token _%c_", *readPtr)
         }
         tokens->size++;
     }
