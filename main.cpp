@@ -2,6 +2,8 @@
 
 int main()
 {
+    treeClearGraphLogFile();
+    treeSetLogFile();
     char filename[] = "program.txt";
     char name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 
@@ -48,6 +50,7 @@ int main()
 
     treeDtor(&tree);
     dtorTokens(&tokens);
+    treeCloseLogFile();
 
     return 0;
 }
