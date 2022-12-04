@@ -185,16 +185,16 @@ void getValueOfNode(const Node *node,
                     sprintf(*node_value, "==");
                     break;
                 case GREATER_OP:
-                    sprintf(*node_value, ">");
+                    sprintf(*node_value, "greater");
                     break;
                 case BELOW_OP:
-                    sprintf(*node_value, "<");
+                    sprintf(*node_value, "smaller");
                     break;
                 case GREATER_EQ_OP:
-                    sprintf(*node_value, ">=");
+                    sprintf(*node_value, "greater or equal");
                     break;
                 case BELOW_EQ_OP:
-                    sprintf(*node_value, "<=");
+                    sprintf(*node_value, "smaller or equal");
                     break;
                 case NOT_EQ_OP:
                     sprintf(*node_value, "!=");

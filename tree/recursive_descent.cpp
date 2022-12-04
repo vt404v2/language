@@ -12,15 +12,22 @@
         last_node = value;       \
     }
 
-//#define ADD_NODE_AND_CONTINUE \
-//if (value != nullptr)         \
-//{                             \
-//    ADD_NODE                  \
-//    continue;                 \
-//}
+
+#define IS_LOGICAL(operation)        \
+    ((operation) == EQUAL_OP      || \
+     (operation) == GREATER_OP    || \
+     (operation) == BELOW_OP      || \
+     (operation) == GREATER_EQ_OP || \
+     (operation) == BELOW_EQ_OP   || \
+     (operation) == NOT_EQ_OP     || \
+     (operation) == NOT_OP        || \
+     (operation) == OR_OP         || \
+     (operation) == AND_OP)
+
 
 #define IS_NAME_TOKEN(name)                                     \
-strcasecmp((*name_table)[TOKEN.value.id_in_table], name) == 0
+strcasecmp((*name_table)[TOKEN.value.id_in_table], (name)) == 0
+
 
 Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
@@ -34,11 +41,35 @@ Node *recursiveDescent(Tokens *tokens,
 
     while (*index < tokens->size)
     {
-        Node *value = getAddSub(tokens, index, name_table);
+        Node *value = getLogOp(tokens, index, name_table);
         ADD_NODE
     }
 
     return root;
+}
+
+Node *getLogOp(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *leftValue = getAddSub(tokens, index, name_table);
+    while (TOKEN.type == OPERATOR_TOKEN &&
+           IS_LOGICAL(TOKEN.value.operation))
+    {
+        OperationType tokenValue = TOKEN.value.operation;
+        (*index)++;
+
+        Node *rightValue = getMulDiv(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
+                                      {.op_value = tokenValue},
+                                      leftValue,
+                                      rightValue);
+    }
+
+    return leftValue;
 }
 
 Node *getAddSub(Tokens *tokens,
@@ -51,24 +82,17 @@ Node *getAddSub(Tokens *tokens,
     Node *leftValue = getMulDiv(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
-           (TOKEN.value.operation == '+' ||
-            TOKEN.value.operation == '-'))
+           (TOKEN.value.operation == ADD_OP ||
+            TOKEN.value.operation == SUB_OP))
     {
-        char tokenValue = TOKEN.value.operation;
+        OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
 
         Node *rightValue = getMulDiv(tokens, index, name_table);
-        if (tokenValue == '+')
-            leftValue = createNewNode(OPERATOR,
-                                      {.op_value = ADD_OP},
-                                      leftValue,
-                                      rightValue);
-        else
-            leftValue = createNewNode(OPERATOR,
-                                      {.op_value = SUB_OP},
-                                      leftValue,
-                                      rightValue);
-
+        leftValue = createNewNode(OPERATOR,
+                                  {.op_value = tokenValue},
+                                  leftValue,
+                                  rightValue);
     }
 
     return leftValue;
@@ -84,24 +108,18 @@ Node *getMulDiv(Tokens *tokens,
     Node *leftValue = getPow(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
-           (TOKEN.value.operation == '*' ||
-            TOKEN.value.operation == '/'))
+           (TOKEN.value.operation == MUL_OP ||
+            TOKEN.value.operation == SUB_OP))
     {
-        char tokenValue = TOKEN.value.operation;
+        OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
 
         Node *rightValue = getPow(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
+                                  {.op_value = tokenValue},
+                                  leftValue,
+                                  rightValue);
 
-        if (tokenValue == '*')
-            leftValue = createNewNode(OPERATOR,
-                                      {.op_value = MUL_OP},
-                                      leftValue,
-                                      rightValue);
-        else
-            leftValue = createNewNode(OPERATOR,
-                                      {.op_value = DIV_OP},
-                                      leftValue,
-                                      rightValue);
     }
 
     return leftValue;
@@ -118,9 +136,8 @@ Node *getPow(Tokens *tokens,
     Node *rightValue = nullptr;
 
     while (TOKEN.type == OPERATOR_TOKEN &&
-           TOKEN.value.operation == '^')
+           TOKEN.value.operation == POW_OP)
     {
-        char tokenValue = TOKEN.value.operation;
         (*index)++;
 
         rightValue = getPow(tokens, index, name_table);
@@ -221,7 +238,7 @@ Node *getVarInit(Tokens *tokens,
         size_t variable_id = TOKEN.value.id_in_table;
         (*index)++;
         if (TOKEN.type == OPERATOR_TOKEN &&
-            TOKEN.value.operation == '=')
+            TOKEN.value.operation == EQUAL_OP)
         {
             (*index)++;
             Node *var_node = createNode(VARIABLE,
@@ -230,7 +247,7 @@ Node *getVarInit(Tokens *tokens,
                                         nullptr);
             Node *init_value = getVarInit(tokens, index, name_table);
             if (init_value == nullptr)
-                init_value = getAddSub(tokens, index, name_table);
+                init_value = getLogOp(tokens, index, name_table);
             Node *init_node = createNode(OPERATOR,
                                          {.op_value=ASSIGN_OP},
                                          var_node,
@@ -336,7 +353,7 @@ Node *getCodeBlock(Tokens *tokens,
 
     while (*index < tokens->size)
     {
-        Node *value = getAddSub(tokens, index, name_table);
+        Node *value = getLogOp(tokens, index, name_table);
         ADD_NODE
         if (TOKEN.type == BRACKET_TOKEN &&
             TOKEN.value.bracket == '}')
@@ -380,7 +397,7 @@ Node *getPrimaryExpression(Tokens *tokens,
     {
         (*index)++;
 
-        value = getAddSub(tokens, index, name_table);
+        value = getLogOp(tokens, index, name_table);
         ASSERT_OK(TOKEN.value.bracket == ')',
                   "Expected ), but got _%c_\n",
                   TOKEN.value.bracket)

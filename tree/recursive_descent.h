@@ -54,6 +54,9 @@ Node *getVarInit(Tokens *tokens,
                  size_t *index,
                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getLogOp(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 Node *getVarDec(Tokens *tokens,
                 size_t *index,

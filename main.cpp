@@ -25,7 +25,7 @@ int main()
                     printf("Table id: %zu\n", tokens.tokens[i].value.id_in_table);
                     break;
                 case OPERATOR_TOKEN:
-                    printf("Value: %c\n", tokens.tokens[i].value.operation);
+                    printf("Value: %d\n", tokens.tokens[i].value.operation);
                     break;
                 case BRACKET_TOKEN:
                     printf("Value: %c\n", tokens.tokens[i].value.bracket);

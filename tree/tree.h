@@ -24,11 +24,37 @@ enum TokenType
     BRACKET_TOKEN        =  4,
 };
 
+enum OperationType
+{
+    INCORRECT_OP  = -1,
+    ADD_OP        =  1,
+    SUB_OP        =  2,
+    MUL_OP        =  3,
+    DIV_OP        =  4,
+    POW_OP        =  5,
+    INPUT_OP      =  6,
+    OUTPUT_OP     =  7,
+    EQUAL_OP      =  8,
+    GREATER_OP    =  9,
+    BELOW_OP      = 10,
+    GREATER_EQ_OP = 11,
+    BELOW_EQ_OP   = 12,
+    NOT_EQ_OP     = 13,
+    NOT_OP        = 14,
+    OR_OP         = 15,
+    AND_OP        = 16,
+    ASSIGN_OP     = 17,
+    // not standard
+    LOG_OP        = 18,
+    SIN_OP        = 19,
+    COS_OP        = 20,
+};
+
 union TokenValue
 {
     int num_value;
     size_t id_in_table;
-    char operation;
+    OperationType operation;
     char bracket;
 };
 
@@ -61,32 +87,6 @@ enum NodeType
     RETURN           = 10,
     //not standard
     ID_IN_NAME_TABLE = 666,
-};
-
-enum OperationType
-{
-    INCORRECT_OP  = -1,
-    ADD_OP        =  1,
-    SUB_OP        =  2,
-    MUL_OP        =  3,
-    DIV_OP        =  4,
-    POW_OP        =  5,
-    INPUT_OP      =  6,
-    OUTPUT_OP     =  7,
-    EQUAL_OP      =  8,
-    GREATER_OP    =  9,
-    BELOW_OP      = 10,
-    GREATER_EQ_OP = 11,
-    BELOW_EQ_OP   = 12,
-    NOT_EQ_OP     = 13,
-    NOT_OP        = 14,
-    OR_OP         = 15,
-    AND_OP        = 16,
-    ASSIGN_OP     = 17,
-    // not standard
-    LOG_OP        = 18,
-    SIN_OP        = 19,
-    COS_OP        = 20,
 };
 
 union NodeValue
