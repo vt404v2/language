@@ -25,20 +25,6 @@ Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getIf(Tokens *tokens,
-            size_t *index,
-            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-Node *getVarInit(Tokens *tokens,
-                 size_t *index,
-                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-
-Node *getVarDec(Tokens *tokens,
-                size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-
 Node *getAddSub(Tokens *tokens,
                 size_t *index,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
@@ -62,6 +48,24 @@ Node *getSin(Tokens *tokens,
 Node *getCos(Tokens *tokens,
              size_t *index,
              char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+
+Node *getVarInit(Tokens *tokens,
+                 size_t *index,
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+
+Node *getVarDec(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getIf(Tokens *tokens,
+            size_t *index,
+            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getCodeBlock(Tokens *tokens,
+                   size_t *index,
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,

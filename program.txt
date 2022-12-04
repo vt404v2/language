@@ -1,7 +1,12 @@
 var x
 if (0)
+{
     x = 5
+    x = x + x
+}
 else
+{
     x = 6
-var y
-y = 0
+    x = x * x
+}
+x = 9

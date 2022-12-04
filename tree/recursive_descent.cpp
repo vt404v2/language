@@ -34,103 +34,11 @@ Node *recursiveDescent(Tokens *tokens,
 
     while (*index < tokens->size)
     {
-        Node *value = getPrimaryExpression(tokens, index, name_table);
+        Node *value = getAddSub(tokens, index, name_table);
         ADD_NODE
     }
 
     return root;
-}
-
-Node *getIf(Tokens *tokens,
-            size_t *index,
-            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("if"))
-    {
-        (*index)++;
-        Node *condition_node = getPrimaryExpression(tokens, index, name_table);
-        Node *positive_branch = getPrimaryExpression(tokens, index, name_table);
-
-        Node *negative_branch = nullptr;
-        if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("else"))
-        {
-            (*index)++;
-            negative_branch = getPrimaryExpression(tokens, index, name_table);
-        }
-
-        Node *if2_node = createNode(IF2,
-                                    {},
-                                    positive_branch,
-                                    negative_branch);
-        Node *if_node = createNode(IF, {}, condition_node, if2_node);
-        return createNode(FICTIVE_NODE,
-                          {},
-                          if_node, nullptr);
-    }
-    return nullptr;
-}
-
-Node *getVarInit(Tokens *tokens,
-                 size_t *index,
-                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    if (TOKEN.type == KEYWORD_TOKEN &&
-        !is_keyword((*name_table)[TOKEN.value.id_in_table]))
-    {
-        size_t variable_id = TOKEN.value.id_in_table;
-        (*index)++;
-        if (TOKEN.type == OPERATOR_TOKEN &&
-            TOKEN.value.operation == '=')
-        {
-            (*index)++;
-            Node *var_node = createNode(VARIABLE,
-                                        {.var_value = variable_id},
-                                        nullptr,
-                                        nullptr);
-            Node *init_value = getVarInit(tokens, index, name_table);
-            if (init_value == nullptr)
-                init_value = getAddSub(tokens, index, name_table);
-            Node *init_node = createNode(OPERATOR,
-                                         {.op_value=ASSIGN_OP},
-                                         var_node,
-                                         init_value);
-
-            return createNode(FICTIVE_NODE, {}, init_node, nullptr);
-        }
-        (*index)--;
-    }
-    return nullptr;
-}
-
-Node *getVarDec(Tokens *tokens,
-                size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    if (TOKEN.type == KEYWORD_TOKEN &&
-        (strcasecmp((*name_table)[TOKEN.value.id_in_table],
-                    "var") == 0))
-    {
-        (*index)++;
-        if (TOKEN.type == KEYWORD_TOKEN)
-        {
-            Node *declared_var = createNode(VAR_DEC,
-                                            {.dec_value = TOKEN.value.id_in_table},
-                                            nullptr,
-                                            nullptr);
-            (*index)++;
-
-            Node *fictive_node = createNode(FICTIVE_NODE,
-                                            {},
-                                            declared_var,
-                                            nullptr);
-            return fictive_node;
-        }
-        (*index)--;
-    }
-    return nullptr;
 }
 
 Node *getAddSub(Tokens *tokens,
@@ -303,6 +211,120 @@ Node *getPow(Tokens *tokens,
 //    return value;
 //}
 
+Node *getVarInit(Tokens *tokens,
+                 size_t *index,
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        !is_keyword((*name_table)[TOKEN.value.id_in_table]))
+    {
+        size_t variable_id = TOKEN.value.id_in_table;
+        (*index)++;
+        if (TOKEN.type == OPERATOR_TOKEN &&
+            TOKEN.value.operation == '=')
+        {
+            (*index)++;
+            Node *var_node = createNode(VARIABLE,
+                                        {.var_value = variable_id},
+                                        nullptr,
+                                        nullptr);
+            Node *init_value = getVarInit(tokens, index, name_table);
+            if (init_value == nullptr)
+                init_value = getAddSub(tokens, index, name_table);
+            Node *init_node = createNode(OPERATOR,
+                                         {.op_value=ASSIGN_OP},
+                                         var_node,
+                                         init_value);
+
+            return createNode(FICTIVE_NODE, {}, init_node, nullptr);
+        }
+        (*index)--;
+    }
+    return nullptr;
+}
+
+Node *getVarDec(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        (strcasecmp((*name_table)[TOKEN.value.id_in_table],
+                    "var") == 0))
+    {
+        (*index)++;
+        if (TOKEN.type == KEYWORD_TOKEN)
+        {
+            Node *declared_var = createNode(VAR_DEC,
+                                            {.dec_value = TOKEN.value.id_in_table},
+                                            nullptr,
+                                            nullptr);
+            (*index)++;
+
+            Node *fictive_node = createNode(FICTIVE_NODE,
+                                            {},
+                                            declared_var,
+                                            nullptr);
+            return fictive_node;
+        }
+        (*index)--;
+    }
+    return nullptr;
+}
+
+Node *getIf(Tokens *tokens,
+            size_t *index,
+            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("if"))
+    {
+        (*index)++;
+        Node *condition_node = getPrimaryExpression(tokens, index, name_table);
+        Node *positive_branch = getPrimaryExpression(tokens, index, name_table);
+
+        Node *negative_branch = nullptr;
+        if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("else"))
+        {
+            (*index)++;
+            negative_branch = getPrimaryExpression(tokens, index, name_table);
+        }
+
+        Node *if2_node = createNode(IF2,
+                                    {},
+                                    positive_branch,
+                                    negative_branch);
+        Node *if_node = createNode(IF, {}, condition_node, if2_node);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          if_node, nullptr);
+    }
+    return nullptr;
+}
+
+Node *getCodeBlock(Tokens *tokens,
+                   size_t *index,
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *root = nullptr;
+    Node *last_node = root;
+
+    while (*index < tokens->size)
+    {
+        Node *value = getAddSub(tokens, index, name_table);
+        ADD_NODE
+        if (TOKEN.type == BRACKET_TOKEN &&
+            TOKEN.value.bracket == '}')
+            break;
+    }
+
+    return root;
+}
+
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -310,7 +332,6 @@ Node *getPrimaryExpression(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-//    Node *value = nullptr;
     Node *value = getVarDec(tokens, index, name_table);
     if (value)
         return value;
@@ -321,6 +342,16 @@ Node *getPrimaryExpression(Tokens *tokens,
     if (value)
         return value;
     if (TOKEN.type == BRACKET_TOKEN &&
+        TOKEN.value.bracket == '{')
+    {
+        (*index)++;
+        value = getCodeBlock(tokens, index, name_table);
+        ASSERT_OK(TOKEN.value.bracket == '}',
+                  "Expected }, but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+    }
+    else if (TOKEN.type == BRACKET_TOKEN &&
         TOKEN.value.bracket == '(')
     {
         (*index)++;
