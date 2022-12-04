@@ -48,35 +48,61 @@ struct Tokens
 enum NodeType
 {
     INCORRECT_TYPE   = -1,
-    OPERATION        = 0,
-    ID_IN_NAME_TABLE = 1,
-    NUMBER           = 2,
+    FICTIVE_NODE     =  0,
+    NUMBER           =  1,
+    VARIABLE         =  2,
+    IF               =  3,
+    IF2              =  4,
+    WHILE            =  5,
+    OPERATOR         =  6,
+    VAR_DEC          =  7,
+    DEF              =  8,
+    CALL             =  9,
+    RETURN           = 10,
+    //not standard
+    ID_IN_NAME_TABLE = 666,
 };
 
 enum OperationType
 {
-    INCORRECT_OP = -1,
-    ADD_OP = 0,
-    SUB_OP = 1,
-    MUL_OP = 2,
-    DIV_OP = 3,
-    POW_OP = 4,
-    LOG_OP = 5,
-    SIN_OP = 6,
-    COS_OP = 7,
+    INCORRECT_OP  = -1,
+    ADD_OP        =  1,
+    SUB_OP        =  2,
+    MUL_OP        =  3,
+    DIV_OP        =  4,
+    POW_OP        =  5,
+    INPUT_OP      =  6,
+    OUTPUT_OP     =  7,
+    EQUAL_OP      =  8,
+    GREATER_OP    =  9,
+    BELOW_OP      = 10,
+    GREATER_EQ_OP = 11,
+    BELOW_EQ_OP   = 12,
+    NOT_EQ_OP     = 13,
+    NOT_OP        = 14,
+    OR_OP         = 15,
+    AND_OP        = 16,
+    ASSIGN_OP     = 17,
+    // not standard
+    LOG_OP        = 18,
+    SIN_OP        = 19,
+    COS_OP        = 20,
 };
 
 union NodeValue
 {
-    double val_value;
+    int num_value;
     OperationType op_value;
     size_t var_value;
+    size_t dec_value;
+    size_t def_value;
+    size_t call_value;
 };
 
 struct Node
 {
     NodeType node_type = INCORRECT_TYPE;
-    NodeValue value = {.val_value = NAN};
+    NodeValue value = {.num_value = 0};
     Node *left = nullptr;
     Node *right = nullptr;
 };
@@ -186,16 +212,15 @@ size_t nodePostOrderPrint(Node *node, FILE *fp, size_t num_spaces = 0);
  */
 size_t readTree(Tree *tree, const char *filename);
 
-Node *readNode(char **readPtr, char **buffer, long lenOfFile);
-
-Node *readRecursiveDescentNode(Tokens *tokens);
+Node *readRecursiveDescentNode(Tokens *tokens,
+                               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 Node *createNewNode(NodeType node_type,
                     NodeValue node_value,
                     Node *left_node,
                     Node *right_node);
 
-Node *createNum(double value);
+Node *createNum(int value);
 
 Node *createNode(NodeType node_type,
                  NodeValue node_value,

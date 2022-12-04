@@ -157,7 +157,7 @@ void getValueOfNode(const Node *node,
 {
     switch (node->node_type)
     {
-        case OPERATION:
+        case OPERATOR:
             switch (node->value.op_value)
             {
                 case ADD_OP:
@@ -174,6 +174,42 @@ void getValueOfNode(const Node *node,
                     break;
                 case POW_OP:
                     *node_value[0] = '^';
+                    break;
+                case INPUT_OP:
+                    sprintf(*node_value, "INPUT");
+                    break;
+                case OUTPUT_OP:
+                    sprintf(*node_value, "OUTPUT");
+                    break;
+                case EQUAL_OP:
+                    sprintf(*node_value, "==");
+                    break;
+                case GREATER_OP:
+                    sprintf(*node_value, ">");
+                    break;
+                case BELOW_OP:
+                    sprintf(*node_value, "<");
+                    break;
+                case GREATER_EQ_OP:
+                    sprintf(*node_value, ">=");
+                    break;
+                case BELOW_EQ_OP:
+                    sprintf(*node_value, "<=");
+                    break;
+                case NOT_EQ_OP:
+                    sprintf(*node_value, "!=");
+                    break;
+                case NOT_OP:
+                    sprintf(*node_value, "!");
+                    break;
+                case OR_OP:
+                    sprintf(*node_value, "or");
+                    break;
+                case AND_OP:
+                    sprintf(*node_value, "and");
+                    break;
+                case ASSIGN_OP:
+                    sprintf(*node_value, "assign");
                     break;
                 case LOG_OP:
                     sprintf(*node_value, "%s", "log");
@@ -192,8 +228,39 @@ void getValueOfNode(const Node *node,
                     break;
             }
             break;
+        case FICTIVE_NODE:
+            sprintf(*node_value, "FICTIVE_NODE");
+            break;
         case NUMBER:
-            sprintf(*node_value, "%lg", node->value.val_value);
+            sprintf(*node_value, "%d", node->value.num_value);
+            break;
+        case VARIABLE:
+            sprintf(*node_value, "VARIABLE '%s'",
+                    (*name_table)[node->value.var_value]);
+            break;
+        case IF:
+            sprintf(*node_value, "IF OPERATOR");
+            break;
+        case IF2:
+            sprintf(*node_value, "IF ACTIONS");
+            break;
+        case WHILE:
+            sprintf(*node_value, "WHILE operator");
+            break;
+        case VAR_DEC:
+            sprintf(*node_value, "VARIABLE DECLARATION: '%s'",
+                    (*name_table)[node->value.var_value]);
+            break;
+        case DEF:
+            sprintf(*node_value, "FUNCTION DECLARATION: '%s'",
+                    (*name_table)[node->value.def_value]);
+            break;
+        case CALL:
+            sprintf(*node_value, "FUNCTION CALL: '%s'",
+                    (*name_table)[node->value.call_value]);
+            break;
+        case RETURN:
+            sprintf(*node_value, "RETURN FROM FUNC");
             break;
         case ID_IN_NAME_TABLE:
             sprintf(*node_value, "%s", (*name_table)[node->value.var_value]);

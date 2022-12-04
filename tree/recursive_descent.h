@@ -8,6 +8,7 @@
 #include "cmath"
 #include "tree.h"
 
+// TODO: grammar
 // grammar of recurrent descent
 // recursiveDescent ::= getAddSub '\0'
 // getAddSub ::= getMulDiv {['+', '-'] getMulDiv}*
@@ -20,25 +21,57 @@
 // getValue ::= [double] | getVariable
 // getVariable ::= ['x'-'z', 'X'-'Z']
 
-Node *recursiveDescent(Tokens *tokens, size_t *index);
+Node *recursiveDescent(Tokens *tokens,
+                       size_t *index,
+                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getAddSub(Tokens *tokens, size_t *index);
+Node *getIf(Tokens *tokens,
+            size_t *index,
+            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getMulDiv(Tokens *tokens, size_t *index);
+Node *getVarInit(Tokens *tokens,
+                 size_t *index,
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getPow(Tokens *tokens, size_t *index);
 
-Node *getLog(Tokens *tokens, size_t *index);
+Node *getVarDec(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getSin(Tokens *tokens, size_t *index);
 
-Node *getCos(Tokens *tokens, size_t *index);
+Node *getAddSub(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getPrimaryExpression(Tokens *tokens, size_t *index);
+Node *getMulDiv(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getPow(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getLog(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getSin(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getCos(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getPrimaryExpression(Tokens *tokens,
+                           size_t *index,
+                           char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 Node *getValue(Tokens *tokens, size_t *index);
 
 Node *getVariable(Tokens *tokens, size_t *index);
+
+bool is_keyword(char *word);
 
 #define ASSERT_OK(value, error, ...)                                  \
         if (!(value))                                                 \

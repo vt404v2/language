@@ -1,22 +1,146 @@
 #include "recursive_descent.h"
 
-Node *recursiveDescent(Tokens *tokens, size_t *index)
+#define ADD_NODE                 \
+    if (last_node)               \
+    {                            \
+        last_node->right = value;\
+        last_node = value;       \
+    }                            \
+    else                         \
+    {                            \
+        root = value;            \
+        last_node = value;       \
+    }
+
+//#define ADD_NODE_AND_CONTINUE \
+//if (value != nullptr)         \
+//{                             \
+//    ADD_NODE                  \
+//    continue;                 \
+//}
+
+#define IS_NAME_TOKEN(name)                                     \
+strcasecmp((*name_table)[TOKEN.value.id_in_table], name) == 0
+
+Node *recursiveDescent(Tokens *tokens,
+                       size_t *index,
+                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *value = getAddSub(tokens, index);
-//    fprintf(stderr, "INDEX: %zu\n", *index);
+    Node *root = nullptr;
+    Node *last_node = root;
 
-    return value;
+    while (*index < tokens->size)
+    {
+        Node *value = getPrimaryExpression(tokens, index, name_table);
+        ADD_NODE
+    }
+
+    return root;
 }
 
-Node *getAddSub(Tokens *tokens, size_t *index)
+Node *getIf(Tokens *tokens,
+            size_t *index,
+            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("if"))
+    {
+        (*index)++;
+        Node *condition_node = getPrimaryExpression(tokens, index, name_table);
+        Node *positive_branch = getPrimaryExpression(tokens, index, name_table);
+
+        Node *negative_branch = nullptr;
+        if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("else"))
+        {
+            (*index)++;
+            negative_branch = getPrimaryExpression(tokens, index, name_table);
+        }
+
+        Node *if2_node = createNode(IF2,
+                                    {},
+                                    positive_branch,
+                                    negative_branch);
+        Node *if_node = createNode(IF, {}, condition_node, if2_node);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          if_node, nullptr);
+    }
+    return nullptr;
+}
+
+Node *getVarInit(Tokens *tokens,
+                 size_t *index,
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        !is_keyword((*name_table)[TOKEN.value.id_in_table]))
+    {
+        size_t variable_id = TOKEN.value.id_in_table;
+        (*index)++;
+        if (TOKEN.type == OPERATOR_TOKEN &&
+            TOKEN.value.operation == '=')
+        {
+            (*index)++;
+            Node *var_node = createNode(VARIABLE,
+                                        {.var_value = variable_id},
+                                        nullptr,
+                                        nullptr);
+            Node *init_value = getVarInit(tokens, index, name_table);
+            if (init_value == nullptr)
+                init_value = getAddSub(tokens, index, name_table);
+            Node *init_node = createNode(OPERATOR,
+                                         {.op_value=ASSIGN_OP},
+                                         var_node,
+                                         init_value);
+
+            return createNode(FICTIVE_NODE, {}, init_node, nullptr);
+        }
+        (*index)--;
+    }
+    return nullptr;
+}
+
+Node *getVarDec(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *leftValue = getMulDiv(tokens, index);
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        (strcasecmp((*name_table)[TOKEN.value.id_in_table],
+                    "var") == 0))
+    {
+        (*index)++;
+        if (TOKEN.type == KEYWORD_TOKEN)
+        {
+            Node *declared_var = createNode(VAR_DEC,
+                                            {.dec_value = TOKEN.value.id_in_table},
+                                            nullptr,
+                                            nullptr);
+            (*index)++;
+
+            Node *fictive_node = createNode(FICTIVE_NODE,
+                                            {},
+                                            declared_var,
+                                            nullptr);
+            return fictive_node;
+        }
+        (*index)--;
+    }
+    return nullptr;
+}
+
+Node *getAddSub(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *leftValue = getMulDiv(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
            (TOKEN.value.operation == '+' ||
@@ -25,14 +149,14 @@ Node *getAddSub(Tokens *tokens, size_t *index)
         char tokenValue = TOKEN.value.operation;
         (*index)++;
 
-        Node *rightValue = getMulDiv(tokens, index);
+        Node *rightValue = getMulDiv(tokens, index, name_table);
         if (tokenValue == '+')
-            leftValue = createNewNode(OPERATION,
+            leftValue = createNewNode(OPERATOR,
                                       {.op_value = ADD_OP},
                                       leftValue,
                                       rightValue);
         else
-            leftValue = createNewNode(OPERATION,
+            leftValue = createNewNode(OPERATOR,
                                       {.op_value = SUB_OP},
                                       leftValue,
                                       rightValue);
@@ -42,12 +166,14 @@ Node *getAddSub(Tokens *tokens, size_t *index)
     return leftValue;
 }
 
-Node *getMulDiv(Tokens *tokens, size_t *index)
+Node *getMulDiv(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *leftValue = getPow(tokens, index);
+    Node *leftValue = getPow(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
            (TOKEN.value.operation == '*' ||
@@ -56,15 +182,15 @@ Node *getMulDiv(Tokens *tokens, size_t *index)
         char tokenValue = TOKEN.value.operation;
         (*index)++;
 
-        Node *rightValue = getPow(tokens, index);
+        Node *rightValue = getPow(tokens, index, name_table);
 
         if (tokenValue == '*')
-            leftValue = createNewNode(OPERATION,
+            leftValue = createNewNode(OPERATOR,
                                       {.op_value = MUL_OP},
                                       leftValue,
                                       rightValue);
         else
-            leftValue = createNewNode(OPERATION,
+            leftValue = createNewNode(OPERATOR,
                                       {.op_value = DIV_OP},
                                       leftValue,
                                       rightValue);
@@ -73,12 +199,14 @@ Node *getMulDiv(Tokens *tokens, size_t *index)
     return leftValue;
 }
 
-Node *getPow(Tokens *tokens, size_t *index)
+Node *getPow(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *leftValue = getPrimaryExpression(tokens, index);
+    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
     Node *rightValue = nullptr;
 
     while (TOKEN.type == OPERATOR_TOKEN &&
@@ -87,8 +215,8 @@ Node *getPow(Tokens *tokens, size_t *index)
         char tokenValue = TOKEN.value.operation;
         (*index)++;
 
-        rightValue = getPow(tokens, index);
-        leftValue = createNewNode(OPERATION,
+        rightValue = getPow(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
                                   {.op_value = POW_OP},
                                   leftValue,
                                   rightValue);
@@ -175,19 +303,29 @@ Node *getPow(Tokens *tokens, size_t *index)
 //    return value;
 //}
 
-Node *getPrimaryExpression(Tokens *tokens, size_t *index)
+Node *getPrimaryExpression(Tokens *tokens,
+                           size_t *index,
+                           char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *value = nullptr;
-
+//    Node *value = nullptr;
+    Node *value = getVarDec(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getVarInit(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getIf(tokens, index, name_table);
+    if (value)
+        return value;
     if (TOKEN.type == BRACKET_TOKEN &&
         TOKEN.value.bracket == '(')
     {
         (*index)++;
 
-        value = getAddSub(tokens, index);
+        value = getAddSub(tokens, index, name_table);
         ASSERT_OK(TOKEN.value.bracket == ')',
                   "Expected ), but got _%c_\n",
                   TOKEN.value.bracket)
@@ -211,7 +349,7 @@ Node *getValue(Tokens *tokens, size_t *index)
     assert(index != nullptr);
 
     Node *value = createNewNode(NUMBER,
-                                {.val_value =
+                                {.num_value =
                                 tokens->tokens[*index].value.num_value},
                                 nullptr,
                                 nullptr);
@@ -224,12 +362,20 @@ Node *getVariable(Tokens *tokens, size_t *index)
 {
     assert(tokens != nullptr);
 
-    Node *value = createNewNode(ID_IN_NAME_TABLE,
+    Node *value = createNewNode(VARIABLE,
                                 {.var_value = TOKEN.value.id_in_table},
                                 nullptr,
-                                value);
+                                nullptr);
 
     (*index)++;
 
     return value;
+}
+
+bool is_keyword(char *word)
+{
+    return strcasecmp(word, "if") == 0 ||
+        strcasecmp(word, "else") == 0 ||
+        strcasecmp(word, "while") == 0 ||
+        strcasecmp(word, "var") == 0;
 }
