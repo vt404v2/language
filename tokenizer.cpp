@@ -60,38 +60,39 @@ size_t tokenize(char *filename,
         else if (*readPtr == '>' && *(readPtr + 1) == '=')
         {
             tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = GREATER_EQ_OP;
-            readPtr+=2;
+            tokens->tokens[tokens->size].value.operation =
+                GREATER_EQ_OP;
+            readPtr += 2;
         }
         else if (*readPtr == '<' && *(readPtr + 1) == '=')
         {
             tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
             tokens->tokens[tokens->size].value.operation = BELOW_EQ_OP;
-            readPtr+=2;
+            readPtr += 2;
         }
         else if (*readPtr == '=' && *(readPtr + 1) == '=')
         {
             tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
             tokens->tokens[tokens->size].value.operation = EQUAL_OP;
-            readPtr+=2;
+            readPtr += 2;
         }
         else if (*readPtr == '!' && *(readPtr + 1) == '=')
         {
             tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
             tokens->tokens[tokens->size].value.operation = NOT_EQ_OP;
-            readPtr+=2;
+            readPtr += 2;
         }
         else if (*readPtr == '&' && *(readPtr + 1) == '&')
         {
             tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
             tokens->tokens[tokens->size].value.operation = AND_OP;
-            readPtr+=2;
+            readPtr += 2;
         }
         else if (*readPtr == '|' && *(readPtr + 1) == '|')
         {
             tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
             tokens->tokens[tokens->size].value.operation = OR_OP;
-            readPtr+=2;
+            readPtr += 2;
         }
         else if (*readPtr == '=')
         {
@@ -148,9 +149,9 @@ size_t tokenize(char *filename,
             readPtr++;
         }
         else if (*readPtr == '(' ||
-                 *readPtr == ')' ||
-                 *readPtr == '{' ||
-                 *readPtr == '}')
+            *readPtr == ')' ||
+            *readPtr == '{' ||
+            *readPtr == '}')
         {
             tokens->tokens[tokens->size].type = BRACKET_TOKEN;
             tokens->tokens[tokens->size].value.bracket = *readPtr;
@@ -172,7 +173,8 @@ void reallocTokens(Tokens *tokens)
 {
     tokens->capacity *= 2;
     tokens->tokens = (Token_t *) realloc(tokens->tokens,
-                                         tokens->capacity * sizeof(tokens->tokens[0]));
+                                         tokens->capacity
+                                             * sizeof(tokens->tokens[0]));
     assert(tokens->tokens != nullptr);
 }
 

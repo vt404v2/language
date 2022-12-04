@@ -5,7 +5,6 @@ size_t treeCtor(Tree *tree)
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
 
     tree->root = nullptr;
-//    tree->size = 0;
     return TREE_NO_ERRORS;
 }
 
@@ -24,7 +23,6 @@ size_t treeDtor(Tree *tree)
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
 
     nodeDtor(tree->root);
-//    tree->size = 0;
     return TREE_NO_ERRORS;
 }
 

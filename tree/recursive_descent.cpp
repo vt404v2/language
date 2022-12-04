@@ -12,7 +12,6 @@
         last_node = value;       \
     }
 
-
 #define IS_LOGICAL(operation)        \
     ((operation) == EQUAL_OP      || \
      (operation) == GREATER_OP    || \
@@ -24,10 +23,8 @@
      (operation) == OR_OP         || \
      (operation) == AND_OP)
 
-
 #define IS_NAME_TOKEN(name)                                     \
 strcasecmp((*name_table)[TOKEN.value.id_in_table], (name)) == 0
-
 
 Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
@@ -57,16 +54,16 @@ Node *getLogOp(Tokens *tokens,
 
     Node *leftValue = getAddSub(tokens, index, name_table);
     while (TOKEN.type == OPERATOR_TOKEN &&
-           IS_LOGICAL(TOKEN.value.operation))
+        IS_LOGICAL(TOKEN.value.operation))
     {
         OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
 
         Node *rightValue = getMulDiv(tokens, index, name_table);
         leftValue = createNewNode(OPERATOR,
-                                      {.op_value = tokenValue},
-                                      leftValue,
-                                      rightValue);
+                                  {.op_value = tokenValue},
+                                  leftValue,
+                                  rightValue);
     }
 
     return leftValue;
@@ -82,7 +79,7 @@ Node *getAddSub(Tokens *tokens,
     Node *leftValue = getMulDiv(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
-           (TOKEN.value.operation == ADD_OP ||
+        (TOKEN.value.operation == ADD_OP ||
             TOKEN.value.operation == SUB_OP))
     {
         OperationType tokenValue = TOKEN.value.operation;
@@ -108,7 +105,7 @@ Node *getMulDiv(Tokens *tokens,
     Node *leftValue = getPow(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
-           (TOKEN.value.operation == MUL_OP ||
+        (TOKEN.value.operation == MUL_OP ||
             TOKEN.value.operation == SUB_OP))
     {
         OperationType tokenValue = TOKEN.value.operation;
@@ -136,7 +133,7 @@ Node *getPow(Tokens *tokens,
     Node *rightValue = nullptr;
 
     while (TOKEN.type == OPERATOR_TOKEN &&
-           TOKEN.value.operation == POW_OP)
+        TOKEN.value.operation == POW_OP)
     {
         (*index)++;
 
@@ -298,15 +295,18 @@ Node *getIf(Tokens *tokens,
     if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("if"))
     {
         (*index)++;
-        Node *condition_node = getPrimaryExpression(tokens, index, name_table);
+        Node *condition_node =
+            getPrimaryExpression(tokens, index, name_table);
 
-        Node *positive_branch = getPrimaryExpression(tokens, index, name_table);
+        Node *positive_branch =
+            getPrimaryExpression(tokens, index, name_table);
         Node *negative_branch = nullptr;
 
         if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("else"))
         {
             (*index)++;
-            negative_branch = getPrimaryExpression(tokens, index, name_table);
+            negative_branch =
+                getPrimaryExpression(tokens, index, name_table);
         }
 
         Node *if2_node = createNode(IF2,
@@ -328,7 +328,8 @@ Node *getWhile(Tokens *tokens,
     if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("while"))
     {
         (*index)++;
-        Node *condition_node = getPrimaryExpression(tokens, index, name_table);
+        Node *condition_node =
+            getPrimaryExpression(tokens, index, name_table);
         Node *action = getPrimaryExpression(tokens, index, name_table);
         Node *while_node = createNode(WHILE,
                                       {},
@@ -407,9 +408,9 @@ Node *getPrimaryExpression(Tokens *tokens,
         value = getVariable(tokens, index);
     else
     {
-//        fprintf(stderr, "get value index: %zu\n", *index);
+        //        fprintf(stderr, "get value index: %zu\n", *index);
         value = getValue(tokens, index);
-//        fprintf(stderr, "after get value index: %zu\n", *index);
+        //        fprintf(stderr, "after get value index: %zu\n", *index);
     }
 
     return value;
