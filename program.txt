@@ -2,9 +2,9 @@ var x
 var i
 i = 0
 x = 1000
-while (x > 0)
+while ((x > 0) && (i < 1000))
 {
     x = x - 7
-    i = i + 1
+    i = i + 7
 }
 i = x
