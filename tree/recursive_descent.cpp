@@ -281,6 +281,7 @@ Node *getVarDec(Tokens *tokens,
                                             {},
                                             declared_var,
                                             nullptr);
+            (*index)--;
             return fictive_node;
         }
         (*index)--;

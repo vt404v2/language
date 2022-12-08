@@ -1,4 +1,4 @@
-var y
+var y = 1000 - 7
 def g(a, b, c)
 {
     var x
