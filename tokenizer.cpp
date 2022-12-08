@@ -58,97 +58,40 @@ size_t tokenize(char *filename,
             readPtr += length;
             tokens->tokens[tokens->size].value.num_value = num;
         }
-        else if (*readPtr == '>' && *(readPtr + 1) == '=')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation =
-                GREATER_EQ_OP;
-            readPtr += 2;
+#define TWO_CHARS_OPERATOR(first, second, name)                 \
+        if (*readPtr == (first) && *(readPtr + 1) == (second))  \
+        {                                                       \
+            tokens->tokens[tokens->size].type = OPERATOR_TOKEN; \
+            tokens->tokens[tokens->size].value.operation =      \
+                (name);                                         \
+            readPtr += 2;                                       \
         }
-        else if (*readPtr == '<' && *(readPtr + 1) == '=')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = BELOW_EQ_OP;
-            readPtr += 2;
+
+        else TWO_CHARS_OPERATOR('>', '=', GREATER_EQ_OP)
+        else TWO_CHARS_OPERATOR('<', '=', BELOW_EQ_OP)
+        else TWO_CHARS_OPERATOR('=', '=', EQUAL_OP)
+        else TWO_CHARS_OPERATOR('!', '=', NOT_EQ_OP)
+        else TWO_CHARS_OPERATOR('&', '&', AND_OP)
+        else TWO_CHARS_OPERATOR('|', '|', OR_OP)
+#undef TWO_CHARS_OPERATOR
+#define ONE_CHAR_OPERATOR(oper, name)                              \
+        if (*readPtr == (oper))                                    \
+        {                                                          \
+            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;    \
+            tokens->tokens[tokens->size].value.operation = (name); \
+            readPtr++;                                             \
         }
-        else if (*readPtr == '=' && *(readPtr + 1) == '=')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = EQUAL_OP;
-            readPtr += 2;
-        }
-        else if (*readPtr == '!' && *(readPtr + 1) == '=')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = NOT_EQ_OP;
-            readPtr += 2;
-        }
-        else if (*readPtr == '&' && *(readPtr + 1) == '&')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = AND_OP;
-            readPtr += 2;
-        }
-        else if (*readPtr == '|' && *(readPtr + 1) == '|')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = OR_OP;
-            readPtr += 2;
-        }
-        else if (*readPtr == '=')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = EQUAL_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '>')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = GREATER_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '<')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = BELOW_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '+')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = ADD_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '-')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = SUB_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '*')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = MUL_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '/')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = DIV_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '^')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = POW_OP;
-            readPtr++;
-        }
-        else if (*readPtr == '!')
-        {
-            tokens->tokens[tokens->size].type = OPERATOR_TOKEN;
-            tokens->tokens[tokens->size].value.operation = NOT_OP;
-            readPtr++;
-        }
+
+        else ONE_CHAR_OPERATOR('=', EQUAL_OP)
+        else ONE_CHAR_OPERATOR('>', GREATER_OP)
+        else ONE_CHAR_OPERATOR('<', BELOW_OP)
+        else ONE_CHAR_OPERATOR('+', ADD_OP)
+        else ONE_CHAR_OPERATOR('-', SUB_OP)
+        else ONE_CHAR_OPERATOR('*', MUL_OP)
+        else ONE_CHAR_OPERATOR('/', DIV_OP)
+        else ONE_CHAR_OPERATOR('^', POW_OP)
+        else ONE_CHAR_OPERATOR('!', NOT_OP)
+#undef ONE_CHAR_OPERATOR
         else if (*readPtr == '(' ||
             *readPtr == ')' ||
             *readPtr == '{' ||

@@ -529,11 +529,7 @@ Node *getPrimaryExpression(Tokens *tokens,
     else if (TOKEN.type == KEYWORD_TOKEN)
         value = getVariable(tokens, index, name_table);
     else
-    {
-        //        fprintf(stderr, "get value index: %zu\n", *index);
         value = getValue(tokens, index, name_table);
-        //        fprintf(stderr, "after get value index: %zu\n", *index);
-    }
 
     return value;
 }
