@@ -47,6 +47,18 @@ int main()
 
     tree.root = readRecursiveDescentNode(&tokens, &name_table);
     treeDump(&tree, &name_table);
+
+    FILE *tree_file = fopen("tree.txt", "w");
+    treeSaveToFile(&tree, tree_file);
+    fclose(tree_file);
+
+    Tree new_tree = {};
+    treeCtor(&tree);
+    readTree(&new_tree, "tree.txt");
+    treeDump(&new_tree, &name_table);
+
+    treeDtor(&new_tree);
+
     treeDtor(&tree);
     dtorTokens(&tokens);
     treeCloseLogFile();

@@ -205,15 +205,6 @@ size_t nodeInOrderPrint(Node *node, FILE *fp, size_t num_spaces = 0);
  */
 size_t nodePostOrderPrint(Node *node, FILE *fp, size_t num_spaces = 0);
 
-/**
- * @brief reads tree from file
- *
- * @param tree tree to save data from file
- * @param filename name of file to read
- * @return error code
- */
-size_t readTree(Tree *tree, const char *filename);
-
 Node *readRecursiveDescentNode(Tokens *tokens,
                                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
@@ -228,7 +219,18 @@ Node *createNode(NodeType node_type,
                  NodeValue node_value,
                  Node *left_node,
                  Node *right_node);
+/**
+ * @brief reads tree from file
+ *
+ * @param tree tree to save data from file
+ * @param filename name of file to read
+ * @return error code
+ */
+size_t readTree(Tree *tree, const char *filename);
 
+Node *parseNode(char **readPtr);
+
+Node *getValueNode(char **readPtr);
 
 #define CHECK_NULLPTR_ERROR(value, error) \
     {                                     \
