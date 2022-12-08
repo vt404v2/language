@@ -11,4 +11,5 @@ def g(a, b, c)
         i = i + 7
     }
 }
+y = g(y, y, y)
 y = 0

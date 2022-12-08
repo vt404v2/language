@@ -78,6 +78,10 @@ Node *getDefFunction(Tokens *tokens,
                      size_t *index,
                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getCallFunction(Tokens *tokens,
+                      size_t *index,
+                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);

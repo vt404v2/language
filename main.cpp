@@ -47,7 +47,6 @@ int main()
 
     tree.root = readRecursiveDescentNode(&tokens, &name_table);
     treeDump(&tree, &name_table);
-
     treeDtor(&tree);
     dtorTokens(&tokens);
     treeCloseLogFile();

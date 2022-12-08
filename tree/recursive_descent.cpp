@@ -421,6 +421,61 @@ Node *getDefFunction(Tokens *tokens,
     return nullptr;
 }
 
+Node *getCallFunction(Tokens *tokens,
+                     size_t *index,
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN)
+    {
+        size_t func_id = TOKEN.value.id_in_table;
+        (*index)++;
+
+        Node *params_root = createNode(FICTIVE_NODE,
+                                       {},
+                                       nullptr,
+                                       nullptr);
+        Node *params_last = params_root;
+
+        if (TOKEN.value.bracket != '(')
+        {
+            (*index)--;
+            return nullptr;
+        }
+
+        (*index)++;
+
+        while (TOKEN.value.bracket != ')')
+        {
+            params_last->left = getVariable(tokens, index, name_table);
+            params_last->right = createNode(FICTIVE_NODE,
+                                            {},
+                                            nullptr,
+                                            nullptr);
+            params_last = params_last->right;
+            if (TOKEN.value.bracket == ')')
+                break;
+            ASSERT_OK(TOKEN.value.bracket == ',',
+                      "Expected ',', but got _%c_\n",
+                      TOKEN.value.bracket)
+            (*index)++;
+
+        }
+
+        ASSERT_OK(TOKEN.value.bracket == ')',
+                  "Expected ), but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+
+
+        Node *func_call_node = createNode(CALL,
+                                         {.def_value = func_id},
+                                         params_root,
+                                         nullptr);
+        return func_call_node;//createNode(FICTIVE_NODE, {}, func_call_node, func_call_node);
+    }
+    return nullptr;
+}
+
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -445,6 +500,10 @@ Node *getPrimaryExpression(Tokens *tokens,
     value = getDefFunction(tokens, index, name_table);
     if (value)
         return value;
+    value = getCallFunction(tokens, index, name_table);
+    if (value)
+        return value;
+
     if (TOKEN.type == BRACKET_TOKEN &&
         TOKEN.value.bracket == '{')
     {
