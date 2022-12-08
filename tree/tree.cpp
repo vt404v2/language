@@ -101,11 +101,17 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
 
     if (node->left == nullptr and node->right == nullptr)
     {
-        fprintf(fp, "{ %d  %zu }\n", node->node_type, node->value.call_value);
+        fprintf(fp,
+                "{ %d  %zu }\n",
+                node->node_type,
+                node->value.call_value);
         return TREE_NO_ERRORS;
     }
     else
-        fprintf(fp, "{ %d  %zu \n", node->node_type, node->value.call_value);
+        fprintf(fp,
+                "{ %d  %zu \n",
+                node->node_type,
+                node->value.call_value);
 
     if (node->left)
         error = nodePreOrderPrint(node->left,
@@ -132,7 +138,6 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
 
 size_t readTree(Tree *tree, const char *filename)
 {
-
     FILE *fp = fopen(filename, "r");
     if (fp == nullptr)
         return CANT_OPEN_TREE_FILE;
@@ -207,5 +212,8 @@ Node *getValueNode(char **readPtr)
     sscanf(*readPtr, "%zu%n", &value, &length);
     (*readPtr) += length;
     skipSpaces(readPtr);
-    return createNode((NodeType)node_type, {.call_value=value}, nullptr, nullptr);
+    return createNode((NodeType) node_type,
+                      {.call_value=value},
+                      nullptr,
+                      nullptr);
 }
