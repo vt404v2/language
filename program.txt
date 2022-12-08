@@ -10,6 +10,7 @@ def g(a, b, c)
         x = x - 7
         i = i + 7
     }
+    x = 1000
 }
 y = g(y, y, y)
 y = 0

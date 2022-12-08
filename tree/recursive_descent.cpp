@@ -329,6 +329,7 @@ Node *getWhile(Tokens *tokens,
     if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("while"))
     {
         (*index)++;
+
         Node *condition_node =
             getPrimaryExpression(tokens, index, name_table);
         Node *action = getPrimaryExpression(tokens, index, name_table);
@@ -423,8 +424,8 @@ Node *getDefFunction(Tokens *tokens,
 }
 
 Node *getCallFunction(Tokens *tokens,
-                     size_t *index,
-                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+                      size_t *index,
+                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     if (TOKEN.type == KEYWORD_TOKEN)
     {
@@ -453,6 +454,7 @@ Node *getCallFunction(Tokens *tokens,
                                             nullptr,
                                             nullptr);
             params_last = params_last->right;
+
             if (TOKEN.value.bracket == ')')
                 break;
             ASSERT_OK(TOKEN.value.bracket == ',',
@@ -467,12 +469,11 @@ Node *getCallFunction(Tokens *tokens,
                   TOKEN.value.bracket)
         (*index)++;
 
-
         Node *func_call_node = createNode(CALL,
-                                         {.def_value = func_id},
-                                         params_root,
-                                         nullptr);
-        return func_call_node;//createNode(FICTIVE_NODE, {}, func_call_node, func_call_node);
+                                          {.def_value = func_id},
+                                          params_root,
+                                          nullptr);
+        return func_call_node;
     }
     return nullptr;
 }
@@ -569,9 +570,9 @@ Node *getVariable(Tokens *tokens,
 
 bool is_keyword(char *word)
 {
-    return strcasecmp(word, "if")    == 0 ||
-           strcasecmp(word, "else")  == 0 ||
-           strcasecmp(word, "while") == 0 ||
-           strcasecmp(word, "var")   == 0 ||
-           strcasecmp(word, "def")   == 0;
+    return strcasecmp(word, "if") == 0 ||
+        strcasecmp(word, "else") == 0 ||
+        strcasecmp(word, "while") == 0 ||
+        strcasecmp(word, "var") == 0 ||
+        strcasecmp(word, "def") == 0;
 }

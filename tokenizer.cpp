@@ -47,7 +47,7 @@ size_t tokenize(char *filename,
             tokens->tokens[tokens->size].value.id_in_table = position;
         }
         else if (isdigit(*readPtr) ||
-                 (*readPtr == '-' && isdigit(*(readPtr + 1))))
+            (*readPtr == '-' && isdigit(*(readPtr + 1))))
         {
             tokens->tokens[tokens->size].type = NUMBER_TOKEN;
 
@@ -172,7 +172,7 @@ void getWord(char **readPtr, char *word, size_t *word_length)
         length++;
         (*readPtr)++;
     }
-    while (isalpha(**readPtr) || **readPtr=='_');
+    while (isalpha(**readPtr) || **readPtr == '_');
     *word_length = length;
 }
 
