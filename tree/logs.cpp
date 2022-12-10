@@ -29,8 +29,7 @@ void treeCloseLogFile()
         fclose(TREE_LOG_FILE);
 }
 
-size_t treeDump(Tree *tree,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+size_t treeDump(Tree *tree)
 {
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
 
@@ -42,14 +41,13 @@ size_t treeDump(Tree *tree,
 
     fprintf(TREE_LOG_FILE, "<pre>\n");
 
-    createGraph(tree, photo_name, name_table);
+    createGraph(tree, photo_name);
     fprintf(TREE_LOG_FILE, "<img src=%s />\n", photo_name);
     TREE_GRAPH_LOG_VERSION++;
 }
 
 size_t createGraph(Tree *tree,
-                   const char *photo_name,
-                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+                   const char *photo_name)
 {
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
     CHECK_NULLPTR_ERROR(photo_name, TREE_FILENAME_IS_NULLPTR)
@@ -58,7 +56,7 @@ size_t createGraph(Tree *tree,
     fprintf(fp, "digraph TREE {\n"
                 "    rankdir=TB;\n");
 
-    createGraphNodes(tree->root, fp, name_table);
+    createGraphNodes(tree, tree->root, fp);
     createGraphEdges(tree->root, fp);
 
     // close graph with }
@@ -74,9 +72,9 @@ size_t createGraph(Tree *tree,
     return TREE_NO_ERRORS;
 }
 
-size_t createGraphNodes(Node *node,
-                        FILE *fp,
-                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+size_t createGraphNodes(Tree *tree,
+                        Node *node,
+                        FILE *fp)
 {
     if (!node)
         return TREE_NO_ERRORS;
@@ -84,7 +82,7 @@ size_t createGraphNodes(Node *node,
     size_t error = TREE_NO_ERRORS;
 
     char node_value[BUFFER_SIZE] = "";
-    getValueOfNode(node, &node_value, name_table);
+    getValueOfNode(tree, node, &node_value);
 
     fprintf(fp,
             "    node_%p[shape=\"record\", \n"
@@ -103,12 +101,12 @@ size_t createGraphNodes(Node *node,
             node->right);
 
     if (node->left)
-        error = createGraphNodes(node->left, fp, name_table);
+        error = createGraphNodes(tree, node->left, fp);
     if (error)
         return error;
 
     if (node->right)
-        error = createGraphNodes(node->right, fp, name_table);
+        error = createGraphNodes(tree, node->right, fp);
     if (error)
         return error;
 
@@ -151,9 +149,9 @@ size_t createGraphEdges(Node *node, FILE *fp)
     return TREE_NO_ERRORS;
 }
 
-void getValueOfNode(const Node *node,
-                    char (*node_value)[BUFFER_SIZE],
-                    char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+void getValueOfNode(Tree *tree,
+                    const Node *node,
+                    char (*node_value)[BUFFER_SIZE])
 {
     switch (node->node_type)
     {
@@ -236,7 +234,7 @@ void getValueOfNode(const Node *node,
             break;
         case VARIABLE:
             sprintf(*node_value, "VARIABLE '%s'",
-                    (*name_table)[node->value.var_value]);
+                    tree->var_name_table[node->value.var_value]);
             break;
         case IF:
             sprintf(*node_value, "IF OPERATOR");
@@ -249,21 +247,22 @@ void getValueOfNode(const Node *node,
             break;
         case VAR_DEC:
             sprintf(*node_value, "VARIABLE DECLARATION: '%s'",
-                    (*name_table)[node->value.var_value]);
+                    tree->var_name_table[node->value.var_value]);
             break;
         case DEF:
             sprintf(*node_value, "FUNCTION DECLARATION: '%s'",
-                    (*name_table)[node->value.def_value]);
+                    tree->func_name_table[node->value.def_value]);
             break;
         case CALL:
             sprintf(*node_value, "FUNCTION CALL: '%s'",
-                    (*name_table)[node->value.call_value]);
+                    tree->func_name_table[node->value.call_value]);
             break;
         case RETURN:
             sprintf(*node_value, "RETURN FROM FUNC");
             break;
         case ID_IN_NAME_TABLE:
-            sprintf(*node_value, "%s", (*name_table)[node->value.var_value]);
+            sprintf(*node_value, "%s",
+                    tree->var_name_table[node->value.var_value]);
             break;
         case INCORRECT_TYPE:
             sprintf(*node_value, "%s", "INCORRECT_TYPE");

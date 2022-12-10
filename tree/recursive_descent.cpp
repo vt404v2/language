@@ -470,7 +470,7 @@ Node *getCallFunction(Tokens *tokens,
         (*index)++;
 
         Node *func_call_node = createNode(CALL,
-                                          {.def_value = func_id},
+                                          {.call_value = func_id},
                                           params_root,
                                           nullptr);
         return func_call_node;

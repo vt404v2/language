@@ -12,7 +12,7 @@ int main()
     Tree tree = {};
     treeCtor(&tree);
     readTree(&tree, "tree.txt");
-//    treeDump(&tree, &name_table);
+    treeDump(&tree);
     treeDtor(&tree);
 
     treeCloseLogFile();

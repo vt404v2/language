@@ -112,6 +112,8 @@ struct Node
 struct Tree
 {
     Node *root = nullptr;
+    char var_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
+    char func_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 //    size_t size = 0;
 };
 
@@ -173,8 +175,33 @@ size_t nodeDtor(Node *node);
  * @param fp file for saving
  * @return error code
  */
-size_t treeSaveToFile(Tree *tree, FILE *fp);
+size_t treeSaveToFile(Tree *tree,
+                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                      FILE *fp);
 
+void printVariables(Node *node,
+                    char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                    FILE *fp);
+
+void fixVariables(Node *node,
+                  size_t (*var_table)[BUFFER_SIZE],
+                  size_t *length);
+
+void getVariables(Node *node,
+                  size_t (*var_table)[BUFFER_SIZE],
+                  size_t *length);
+
+void printFunctions(Node *node,
+                    char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                    FILE *fp);
+
+void fixFunctions(Node *node,
+                  size_t (*func_table)[BUFFER_SIZE],
+                  size_t *length);
+
+void getFunctions(Node *node,
+                  size_t (*func_table)[BUFFER_SIZE],
+                  size_t *length);
 /**
  * @brief prints nodes in preorder in specific format
  *
@@ -227,6 +254,10 @@ Node *createNode(NodeType node_type,
  * @return error code
  */
 size_t readTree(Tree *tree, const char *filename);
+
+void parseVariables(char **readPtr, Tree *tree);
+
+void parseFunctions(char **readPtr, Tree *tree);
 
 Node *parseNode(char **readPtr);
 
