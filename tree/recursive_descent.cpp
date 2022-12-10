@@ -41,6 +41,7 @@ Node *recursiveDescent(Tokens *tokens,
         Node *value = getLogOp(tokens, index, name_table);
         ADD_NODE
     }
+//    fprintf(stderr, "%zu\n", *index);
 
     return root;
 }
@@ -281,7 +282,7 @@ Node *getVarDec(Tokens *tokens,
                                             {},
                                             declared_var,
                                             nullptr);
-            (*index)--;
+//            (*index)--;
             return fictive_node;
         }
         (*index)--;
@@ -293,6 +294,9 @@ Node *getIf(Tokens *tokens,
             size_t *index,
             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
     if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("if"))
     {
         (*index)++;
@@ -326,6 +330,9 @@ Node *getWhile(Tokens *tokens,
                size_t *index,
                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
     if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("while"))
     {
         (*index)++;
@@ -340,6 +347,30 @@ Node *getWhile(Tokens *tokens,
         return createNode(FICTIVE_NODE,
                           {},
                           while_node, nullptr);
+    }
+    return nullptr;
+}
+
+Node *getOutFunction(Tokens *tokens,
+                     size_t *index,
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("print"))
+    {
+        (*index)++;
+
+        Node *output_value =
+            getPrimaryExpression(tokens, index, name_table);
+        Node *output_node = createNode(OPERATOR,
+                                      {.op_value = OUTPUT_OP},
+                                       output_value,
+                                       nullptr);
+        return createNode(FICTIVE_NODE,
+                                    {},
+                                    output_node, nullptr);
     }
     return nullptr;
 }
@@ -499,6 +530,9 @@ Node *getPrimaryExpression(Tokens *tokens,
     value = getWhile(tokens, index, name_table);
     if (value)
         return value;
+    value = getOutFunction(tokens, index, name_table);
+    if (value)
+        return value;
     value = getDefFunction(tokens, index, name_table);
     if (value)
         return value;
@@ -574,5 +608,6 @@ bool is_keyword(char *word)
         strcasecmp(word, "else") == 0 ||
         strcasecmp(word, "while") == 0 ||
         strcasecmp(word, "var") == 0 ||
-        strcasecmp(word, "def") == 0;
+        strcasecmp(word, "def") == 0 ||
+        strcasecmp(word, "print") == 0;
 }

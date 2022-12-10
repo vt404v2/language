@@ -1,2 +1,7 @@
-var y = 1000 - 7
+var y
+y = -7
+print(y)
+y = y + 1000
+print(y)
 y = 0
+print(y)

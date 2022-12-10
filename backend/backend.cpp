@@ -70,6 +70,12 @@ void assemble_node(Tree *tree, Node *node, FILE *fp)
                     fprintf(fp, "DIV\n");
                     break;
                 }
+                case OUTPUT_OP:
+                {
+                    assemble_node(tree, node->left, fp);
+                    fprintf(fp, "OUT\n");
+                    break;
+                }
                 default:
                 {
                     fprintf(stderr, "UNKNOWN OPERATOR\n");
@@ -81,7 +87,10 @@ void assemble_node(Tree *tree, Node *node, FILE *fp)
         case NUMBER:
             fprintf(fp, "PUSH %d\n", VALUE.num_value);
             break;
+        case VARIABLE:
+            fprintf(fp, "PUSH [%zu]\n", VALUE.var_value);
+            break;
         default:
-            fprintf(stderr, "UNKNOWN NODE TYPE: %d\n", NODE_TYPE);
+            fprintf(stderr, "UNKNOWN NODETYPE: %d\n", NODE_TYPE);
     }
 }

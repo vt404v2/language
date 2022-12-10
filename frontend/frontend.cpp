@@ -14,6 +14,7 @@ void convertProgramToTree(const char *filename,
     treeCtor(&tree);
 
     tree.root = readRecursiveDescentNode(&tokens, &name_table);
+    treeDump(&tree);
 
     FILE *tree_file = fopen(tree_filename, "w");
     treeSaveToFile(&tree, &name_table, tree_file);

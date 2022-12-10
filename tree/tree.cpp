@@ -265,7 +265,6 @@ size_t readTree(Tree *tree, const char *filename)
     char *readPtr = tree_buffer;
     parseVariables(&readPtr, tree);
     parseFunctions(&readPtr, tree);
-
     tree->root = parseNode(&readPtr);
 
     return TREE_NO_ERRORS;
@@ -303,45 +302,22 @@ void parseFunctions(char **readPtr, Tree *tree)
 
 Node *parseNode(char **readPtr)
 {
-
-    Node *value_node = nullptr;
-
     skipSpaces(readPtr);
+
     if (**readPtr == '{')
     {
         (*readPtr)++;
         skipSpaces(readPtr);
-        value_node = getValueNode(readPtr);
-    }
-    skipSpaces(readPtr);
-    if (**readPtr == '}')
-    {
-        (*readPtr)++;
-        skipSpaces(readPtr);
-        return value_node;
-    }
-
-    Node *left_node = nullptr;
-    Node *right_node = nullptr;
-    if (**readPtr == '{')
-    {
-        left_node = parseNode(readPtr);
+        Node *node = getValueNode(readPtr);
         if (**readPtr == '}')
+        {
             (*readPtr)++;
-        skipSpaces(readPtr);
+            skipSpaces(readPtr);
+            return node;
+        }
     }
 
-    if (**readPtr == '{')
-    {
-        right_node = parseNode(readPtr);
-        if (**readPtr == '}')
-            (*readPtr)++;
-        skipSpaces(readPtr);
-    }
-
-    value_node->left = left_node;
-    value_node->right = right_node;
-    return value_node;
+    return nullptr;
 }
 
 Node *getValueNode(char **readPtr)
@@ -360,8 +336,20 @@ Node *getValueNode(char **readPtr)
     sscanf(*readPtr, "%zu%n", &value, &length);
     (*readPtr) += length;
     skipSpaces(readPtr);
-    return createNode((NodeType) node_type,
-                      {.call_value=value},
-                      nullptr,
-                      nullptr);
+    Node *value_node =  createNode((NodeType) node_type,
+                                  {.call_value=value},
+                                  nullptr,
+                                  nullptr);
+    if (**readPtr == '}')
+    {
+        return value_node;
+    }
+    else
+    {
+        Node *left = parseNode(readPtr);
+        Node *right = parseNode(readPtr);
+        value_node->left = left;
+        value_node->right = right;
+        return value_node;
+    }
 }
