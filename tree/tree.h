@@ -5,7 +5,7 @@
 #include "stdlib.h"
 #include "assert.h"
 #include "config.h"
-#include "../utils.h"
+#include "../common/utils.h"
 #include "cstring"
 #include <cmath>
 #include <cctype>
@@ -131,7 +131,7 @@ enum TreeErrors
     CANT_OPEN_FILE            = 10,
 };
 
-#include "../tokenizer.h"
+#include "../tokenizer/tokenizer.h"
 #include "recursive_descent.h"
 
 /**

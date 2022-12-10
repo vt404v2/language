@@ -15,7 +15,7 @@ void dtorTokens(Tokens *tokens)
     tokens->capacity = 0;
 }
 
-size_t tokenize(char *filename,
+size_t tokenize(const char *filename,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
                 Tokens *tokens)
 {

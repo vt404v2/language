@@ -1,68 +1,21 @@
-#include "tokenizer.h"
+#include "frontend/frontend.h"
 
 int main()
 {
     treeClearGraphLogFile();
     treeSetLogFile();
-    char filename[] = "program.txt";
-    char name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 
-    Tokens tokens = {};
-    ctorTokens(&tokens, 2);
+    system("cmake --build . --target frontend_run");
+    system("./frontend_run");
+    convertProgramToTree("program.txt", "tree.txt");
 
-    tokenize(filename, &name_table, &tokens);
-    {
-        printf("SIZE: %zu\n", tokens.size);
-        for (size_t i = 0; i < tokens.size; i++)
-        {
-            printf("token %.2zu: Type: %d ",
-                   i,
-                   tokens.tokens[i].type);
-            switch (tokens.tokens[i].type)
-            {
-                case NUMBER_TOKEN:
-                    printf("Value: %d\n", tokens.tokens[i].value.num_value);
-                    break;
-                case KEYWORD_TOKEN:
-                    printf("Table id: %zu\n", tokens.tokens[i].value.id_in_table);
-                    break;
-                case OPERATOR_TOKEN:
-                    printf("Value: %d\n", tokens.tokens[i].value.operation);
-                    break;
-                case BRACKET_TOKEN:
-                    printf("Value: %c\n", tokens.tokens[i].value.bracket);
-                    break;
-                case SPECIAL_TOKEN:
-                    printf("Value: %c\n", tokens.tokens[i].value.special_token);
-                    break;
-                case INCORRECT_TYPE_TOKEN:
-                    printf("Value: INCORRECT VALUE\n");
-                    break;
-
-            }
-        }
-    }
     Tree tree = {};
     treeCtor(&tree);
-
-    tree.root = readRecursiveDescentNode(&tokens, &name_table);
-    treeDump(&tree, &name_table);
-
-    FILE *tree_file = fopen("tree.txt", "w");
-    treeSaveToFile(&tree, tree_file);
-    fclose(tree_file);
-
-    Tree new_tree = {};
-    treeCtor(&tree);
-    readTree(&new_tree, "tree.txt");
-    treeDump(&new_tree, &name_table);
-
-    treeDtor(&new_tree);
-
+    readTree(&tree, "tree.txt");
+//    treeDump(&tree, &name_table);
     treeDtor(&tree);
-    dtorTokens(&tokens);
-    treeCloseLogFile();
 
+    treeCloseLogFile();
     return 0;
 }
 

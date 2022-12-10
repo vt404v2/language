@@ -1,15 +1,15 @@
 #ifndef LANGUAGE__TOKENIZER_H
 #define LANGUAGE__TOKENIZER_H
 
-#include "tree/tree.h"
-#include "tree/logs.h"
+#include "../tree/tree.h"
+#include "../tree/logs.h"
 
 
 void ctorTokens(Tokens *tokens, size_t capacity);
 
 void dtorTokens(Tokens *tokens);
 
-size_t tokenize(char *filename,
+size_t tokenize(const char *filename,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
                 Tokens *tokens);
 
