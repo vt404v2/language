@@ -1,7 +1,8 @@
 var y
-y = -7
-print(y)
-y = y + 1000
-print(y)
+y = 1000 - 7
+while (y)
+{
+    print(y)
+    y = y - 7
+}
 y = 0
-print(y)

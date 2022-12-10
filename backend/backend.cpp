@@ -41,8 +41,12 @@ void assemble_node(Tree *tree, Node *node, FILE *fp)
             {
                 case ASSIGN_OP:
                     assemble_node(tree, node->right, fp);
-                    fprintf(fp, "POP [%zu]\n", node->left->value.var_value);
-                    fprintf(fp, "PUSH [%zu]\n", node->left->value.var_value);
+                    fprintf(fp,
+                            "POP [%zu]\n",
+                            node->left->value.var_value);
+                    fprintf(fp,
+                            "PUSH [%zu]\n",
+                            node->left->value.var_value);
                     break;
                 case ADD_OP:
                     assemble_node(tree, node->left, fp);
@@ -90,6 +94,16 @@ void assemble_node(Tree *tree, Node *node, FILE *fp)
         case VARIABLE:
             fprintf(fp, "PUSH [%zu]\n", VALUE.var_value);
             break;
+        case WHILE:
+        {
+            Node *oper_node = node->left;
+            fprintf(fp, ":label_%p\n", node->right);
+            assemble_node(tree, node->right, fp);
+            assemble_node(tree, node->left, fp);
+            fprintf(fp, "PUSH 0\n");
+            fprintf(fp, "ja :label_%p\n", node->right);
+            break;
+        }
         default:
             fprintf(stderr, "UNKNOWN NODETYPE: %d\n", NODE_TYPE);
     }
