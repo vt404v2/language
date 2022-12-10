@@ -1,16 +1,2 @@
 var y = 1000 - 7
-def g(a, b, c)
-{
-    var x
-    var i
-    i = 0
-    x = 1000
-    while ((x >= 0) && (i <= 1000))
-    {
-        x = x - 7
-        i = i + 7
-    }
-    x = 1000
-}
-y = g(y, y, y)
 y = 0

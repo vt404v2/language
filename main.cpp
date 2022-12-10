@@ -1,4 +1,5 @@
 #include "frontend/frontend.h"
+#include "backend/backend.h"
 
 int main()
 {
@@ -8,12 +9,10 @@ int main()
     system("cmake --build . --target frontend_run");
     system("./frontend_run");
     convertProgramToTree("program.txt", "tree.txt");
+    convertTreeToAsm("tree.txt", "lang.asm");
 
-    Tree tree = {};
-    treeCtor(&tree);
-    readTree(&tree, "tree.txt");
-    treeDump(&tree);
-    treeDtor(&tree);
+    system("cmake --build ./processor --target main");
+    system("cd processor; ./main");
 
     treeCloseLogFile();
     return 0;
