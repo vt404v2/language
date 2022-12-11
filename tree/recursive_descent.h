@@ -90,6 +90,10 @@ Node *getDefFunction(Tokens *tokens,
                      size_t *index,
                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+void changeFuncVarsToArgVariables(Node *node, Node *params);
+
+void checkId(Node *node, Node *params, bool *is_arg_var);
+
 Node *getCallFunction(Tokens *tokens,
                       size_t *index,
                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);

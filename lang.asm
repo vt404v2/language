@@ -1,42 +1,64 @@
+PUSH 666
+POP rax
 PUSH 0
 POP [0]
-PUSH 1000
-POP [0]
-PUSH [0]
-PUSH [0]
-PUSH 0
-A
-PUSH 0
-jbe :label_not_cond_0x55f66b9b4f90
-:label_0x55f66b9b4f90
-PUSH [0]
 PUSH 100
-A
-PUSH 0
-jbe :label_(nil)
-:label_0x55f66b9b50b0
-call :func_g
-OUT
-jmp :label_exit_if_0x55f66b9b4fc0
-:label_(nil)
-jmp :label_exit_if_0x55f66b9b4fc0
-:label_exit_if_0x55f66b9b4fc0
-PUSH [0]
-PUSH 7
-SUB
 POP [0]
 PUSH [0]
 PUSH [0]
-PUSH 0
-A
-PUSH 0
-ja :label_0x55f66b9b4f90
-:label_not_cond_0x55f66b9b4f90
+POP [rax]
+PUSH rax
+PUSH 1
+ADD
+POP rax
+PUSH rax
+PUSH 1
+SUB
+POP rax
+call :func_g
+POP [0]
+PUSH [0]
+PUSH [0]
+OUT
+PUSH [0]
+POP [rax]
+PUSH rax
+PUSH 1
+ADD
+POP rax
+PUSH rax
+PUSH 1
+SUB
+POP rax
+call :func_g
+POP [0]
+PUSH [0]
 PUSH [0]
 OUT
 HLT
 :func_g
-PUSH [0]
-OUT
-PUSH [0]
+PUSH 10
+PUSH [rax]
+A
+PUSH 0
+jbe :label_0x55d70ae31580
+:label_0x55d70ae314f0
+PUSH [rax]
 RET
+jmp :label_exit_if_0x55d70ae30f50
+:label_0x55d70ae31580
+PUSH [rax]
+OUT
+PUSH [rax]
+PUSH 1
+SUB
+POP [rax]
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+POP rax
+call :func_g
+RET
+jmp :label_exit_if_0x55d70ae30f50
+:label_exit_if_0x55d70ae30f50

@@ -29,6 +29,8 @@ void convertTreeToAsm(const char *tree_filename,
 
 void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 {
+    fprintf(main_fp, "PUSH 666\n");
+    fprintf(main_fp, "POP rax\n");
     assemble_node(tree, node, main_fp, func_fp);
     fprintf(main_fp, "HLT");
 }
@@ -45,7 +47,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             break;
         case VAR_DEC:
             fprintf(main_fp, "PUSH 0\n"
-                        "POP [%zu]\n", VALUE.dec_value);
+                             "POP [%zu]\n", VALUE.dec_value);
             break;
         case OPERATOR:
         {
@@ -53,12 +55,22 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             {
                 case ASSIGN_OP:
                     assemble_node(tree, RIGHT_NODE, main_fp, func_fp);
-                    fprintf(main_fp,
-                            "POP [%zu]\n",
-                            node->left->value.var_value);
-                    fprintf(main_fp,
-                            "PUSH [%zu]\n",
-                            node->left->value.var_value);
+                    if (LEFT_NODE->node_type == VARIABLE)
+                    {
+                        fprintf(main_fp,
+                                "POP [%zu]\n",
+                                node->left->value.var_value);
+                        fprintf(main_fp,
+                                "PUSH [%zu]\n",
+                                node->left->value.var_value);
+                    }
+                    else
+                    {
+                        fprintf(main_fp,
+                                "POP [rax]\n");
+                        fprintf(main_fp,
+                                "PUSH [rax]\n");
+                    }
                     break;
                 case ADD_OP:
                     assemble_node(tree, LEFT_NODE, main_fp, func_fp);
@@ -139,6 +151,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     fprintf(main_fp, "E\n");
                     break;
                 case AND_OP:
+                {
                     // left_value to bool
                     assemble_node(tree, LEFT_NODE, main_fp, func_fp);
                     fprintf(main_fp, "PUSH 0\n");
@@ -153,7 +166,9 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     fprintf(main_fp, "E\n");
                     fprintf(main_fp, "MUL\n");
                     break;
+                }
                 case OR_OP:
+                {
                     // left_value to bool
                     assemble_node(tree, LEFT_NODE, main_fp, func_fp);
                     fprintf(main_fp, "PUSH 0\n");
@@ -173,6 +188,8 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     fprintf(main_fp, "PUSH 0\n");
                     fprintf(main_fp, "E\n");
                     break;
+                }
+
                 case INCORRECT_OP:
                     fprintf(stderr, "INCORRECT OPERATOR\n");
                     break;
@@ -230,7 +247,10 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             // false code
             fprintf(main_fp, ":label_%p\n", false_condition_node);
             if (false_condition_node)
-                assemble_node(tree, false_condition_node, main_fp, func_fp);
+                assemble_node(tree,
+                              false_condition_node,
+                              main_fp,
+                              func_fp);
             fprintf(main_fp, "jmp :label_exit_if_%p\n", node);
 
             // exit pointer
@@ -241,13 +261,29 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(stderr, "GOT IF ACTIONS WITHOUT CONDITION\n");
             break;
         case DEF:
-            fprintf(func_fp, ":func_%s\n", tree->func_name_table[VALUE.def_value]);
-//            assemble_node(tree, LEFT_NODE, fp);
+            fprintf(func_fp,
+                    ":func_%s\n",
+                    tree->func_name_table[VALUE.def_value]);
+//            assemble_args(tree, LEFT_NODE, func_fp);
+//            assemble_node(tree, LEFT_NODE, func_fp, func_fp);
             assemble_node(tree, RIGHT_NODE, func_fp, func_fp);
             break;
         case CALL:
-            fprintf(main_fp, "call :func_%s\n", tree->func_name_table[VALUE.def_value]);
+        {
+            pushArgs(tree, LEFT_NODE, main_fp);
+
+            size_t num_args = 1;
+            fprintf(main_fp, "PUSH rax\n");
+            fprintf(main_fp, "PUSH %zu\n", num_args);
+            fprintf(main_fp, "SUB\n");
+            fprintf(main_fp, "POP rax\n");
+            // return to arg start
+
+            fprintf(main_fp,
+                    "call :func_%s\n",
+                    tree->func_name_table[VALUE.def_value]);
             break;
+        }
         case RETURN:
             assemble_node(tree, LEFT_NODE, func_fp, func_fp);
             fprintf(func_fp, "RET\n");
@@ -255,6 +291,15 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
         case ID_IN_NAME_TABLE:
             fprintf(stderr, "ID_IN_NAME_TABLE NOT SUPPORTED. \n");
             break;
+        case ARG_VARIABLE:
+        {
+            size_t index = VALUE.var_value;
+            index = 0;
+            fprintf(main_fp, "PUSH [rax]\n");
+//            fprintf(main_fp, "PUSH [rax]\n");
+//            fprintf(main_fp, "OUT\n");
+            break;
+        }
         case INCORRECT_TYPE:
             fprintf(stderr, "INCORRECT NODE TYPE: %d\n", NODE_TYPE);
             break;
@@ -262,4 +307,33 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(stderr, "UNKNOWN NODE TYPE: %d\n", NODE_TYPE);
             break;
     }
+}
+
+//void assemble_args(Tree *tree, Node *node, FILE *fp)
+//{
+//    size_t num_args = 1;
+//}
+
+
+void pushArgs(Tree *tree, Node *node, FILE *fp)
+{
+    if (NODE_TYPE == FICTIVE_NODE)
+    {
+        if (LEFT_NODE)
+            pushArgs(tree, LEFT_NODE, fp);
+        if (RIGHT_NODE)
+            pushArgs(tree, RIGHT_NODE, fp);
+    }
+    if (NODE_TYPE == VARIABLE)
+    {
+        fprintf(fp, "PUSH [%zu]\n", VALUE.var_value);
+        fprintf(fp, "POP [rax]\n");
+
+        fprintf(fp, "PUSH rax\n");
+        fprintf(fp, "PUSH 1\n");
+        fprintf(fp, "ADD\n");
+        fprintf(fp, "POP rax\n");
+    }
+
+
 }

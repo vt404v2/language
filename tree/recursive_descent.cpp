@@ -478,7 +478,12 @@ Node *getDefFunction(Tokens *tokens,
 
         while (TOKEN.value.bracket != ')')
         {
-            params_last->left = getVariable(tokens, index, name_table);
+            params_last->left = createNewNode(ARG_VARIABLE,
+                                              {.var_value = TOKEN.value.id_in_table},
+                                              nullptr,
+                                              nullptr);
+
+            (*index)++;
             params_last->right = createNode(FICTIVE_NODE,
                                             {},
                                             nullptr,
@@ -500,6 +505,7 @@ Node *getDefFunction(Tokens *tokens,
 
         (*index)++;
         Node *body = getCodeBlock(tokens, index, name_table);
+        changeFuncVarsToArgVariables(body, params_root);
         (*index)++;
 
         Node *func_def_node = createNode(DEF,
@@ -509,6 +515,42 @@ Node *getDefFunction(Tokens *tokens,
         return createNode(FICTIVE_NODE, {}, func_def_node, nullptr);
     }
     return nullptr;
+}
+
+void changeFuncVarsToArgVariables(Node *node, Node *params)
+{
+    if (NODE_TYPE == VARIABLE)
+    {
+        bool is_arg_var = false;
+        checkId(node, params, &is_arg_var);
+        if (is_arg_var)
+            NODE_TYPE = ARG_VARIABLE;
+    }
+    if (LEFT_NODE)
+        changeFuncVarsToArgVariables(LEFT_NODE, params);
+    if (RIGHT_NODE)
+        changeFuncVarsToArgVariables(RIGHT_NODE, params);
+}
+
+void checkId(Node *node, Node *params, bool *is_arg_var)
+{
+    if (params->node_type == ARG_VARIABLE)
+    {
+        if (params->value.var_value == node->value.var_value)
+        {
+            *is_arg_var = true;
+            return;
+        }
+    }
+    if (params->left)
+        checkId(node, params->left, is_arg_var);
+    if (params->right)
+        checkId(node, params->right, is_arg_var);
+
+    if (LEFT_NODE)
+        checkId(LEFT_NODE, params, is_arg_var);
+    if (RIGHT_NODE)
+        checkId(RIGHT_NODE, params, is_arg_var);
 }
 
 Node *getCallFunction(Tokens *tokens,

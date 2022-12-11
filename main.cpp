@@ -1,6 +1,11 @@
 #include "frontend/frontend.h"
 #include "backend/backend.h"
 
+//#define test "program.txt"
+#define test "test.txt"
+//#define test "quadratic.txt"
+//#define test "factorial.txt"
+
 int main()
 {
     treeClearGraphLogFile();
@@ -8,7 +13,8 @@ int main()
 
     system("cmake --build . --target frontend_run");
     system("./frontend_run");
-    convertProgramToTree("program.txt", "tree.txt");
+
+    convertProgramToTree(test, "tree.txt");
     convertTreeToAsm("tree.txt", "lang.asm", "func_def.asm");
 
     system("cmake --build ./processor --target main");

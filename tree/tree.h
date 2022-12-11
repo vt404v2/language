@@ -87,6 +87,7 @@ enum NodeType
     DEF              =  8,
     CALL             =  9,
     RETURN           = 10,
+    ARG_VARIABLE     = 11,
     //not standard
     ID_IN_NAME_TABLE = 666,
 };

@@ -111,7 +111,7 @@ void fixVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
                   size_t *length)
 {
-    if (NODE_TYPE == VAR_DEC || NODE_TYPE == VARIABLE)
+    if (NODE_TYPE == VAR_DEC || NODE_TYPE == VARIABLE || NODE_TYPE == ARG_VARIABLE)
     {
         for (size_t i = 0; i < *length; i++)
         {
@@ -132,7 +132,7 @@ void getVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
                   size_t *length)
 {
-    if (NODE_TYPE == VAR_DEC || NODE_TYPE == VARIABLE)
+    if (NODE_TYPE == VAR_DEC || NODE_TYPE == ARG_VARIABLE)
     {
         bool exist = false;
         for (size_t i = 0; i < *length; i++)
