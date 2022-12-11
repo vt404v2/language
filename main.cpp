@@ -9,7 +9,7 @@ int main()
     system("cmake --build . --target frontend_run");
     system("./frontend_run");
     convertProgramToTree("program.txt", "tree.txt");
-    convertTreeToAsm("tree.txt", "lang.asm");
+    convertTreeToAsm("tree.txt", "lang.asm", "func_def.asm");
 
     system("cmake --build ./processor --target main");
     system("cd processor; ./main");

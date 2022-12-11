@@ -4,10 +4,13 @@
 #include "../tree/tree.h"
 
 void convertTreeToAsm(const char *tree_filename,
-                      const char *asm_filename);
+                      const char *asm_filename,
+                      const char *asm_func_filename);
 
-void assemble(Tree *tree, Node *node, FILE *fp);
+void assemble(Tree *tree, Node *node,
+              FILE *main_fp, FILE *func_fp);
 
-void assemble_node(Tree *tree, Node *node, FILE *fp);
+void assemble_node(Tree *tree, Node *node,
+                   FILE *main_fp, FILE *func_fp);
 
 #endif //LANGUAGE__BACKEND_H

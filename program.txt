@@ -1,4 +1,9 @@
 var y = 1000
+def g()
+{
+    print(y)
+    return y
+}
 while (y > 0)
 {
     if (y > 100)
