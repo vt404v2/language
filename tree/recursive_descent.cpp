@@ -282,7 +282,9 @@ Node *getVarDec(Tokens *tokens,
                                             {},
                                             declared_var,
                                             nullptr);
-//            (*index)--;
+            if (TOKEN.type == KEYWORD_TOKEN &&
+                TOKEN.value.operation == EQUAL_OP)
+                (*index)--;
             return fictive_node;
         }
         (*index)--;

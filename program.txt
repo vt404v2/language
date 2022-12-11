@@ -1,4 +1,5 @@
-var y
+var y = 1000 - 7
+var x
 y = 1000 - 7
 while (y > 0)
 {
