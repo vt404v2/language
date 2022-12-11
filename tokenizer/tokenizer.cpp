@@ -82,7 +82,7 @@ size_t tokenize(const char *filename,
             readPtr++;                                             \
         }
 
-        else ONE_CHAR_OPERATOR('=', EQUAL_OP)
+        else ONE_CHAR_OPERATOR('=', ASSIGN_OP)
         else ONE_CHAR_OPERATOR('>', GREATER_OP)
         else ONE_CHAR_OPERATOR('<', BELOW_OP)
         else ONE_CHAR_OPERATOR('+', ADD_OP)

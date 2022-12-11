@@ -236,7 +236,7 @@ Node *getVarInit(Tokens *tokens,
         size_t variable_id = TOKEN.value.id_in_table;
         (*index)++;
         if (TOKEN.type == OPERATOR_TOKEN &&
-            TOKEN.value.operation == EQUAL_OP)
+            TOKEN.value.operation == ASSIGN_OP)
         {
             (*index)++;
             Node *var_node = createNode(VARIABLE,
@@ -250,6 +250,7 @@ Node *getVarInit(Tokens *tokens,
                                          {.op_value=ASSIGN_OP},
                                          var_node,
                                          init_value);
+//            fprintf(stderr, "assign \n");
 
             return createNode(FICTIVE_NODE, {}, init_node, nullptr);
         }
@@ -282,8 +283,8 @@ Node *getVarDec(Tokens *tokens,
                                             {},
                                             declared_var,
                                             nullptr);
-            if (TOKEN.type == KEYWORD_TOKEN &&
-                TOKEN.value.operation == EQUAL_OP)
+            if (TOKEN.type == OPERATOR_TOKEN &&
+                TOKEN.value.operation == ASSIGN_OP)
                 (*index)--;
             return fictive_node;
         }

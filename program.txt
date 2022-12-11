@@ -1,6 +1,4 @@
-var y = 1000 - 7
-var x
-y = 1000 - 7
+var y = 1000
 while (y > 0)
 {
     if (y > 100)
