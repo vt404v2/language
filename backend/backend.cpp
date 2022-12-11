@@ -33,11 +33,11 @@ void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(main_fp, "POP rax\n");
 
     fixArgVars(tree, node);
-    for (size_t i = 0; i < 16; i++)
-    {
-        auto d= tree->arg_vars_positions;
-        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
-    }
+//    for (size_t i = 0; i < 16; i++)
+//    {
+//        auto d= tree->arg_vars_positions;
+//        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
+//    }
     assemble_node(tree, node, main_fp, func_fp);
 
     fprintf(main_fp, "HLT");

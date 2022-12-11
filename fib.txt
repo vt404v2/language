@@ -1,0 +1,35 @@
+def fib(nn, xx, yy)
+{
+    if (nn <= 0)
+    {
+        if (xx > yy)
+        {
+            print(xx)
+        }
+        else
+        {
+            print(yy)
+        }
+        return 0
+    }
+    else
+    {
+        if (xx > yy)
+        {
+            yy = yy + xx
+            nn = nn - 1
+            return fib(nn, xx, yy)
+        }
+        else
+        {
+            xx = xx + yy
+            nn = nn - 1
+            return fib(nn, xx, yy)
+        }
+    }
+
+}
+var n = 6
+var x = 0
+var y = 1
+fib(n, x, y)

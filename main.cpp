@@ -2,7 +2,8 @@
 #include "backend/backend.h"
 
 //#define test "program.txt"
-#define test "test.txt"
+//#define test "test.txt"
+#define test "fib.txt"
 //#define test "quadratic.txt"
 //#define test "factorial.txt"
 
