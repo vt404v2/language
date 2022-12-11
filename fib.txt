@@ -29,7 +29,7 @@ def fib(nn, xx, yy)
     }
 
 }
-var n = 6
+var n = input()
 var x = 0
 var y = 1
 fib(n, x, y)

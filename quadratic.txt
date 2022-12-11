@@ -60,7 +60,7 @@ def solve_square(a, b, c)
         return 0
     }
 }
-var x = 1
-var y = 6
-var z = 5
+var x = input()
+var y = input()
+var z = input()
 solve_square(x, y, z)
