@@ -353,6 +353,36 @@ Node *getWhile(Tokens *tokens,
     return nullptr;
 }
 
+Node *getInputFunction(Tokens *tokens,
+                     size_t *index,
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("input"))
+    {
+        (*index)++;
+        ASSERT_OK(TOKEN.value.bracket == '(',
+                  "Expected (, but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+        ASSERT_OK(TOKEN.value.bracket == ')',
+                  "Expected ), but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+
+        Node *input_node = createNode(OPERATOR,
+                                      {.op_value = INPUT_OP},
+                                      nullptr,
+                                      nullptr);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          input_node, nullptr);
+    }
+    return nullptr;
+}
+
 Node *getOutFunction(Tokens *tokens,
                      size_t *index,
                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -532,6 +562,9 @@ Node *getPrimaryExpression(Tokens *tokens,
     value = getWhile(tokens, index, name_table);
     if (value)
         return value;
+    value = getInputFunction(tokens, index, name_table);
+    if (value)
+        return value;
     value = getOutFunction(tokens, index, name_table);
     if (value)
         return value;
@@ -611,5 +644,6 @@ bool is_keyword(char *word)
         strcasecmp(word, "while") == 0 ||
         strcasecmp(word, "var") == 0 ||
         strcasecmp(word, "def") == 0 ||
-        strcasecmp(word, "print") == 0;
+        strcasecmp(word, "print") == 0 ||
+        strcasecmp(word, "input") == 0;
 }

@@ -81,7 +81,7 @@ void assemble_node(Tree *tree, Node *node, FILE *fp)
                     // TODO: implement
                     break;
                 case INPUT_OP:
-                    // TODO: implement
+                    fprintf(fp, "IN\n");
                     break;
                 case OUTPUT_OP:
                     assemble_node(tree, LEFT_NODE, fp);
