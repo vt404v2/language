@@ -113,6 +113,7 @@ struct Node
 struct Tree
 {
     Node *root = nullptr;
+    size_t arg_vars_positions[BUFFER_SIZE] = {};
     char var_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
     char func_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 //    size_t size = 0;

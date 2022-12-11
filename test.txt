@@ -1,19 +1,25 @@
 var y
-y = 100
-def g(a)
+var x
+def g(a, b, c)
 {
-    if (a < 10)
-    {
-        return a
-    }
-    else
-    {
-        print(a)
-        a = a - 1
-        return g(a)
-    }
+    a = a + 6
+    b = b + 5
+    c = c + 9
+    print(a)
+    print(b)
+    print(c)
+    return (1000 - 7)
 }
-y = g(y)
-print(y)
-y = g(y)
-print(y)
+def f(d, e, f)
+{
+    d = d + 18
+    e = e + 19
+    f = f + 20
+    print(d)
+    print(e)
+    print(f)
+    return (1000 - 7)
+}
+y = 100
+print(g(y, y, y))
+print(f(y, y, y))

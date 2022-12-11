@@ -603,7 +603,11 @@ Node *getCallFunction(Tokens *tokens,
                                           {.call_value = func_id},
                                           params_root,
                                           nullptr);
-        return func_call_node;
+        Node *fictive_node = createNode(FICTIVE_NODE,
+                                        {},
+                                        func_call_node,
+                                        nullptr);
+        return fictive_node;
     }
     return nullptr;
 }
