@@ -1,8 +1,11 @@
 var y
 y = 1000 - 7
-while (y)
+while (y > 0)
 {
-    print(y)
+    if (y > 100)
+    {
+        print(y)
+    }
     y = y - 7
 }
 y = 0
