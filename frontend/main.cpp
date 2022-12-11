@@ -3,7 +3,7 @@
 int main()
 {
     treeSetLogFile();
-    convertProgramToTree("program.txt", "tree.txt");
+    convertProgramToTree("quadratic.txt", "tree.txt");
     treeCloseLogFile();
     return 0;
 }

@@ -1,0 +1,59 @@
+def solve_square(a, b, c)
+{
+    if (a == 0)
+    {
+        return (solve_linear(b, c))
+    }
+    else
+    {
+        if (b == 0)
+        {
+            if (a * c > 0)
+            {
+                print(0)
+            }
+            else
+            {
+                print(1)
+                print(0 - c / a)
+            }
+        }
+        else
+        {
+            var d = b * b - 4 * a * c
+            if (d == 0)
+            {
+                print(1)
+                print((0 - b)/(2 * a))
+            }
+            print(404)
+            print((0 - b + d)/(2 * a))
+            print((0 - b - d)/(2 * a))
+        }
+        return 0
+    }
+}
+def solve_linear(e, f)
+{
+    if (e == 0)
+    {
+        if (f == 0)
+        {
+            print(993)
+        }
+        else
+        {
+            print(0)
+        }
+    }
+    else
+    {
+        print(1)
+        print((0 - f) / e)
+    }
+    return 0
+}
+var x = 1
+var y = 5
+var z = 6
+solve_square(x, y, z)

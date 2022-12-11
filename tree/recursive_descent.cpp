@@ -107,7 +107,7 @@ Node *getMulDiv(Tokens *tokens,
 
     while (TOKEN.type == OPERATOR_TOKEN &&
         (TOKEN.value.operation == MUL_OP ||
-            TOKEN.value.operation == SUB_OP))
+            TOKEN.value.operation == DIV_OP))
     {
         OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
