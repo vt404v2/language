@@ -229,6 +229,9 @@ void getValueOfNode(Tree *tree,
         case FICTIVE_NODE:
             sprintf(*node_value, "FICTIVE_NODE");
             break;
+        case SQRT:
+            sprintf(*node_value, "SQRT");
+            break;
         case NUMBER:
             sprintf(*node_value, "%d", node->value.num_value);
             break;

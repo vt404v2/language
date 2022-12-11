@@ -1,33 +1,33 @@
 PUSH 666
 POP rax
 PUSH 0
-POP [6]
+POP [4]
 PUSH 1
-POP [6]
-PUSH [6]
+POP [4]
+PUSH [4]
 PUSH 0
-POP [7]
-PUSH 5
-POP [7]
-PUSH [7]
-PUSH 0
-POP [8]
+POP [5]
 PUSH 6
-POP [8]
-PUSH [8]
+POP [5]
+PUSH [5]
+PUSH 0
+POP [6]
+PUSH 5
+POP [6]
 PUSH [6]
+PUSH [4]
 POP [rax]
 PUSH rax
 PUSH 1
 ADD
 POP rax
-PUSH [7]
+PUSH [5]
 POP [rax]
 PUSH rax
 PUSH 1
 ADD
 POP rax
-PUSH [8]
+PUSH [6]
 POP [rax]
 PUSH rax
 PUSH 1
@@ -52,16 +52,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55f2385fec90
-:label_0x55f2385fde80
-PUSH rax
-PUSH 0
-SUB
-POP rax
-call :func_solve_linear
-RET
-jmp :label_exit_if_0x55f2385ff800
-:label_0x55f2385fec90
+jbe :label_0x55c9aa78dde0
+:label_0x55c9aa78b870
 PUSH rax
 PUSH 1
 ADD
@@ -74,8 +66,58 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55f2385fe030
-:label_0x55f2385fe630
+jbe :label_0x55c9aa78e4a0
+:label_0x55c9aa78cf40
+PUSH rax
+PUSH 2
+ADD
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+POP rax
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55c9aa78e200
+:label_0x55c9aa78dcc0
+PUSH 993
+OUT
+jmp :label_exit_if_0x55c9aa78d870
+:label_0x55c9aa78e200
+PUSH 0
+OUT
+jmp :label_exit_if_0x55c9aa78d870
+:label_exit_if_0x55c9aa78d870
+jmp :label_exit_if_0x55c9aa78b8d0
+:label_0x55c9aa78e4a0
+PUSH 1
+OUT
+PUSH 0
+PUSH [8]
+SUB
+PUSH [9]
+DIV
+OUT
+jmp :label_exit_if_0x55c9aa78b8d0
+:label_exit_if_0x55c9aa78b8d0
+jmp :label_exit_if_0x55c9aa78e140
+:label_0x55c9aa78dde0
+PUSH rax
+PUSH 1
+ADD
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+POP rax
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55c9aa78d450
+:label_0x55c9aa78e0b0
 PUSH rax
 PUSH 0
 ADD
@@ -98,14 +140,15 @@ MUL
 PUSH 0
 A
 PUSH 0
-jbe :label_0x55f2385fe750
-:label_0x55f2385fede0
+jbe :label_0x55c9aa78ce20
+:label_0x55c9aa78cd90
 PUSH 0
 OUT
-jmp :label_exit_if_0x55f2385fe660
-:label_0x55f2385fe750
-PUSH 1
+jmp :label_exit_if_0x55c9aa78e260
+:label_0x55c9aa78ce20
+PUSH 2
 OUT
+PUSH 0
 PUSH 0
 PUSH rax
 PUSH 2
@@ -127,11 +170,38 @@ SUB
 POP rax
 DIV
 SUB
+SQRT
+SUB
 OUT
-jmp :label_exit_if_0x55f2385fe660
-:label_exit_if_0x55f2385fe660
-jmp :label_exit_if_0x55f2385fecc0
-:label_0x55f2385fe030
+PUSH 0
+PUSH 0
+PUSH rax
+PUSH 2
+ADD
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+POP rax
+PUSH rax
+PUSH 0
+ADD
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+POP rax
+DIV
+SUB
+SQRT
+ADD
+OUT
+jmp :label_exit_if_0x55c9aa78e260
+:label_exit_if_0x55c9aa78e260
+jmp :label_exit_if_0x55c9aa78dfc0
+:label_0x55c9aa78d450
 PUSH 0
 POP [3]
 PUSH rax
@@ -181,8 +251,8 @@ PUSH [3]
 PUSH 0
 E
 PUSH 0
-jbe :label_(nil)
-:label_0x55f2385fdc40
+jbe :label_0x55c9aa78ba50
+:label_0x55c9aa78d660
 PUSH 1
 OUT
 PUSH 0
@@ -209,12 +279,20 @@ POP rax
 MUL
 DIV
 OUT
-jmp :label_exit_if_0x55f2385fe390
-:label_(nil)
-jmp :label_exit_if_0x55f2385fe390
-:label_exit_if_0x55f2385fe390
-PUSH 404
+jmp :label_exit_if_0x55c9aa78d570
+:label_0x55c9aa78ba50
+PUSH [3]
+PUSH 0
+A
+PUSH 0
+jbe :label_0x55c9aa78c140
+:label_0x55c9aa78bb70
+PUSH 2
 OUT
+PUSH [3]
+SQRT
+POP [3]
+PUSH [3]
 PUSH 0
 PUSH rax
 PUSH 1
@@ -267,76 +345,17 @@ POP rax
 MUL
 DIV
 OUT
-jmp :label_exit_if_0x55f2385fecc0
-:label_exit_if_0x55f2385fecc0
+jmp :label_exit_if_0x55c9aa78ba80
+:label_0x55c9aa78c140
+PUSH 0
+OUT
+jmp :label_exit_if_0x55c9aa78ba80
+:label_exit_if_0x55c9aa78ba80
+jmp :label_exit_if_0x55c9aa78d570
+:label_exit_if_0x55c9aa78d570
+jmp :label_exit_if_0x55c9aa78dfc0
+:label_exit_if_0x55c9aa78dfc0
 PUSH 0
 RET
-jmp :label_exit_if_0x55f2385ff800
-:label_exit_if_0x55f2385ff800
-:func_solve_linear
-PUSH rax
-PUSH 0
-ADD
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 0
-SUB
-POP rax
-PUSH 0
-E
-PUSH 0
-jbe :label_0x55f2385fcb70
-:label_0x55f2385ff290
-PUSH rax
-PUSH 1
-ADD
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 1
-SUB
-POP rax
-PUSH 0
-E
-PUSH 0
-jbe :label_0x55f2385fcae0
-:label_0x55f2385fca50
-PUSH 993
-OUT
-jmp :label_exit_if_0x55f2385ff2c0
-:label_0x55f2385fcae0
-PUSH 0
-OUT
-jmp :label_exit_if_0x55f2385ff2c0
-:label_exit_if_0x55f2385ff2c0
-jmp :label_exit_if_0x55f2385ff1a0
-:label_0x55f2385fcb70
-PUSH 1
-OUT
-PUSH 0
-PUSH rax
-PUSH 1
-ADD
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 1
-SUB
-POP rax
-SUB
-PUSH rax
-PUSH 0
-ADD
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 0
-SUB
-POP rax
-DIV
-OUT
-jmp :label_exit_if_0x55f2385ff1a0
-:label_exit_if_0x55f2385ff1a0
-PUSH 0
-RET
+jmp :label_exit_if_0x55c9aa78e140
+:label_exit_if_0x55c9aa78e140

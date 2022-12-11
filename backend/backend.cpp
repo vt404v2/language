@@ -249,6 +249,10 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             }
             break;
         }
+        case SQRT:
+            assemble_node(tree, LEFT_NODE, main_fp, func_fp);
+            fprintf(main_fp, "SQRT\n");
+            break;
         case NUMBER:
             fprintf(main_fp, "PUSH %d\n", VALUE.num_value);
             break;
