@@ -7,20 +7,20 @@ PUSH [0]
 PUSH 0
 A
 PUSH 0
-jbe :label_not_cond_0x557bf9e39110
-:label_0x557bf9e39110
+jbe :label_not_cond_0x55f66b9b4f90
+:label_0x55f66b9b4f90
 PUSH [0]
 PUSH 100
 A
 PUSH 0
 jbe :label_(nil)
-:label_0x557bf9e39260
-PUSH [0]
+:label_0x55f66b9b50b0
+call :func_g
 OUT
-jmp :label_exit_if_0x557bf9e39140
+jmp :label_exit_if_0x55f66b9b4fc0
 :label_(nil)
-jmp :label_exit_if_0x557bf9e39140
-:label_exit_if_0x557bf9e39140
+jmp :label_exit_if_0x55f66b9b4fc0
+:label_exit_if_0x55f66b9b4fc0
 PUSH [0]
 PUSH 7
 SUB
@@ -30,8 +30,8 @@ PUSH [0]
 PUSH 0
 A
 PUSH 0
-ja :label_0x557bf9e39110
-:label_not_cond_0x557bf9e39110
+ja :label_0x55f66b9b4f90
+:label_not_cond_0x55f66b9b4f90
 PUSH [0]
 OUT
 HLT

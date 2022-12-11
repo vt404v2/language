@@ -8,7 +8,7 @@ while (y > 0)
 {
     if (y > 100)
     {
-        print(y)
+        print(g())
     }
     y = y - 7
 }

@@ -20,7 +20,7 @@ void convertTreeToAsm(const char *tree_filename,
     fclose(main_fp);
 
     char command[BUFFER_SIZE] = "";
-    sprintf(command, "cat %s>> %s", asm_func_filename, asm_filename);
+    sprintf(command, "cat %s >> %s", asm_func_filename, asm_filename);
     system(command);
 
     sprintf(command, "rm %s", asm_func_filename);
@@ -246,7 +246,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             assemble_node(tree, RIGHT_NODE, func_fp, func_fp);
             break;
         case CALL:
-            // TODO: implement
+            fprintf(main_fp, "call :func_%s\n", tree->func_name_table[VALUE.def_value]);
             break;
         case RETURN:
             assemble_node(tree, LEFT_NODE, func_fp, func_fp);
