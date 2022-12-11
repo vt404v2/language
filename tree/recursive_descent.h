@@ -78,6 +78,10 @@ Node *getOutFunction(Tokens *tokens,
                      size_t *index,
                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getReturn(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
 Node *getCodeBlock(Tokens *tokens,
                    size_t *index,
                    char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);

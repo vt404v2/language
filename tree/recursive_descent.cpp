@@ -407,6 +407,30 @@ Node *getOutFunction(Tokens *tokens,
     return nullptr;
 }
 
+Node *getReturn(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("return"))
+    {
+        (*index)++;
+
+        Node *return_value =
+            getPrimaryExpression(tokens, index, name_table);
+        Node *return_node = createNode(RETURN,
+                                       {},
+                                       return_value,
+                                       nullptr);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          return_node, nullptr);
+    }
+    return nullptr;
+}
+
 Node *getCodeBlock(Tokens *tokens,
                    size_t *index,
                    char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -568,6 +592,9 @@ Node *getPrimaryExpression(Tokens *tokens,
     value = getOutFunction(tokens, index, name_table);
     if (value)
         return value;
+    value = getReturn(tokens, index, name_table);
+    if (value)
+        return value;
     value = getDefFunction(tokens, index, name_table);
     if (value)
         return value;
@@ -639,11 +666,12 @@ Node *getVariable(Tokens *tokens,
 
 bool is_keyword(char *word)
 {
-    return strcasecmp(word, "if") == 0 ||
-        strcasecmp(word, "else") == 0 ||
-        strcasecmp(word, "while") == 0 ||
-        strcasecmp(word, "var") == 0 ||
-        strcasecmp(word, "def") == 0 ||
-        strcasecmp(word, "print") == 0 ||
-        strcasecmp(word, "input") == 0;
+    return strcasecmp(word, "if")     == 0 ||
+           strcasecmp(word, "var")    == 0 ||
+           strcasecmp(word, "def")    == 0 ||
+           strcasecmp(word, "else")   == 0 ||
+           strcasecmp(word, "while")  == 0 ||
+           strcasecmp(word, "print")  == 0 ||
+           strcasecmp(word, "input")  == 0 ||
+           strcasecmp(word, "return") == 0;
 }

@@ -235,7 +235,8 @@ void assemble_node(Tree *tree, Node *node, FILE *fp)
             // TODO: implement
             break;
         case RETURN:
-            // TODO: implement
+            assemble_node(tree, LEFT_NODE, fp);
+            fprintf(fp, "RET\n");
             break;
         case ID_IN_NAME_TABLE:
             fprintf(stderr, "ID_IN_NAME_TABLE NOT SUPPORTED. \n");

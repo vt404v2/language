@@ -9,5 +9,4 @@ while (y > 0)
     }
     y = y - 7
 }
-y = input()
 print(y)

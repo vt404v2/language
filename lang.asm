@@ -11,20 +11,20 @@ PUSH [0]
 PUSH 0
 A
 PUSH 0
-jbe :label_not_cond_0x55a798e1e070
-:label_0x55a798e1e070
+jbe :label_not_cond_0x561b833c4070
+:label_0x561b833c4070
 PUSH [0]
 PUSH 100
 A
 PUSH 0
 jbe :label_(nil)
-:label_0x55a798e1e1c0
+:label_0x561b833c41c0
 PUSH [0]
 OUT
-jmp :label_exit_if_0x55a798e1e0a0
+jmp :label_exit_if_0x561b833c40a0
 :label_(nil)
-jmp :label_exit_if_0x55a798e1e0a0
-:label_exit_if_0x55a798e1e0a0
+jmp :label_exit_if_0x561b833c40a0
+:label_exit_if_0x561b833c40a0
 PUSH [0]
 PUSH 7
 SUB
@@ -34,11 +34,8 @@ PUSH [0]
 PUSH 0
 A
 PUSH 0
-ja :label_0x55a798e1e070
-:label_not_cond_0x55a798e1e070
-IN
-POP [0]
-PUSH [0]
+ja :label_0x561b833c4070
+:label_not_cond_0x561b833c4070
 PUSH [0]
 OUT
 E
