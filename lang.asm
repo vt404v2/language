@@ -52,8 +52,8 @@ SUB
 POP rax
 AE
 PUSH 0
-jbe :label_0x557330960580
-:label_0x5573309607f0
+jbe :label_0x55a462e05700
+:label_0x55a462e05430
 PUSH rax
 PUSH 1
 ADD
@@ -74,8 +74,8 @@ SUB
 POP rax
 A
 PUSH 0
-jbe :label_0x557330960d90
-:label_0x557330960d00
+jbe :label_0x55a462e055e0
+:label_0x55a462e05550
 PUSH rax
 PUSH 1
 ADD
@@ -86,8 +86,8 @@ PUSH 1
 SUB
 POP rax
 OUT
-jmp :label_exit_if_0x557330960820
-:label_0x557330960d90
+jmp :label_exit_if_0x55a462e05460
+:label_0x55a462e055e0
 PUSH rax
 PUSH 2
 ADD
@@ -98,12 +98,12 @@ PUSH 2
 SUB
 POP rax
 OUT
-jmp :label_exit_if_0x557330960820
-:label_exit_if_0x557330960820
+jmp :label_exit_if_0x55a462e05460
+:label_exit_if_0x55a462e05460
 PUSH 0
 RET
-jmp :label_exit_if_0x557330960400
-:label_0x557330960580
+jmp :label_exit_if_0x55a462e05340
+:label_0x55a462e05700
 PUSH rax
 PUSH 1
 ADD
@@ -124,8 +124,8 @@ SUB
 POP rax
 A
 PUSH 0
-jbe :label_0x55733095fa10
-:label_0x557330960970
+jbe :label_0x55a462e05c70
+:label_0x55a462e05820
 PUSH rax
 PUSH 2
 ADD
@@ -182,8 +182,8 @@ SUB
 POP rax
 call :func_fib
 RET
-jmp :label_exit_if_0x5573309605b0
-:label_0x55733095fa10
+jmp :label_exit_if_0x55a462e05730
+:label_0x55a462e05c70
 PUSH rax
 PUSH 1
 ADD
@@ -240,7 +240,7 @@ SUB
 POP rax
 call :func_fib
 RET
-jmp :label_exit_if_0x5573309605b0
-:label_exit_if_0x5573309605b0
-jmp :label_exit_if_0x557330960400
-:label_exit_if_0x557330960400
+jmp :label_exit_if_0x55a462e05730
+:label_exit_if_0x55a462e05730
+jmp :label_exit_if_0x55a462e05340
+:label_exit_if_0x55a462e05340

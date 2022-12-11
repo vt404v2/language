@@ -18,8 +18,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -W
     -Wlarger-than=8192 -Wstack-usage=8192 -pie -fPIE -Werror=vla ")
 
 
-add_executable(language main.cpp tokenizer/tokenizer.cpp frontend/frontend.cpp
-        backend/backend.cpp
+add_executable(language main.cpp tokenizer/tokenizer.cpp
+        frontend/frontend.cpp backend/backend.cpp
         tree/recursive_descent.cpp tree/tree.cpp tree/logs.cpp common/utils.cpp)
-add_executable(frontend_run frontend/main.cpp tokenizer/tokenizer.cpp frontend/frontend.cpp
+add_executable(frontend_run frontend/main.cpp frontend/frontend.cpp tokenizer/tokenizer.cpp
+        tree/recursive_descent.cpp tree/tree.cpp tree/logs.cpp common/utils.cpp)
+add_executable(backend_run backend/main.cpp backend/backend.cpp tokenizer/tokenizer.cpp
         tree/recursive_descent.cpp tree/tree.cpp tree/logs.cpp common/utils.cpp)

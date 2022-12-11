@@ -2,6 +2,8 @@
 
 int main()
 {
-    convertTreeToAsm("tree.txt", "lang.asm");
+    treeSetLogFile();
+    convertTreeToAsm("tree.txt", "lang.asm", "func_def.asm");
+    treeCloseLogFile();
     return 0;
 }
