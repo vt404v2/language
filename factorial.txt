@@ -8,7 +8,6 @@ def fact(n)
     else
     {
         n = n - 1
-        print(n)
         return (n + 1) * fact(n)
     }
 }

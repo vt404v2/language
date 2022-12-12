@@ -316,6 +316,8 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(func_fp,
                     ":func_%s\n",
                     tree->func_name_table[VALUE.def_value]);
+//            fprintf(func_fp, "PUSH rax\n");
+//            fprintf(func_fp, "OUT\n");
             assemble_node(tree, RIGHT_NODE, func_fp, func_fp);
             break;
         case CALL:
@@ -323,17 +325,18 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             size_t num_args = 0;
             pushArgs(tree, LEFT_NODE, main_fp, &num_args);
 
-            fprintf(main_fp, "PUSH rax\n");
-            fprintf(main_fp, "PUSH %zu\n", num_args);
-            fprintf(main_fp, "SUB\n");
-            fprintf(main_fp, "POP rax\n");
+//            fprintf(main_fp, "PUSH rax\n");
+//            fprintf(main_fp, "PUSH %zu\n", num_args);
+//            fprintf(main_fp, "SUB\n");
+//            fprintf(main_fp, "POP rax\n");
             // return to arg start
-
+//            fprintf(main_fp, "PUSH rax\n");
+//            fprintf(main_fp, "OUT\n");
             fprintf(main_fp,
                     "call :func_%s\n",
                     tree->func_name_table[VALUE.def_value]);
 //            fprintf(main_fp, "PUSH rax\n");
-//            fprintf(main_fp, "out\n");
+//            fprintf(main_fp, "OUT\n");
             break;
         }
         case RETURN:
@@ -346,16 +349,33 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
         case ARG_VARIABLE:
         {
             size_t index = tree->arg_vars_positions[VALUE.var_value];
+            size_t num_args = index;
+            size_t arg_index = VALUE.var_value + 1;
+
+            while (num_args < tree->arg_vars_positions[arg_index])
+            {
+                num_args = tree->arg_vars_positions[arg_index];
+                arg_index++;
+            }
+            num_args++;
+
+//            fprintf(stderr, "num args: %zu\n", num_args);
             // set rax to rax+i
+            // set rax to rax+i-n
             fprintf(main_fp, "PUSH rax\n");
             fprintf(main_fp, "PUSH %zu\n", index);
             fprintf(main_fp, "ADD\n");
+            fprintf(main_fp, "PUSH %zu\n", num_args);
+            fprintf(main_fp, "SUB\n");
             fprintf(main_fp, "POP rax\n");
             fprintf(main_fp, "PUSH [rax]\n");// PUSH[rax + i]
             // set rax+i to rax
+            // set rax+i-n ro rax
             fprintf(main_fp, "PUSH rax\n");
             fprintf(main_fp, "PUSH %zu\n", index);
             fprintf(main_fp, "SUB\n");
+            fprintf(main_fp, "PUSH %zu\n", num_args);
+            fprintf(main_fp, "ADD\n");
             fprintf(main_fp, "POP rax\n");
             break;
         }
@@ -387,7 +407,7 @@ void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index)
         fprintf(fp, "ADD\n");
         fprintf(fp, "POP rax\n");
 //        fprintf(fp, "PUSH rax\n");
-//        fprintf(fp, "out\n");
+//        fprintf(fp, "OUT\n");
         (*index)++;
     }
 }
