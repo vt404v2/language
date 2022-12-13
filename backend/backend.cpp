@@ -33,11 +33,11 @@ void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(main_fp, "POP rax\n");
 
     fixArgVars(tree, node);
-//    for (size_t i = 0; i < 16; i++)
-//    {
-//        auto d= tree->arg_vars_positions;
-//        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
-//    }
+    //    for (size_t i = 0; i < 16; i++)
+    //    {
+    //        auto d= tree->arg_vars_positions;
+    //        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
+    //    }
     assemble_node(tree, node, main_fp, func_fp);
 
     fprintf(main_fp, "HLT");
@@ -66,7 +66,7 @@ void registerArgs(Tree *tree, Node *node, size_t *index)
     if (NODE_TYPE == ARG_VARIABLE)
     {
         tree->arg_vars_positions[VALUE.var_value] = *index;
-//        fprintf(stderr, "var_value: %zu index: %zu\n", VALUE.var_value, *index);
+        //        fprintf(stderr, "var_value: %zu index: %zu\n", VALUE.var_value, *index);
         (*index)++;
     }
 }
@@ -108,9 +108,11 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                         size_t num_args = index;
                         size_t arg_index = VALUE.var_value + 1;
 
-                        while (num_args < tree->arg_vars_positions[arg_index])
+                        while (num_args
+                            < tree->arg_vars_positions[arg_index])
                         {
-                            num_args = tree->arg_vars_positions[arg_index];
+                            num_args =
+                                tree->arg_vars_positions[arg_index];
                             arg_index++;
                         }
                         num_args++;
@@ -122,7 +124,6 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                         fprintf(main_fp, "PUSH %zu\n", num_args);
                         fprintf(main_fp, "SUB\n");
                         fprintf(main_fp, "POP rax\n");
-
 
                         fprintf(main_fp,
                                 "POP [rax]\n");
@@ -158,17 +159,9 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     assemble_node(tree, RIGHT_NODE, main_fp, func_fp);
                     fprintf(main_fp, "DIV\n");
                     break;
-                case POW_OP:
-                    // TODO: implement
-                    break;
-                case LOG_OP:
-                    // TODO: implement
-                    break;
-                case SIN_OP:
-                    // TODO: implement
-                    break;
-                case COS_OP:
-                    // TODO: implement
+                case SQRT:
+                    assemble_node(tree, LEFT_NODE, main_fp, func_fp);
+                    fprintf(main_fp, "SQRT\n");
                     break;
                 case INPUT_OP:
                     fprintf(main_fp, "IN\n");
@@ -267,10 +260,6 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             }
             break;
         }
-        case SQRT:
-            assemble_node(tree, LEFT_NODE, main_fp, func_fp);
-            fprintf(main_fp, "SQRT\n");
-            break;
         case NUMBER:
             fprintf(main_fp, "PUSH %d\n", VALUE.num_value);
             break;
@@ -423,14 +412,18 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     }
 }
 
-void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index, size_t last_num_args)
+void pushArgs(Tree *tree,
+              Node *node,
+              FILE *fp,
+              size_t *new_arg_id,
+              size_t last_num_args)
 {
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
-            pushArgs(tree, LEFT_NODE, fp, index, last_num_args);
+            pushArgs(tree, LEFT_NODE, fp, new_arg_id, last_num_args);
         if (RIGHT_NODE)
-            pushArgs(tree, RIGHT_NODE, fp, index, last_num_args);
+            pushArgs(tree, RIGHT_NODE, fp, new_arg_id, last_num_args);
     }
     if (NODE_TYPE == VARIABLE)
     {
@@ -441,32 +434,37 @@ void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index, size_t last_num_a
         fprintf(fp, "PUSH 1\n");
         fprintf(fp, "ADD\n");
         fprintf(fp, "POP rax\n");
-        (*index)++;
+        (*new_arg_id)++;
     }
     else if (NODE_TYPE == ARG_VARIABLE)
     {
-        // set rax to rax + id - n - index
+        // set rax to rax + last_arg_position - last_num_args - new_num_args
         fprintf(fp, "PUSH rax\n");
-        fprintf(fp, "PUSH %zu\n", tree->arg_vars_positions[VALUE.var_value]);
+        fprintf(fp,
+                "PUSH %zu\n",
+                tree->arg_vars_positions[VALUE.var_value]);
         fprintf(fp, "ADD\n");
         fprintf(fp, "PUSH %zu\n", last_num_args);
         fprintf(fp, "SUB\n");
-        fprintf(fp, "PUSH %zu\n", *index);
+        fprintf(fp, "PUSH %zu\n", *new_arg_id);
         fprintf(fp, "SUB\n");
         fprintf(fp, "POP rax\n");
+        // push value from RAM
         fprintf(fp, "PUSH [rax]\n");
 
-//        // set rax + id - n - index to rax
+        // set rax + last_arg_position - last_num_args - new_num_args to rax
         fprintf(fp, "PUSH rax\n");
-        fprintf(fp, "PUSH %zu\n", tree->arg_vars_positions[VALUE.var_value]);
+        fprintf(fp,
+                "PUSH %zu\n",
+                tree->arg_vars_positions[VALUE.var_value]);
         fprintf(fp, "SUB\n");
         fprintf(fp, "PUSH %zu\n", last_num_args);
         fprintf(fp, "ADD\n");
-        fprintf(fp, "PUSH %zu\n", *index);
+        fprintf(fp, "PUSH %zu\n", *new_arg_id);
         fprintf(fp, "ADD\n");
         fprintf(fp, "POP rax\n");
 
-        // put value to ram
+        // put copies of value to RAM
         fprintf(fp, "POP [rax]\n");
 
         // rax++
@@ -474,12 +472,26 @@ void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index, size_t last_num_a
         fprintf(fp, "PUSH 1\n");
         fprintf(fp, "ADD\n");
         fprintf(fp, "POP rax\n");
-        (*index)++;
+        (*new_arg_id)++;
     }
+    //    else if (NODE_TYPE == NUMBER)
+    //    {
+    //        fprintf(fp, "PUSH %d\n", VALUE.num_value);
+    ////         put copies of value to RAM
+    //        fprintf(fp, "POP [rax]\n");
+    ////          rax++
+    //        fprintf(fp, "PUSH rax\n");
+    //        fprintf(fp, "PUSH 1\n");
+    //        fprintf(fp, "ADD\n");
+    //        fprintf(fp, "POP rax\n");
+    //        (*new_arg_id)++;
+    //    }
 }
 
-
-void searchWhereCall(Node *nodeSearchIn, Node *node, bool *found, size_t *func_id)
+void searchWhereCall(Node *nodeSearchIn,
+                     Node *node,
+                     bool *found,
+                     size_t *func_id)
 {
     if (*found)
         return;
@@ -496,7 +508,7 @@ void searchWhereCall(Node *nodeSearchIn, Node *node, bool *found, size_t *func_i
             searchWhereCall(nodeSearchIn->right, node, found, func_id);
         if (*found)
         {
-//            fprintf(stderr, "ptr of func %p, call id: %zu\n", nodeSearchIn, nodeSearchIn->value.def_value);
+            //            fprintf(stderr, "ptr of func %p, call id: %zu\n", nodeSearchIn, nodeSearchIn->value.def_value);
             *func_id = nodeSearchIn->value.def_value;
         }
         return;

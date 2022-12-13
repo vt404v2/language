@@ -32,7 +32,7 @@ enum OperationType
     SUB_OP        =  2,
     MUL_OP        =  3,
     DIV_OP        =  4,
-    POW_OP        =  5,
+    SQRT          =  5,
     INPUT_OP      =  6,
     OUTPUT_OP     =  7,
     EQUAL_OP      =  8,
@@ -88,7 +88,7 @@ enum NodeType
     CALL             =  9,
     RETURN           = 10,
     ARG_VARIABLE     = 11,
-    SQRT             = 12,
+//    SQRT             = 12,
     //not standard
     ID_IN_NAME_TABLE = 666,
 };

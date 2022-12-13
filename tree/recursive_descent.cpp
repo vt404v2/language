@@ -41,7 +41,7 @@ Node *recursiveDescent(Tokens *tokens,
         Node *value = getLogOp(tokens, index, name_table);
         ADD_NODE
     }
-//    fprintf(stderr, "%zu\n", *index);
+    //    fprintf(stderr, "%zu\n", *index);
 
     return root;
 }
@@ -103,7 +103,7 @@ Node *getMulDiv(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *leftValue = getPow(tokens, index, name_table);
+    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
         (TOKEN.value.operation == MUL_OP ||
@@ -112,7 +112,7 @@ Node *getMulDiv(Tokens *tokens,
         OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
 
-        Node *rightValue = getPow(tokens, index, name_table);
+        Node *rightValue = getPrimaryExpression(tokens, index, name_table);
         leftValue = createNewNode(OPERATOR,
                                   {.op_value = tokenValue},
                                   leftValue,
@@ -122,109 +122,6 @@ Node *getMulDiv(Tokens *tokens,
 
     return leftValue;
 }
-
-Node *getPow(Tokens *tokens,
-             size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
-    Node *rightValue = nullptr;
-
-    while (TOKEN.type == OPERATOR_TOKEN &&
-        TOKEN.value.operation == POW_OP)
-    {
-        (*index)++;
-
-        rightValue = getPow(tokens, index, name_table);
-        leftValue = createNewNode(OPERATOR,
-                                  {.op_value = POW_OP},
-                                  leftValue,
-                                  rightValue);
-    }
-
-    return leftValue;
-}
-
-//Node *getLog(Tokens *tokens)
-//{
-//    assert(tokens != nullptr);
-//
-//    Node *value = nullptr;
-//
-//    if (**program == 'l' && *((*program) + 1) == 'o'
-//        && *((*program) + 2) == 'g')
-//    {
-//        (*program) += 3;
-//        ASSERT_OK(**program == '(',
-//                  "Expected (, but got _%c_\n",
-//                  **program)
-//        value = getSin(tokens);
-//        value = createNewNode(OPERATION,
-//                              {.op_value = LOG_OP},
-//                              createNum(exp(1)),
-//                              value);
-//    }
-//    else
-//        value = getSin(tokens);
-//
-//    return value;
-//}
-//
-//Node *getSin(Tokens *tokens)
-//{
-//    assert(tokens != nullptr);
-//
-//    Node *value = nullptr;
-//
-//    if (**program == 's' &&
-//        *((*program) + 1) == 'i' &&
-//        *((*program) + 2) == 'n')
-//    {
-//        (*program) += 3;
-//        ASSERT_OK(**program == '(',
-//                  "Expected (, but got _%c_\n",
-//                  **program)
-//        value = getCos(program);
-//        value = createNewNode(OPERATION,
-//                              {.op_value = SIN_OP},
-//                              nullptr,
-//                              value);
-//    }
-//    else
-//        value = getCos(program);
-//
-//    return value;
-//}
-//
-//Node *getCos(Tokens *tokens)
-//{
-//    assert(program != nullptr);
-//    assert(*program != nullptr);
-//
-//    Node *value = nullptr;
-//
-//    if (**program == 'c' &&
-//        *((*program) + 1) == 'o' &&
-//        *((*program) + 2) == 's')
-//    {
-//        (*program) += 3;
-//        ASSERT_OK(**program == '(',
-//                  "Expected (, but got _%c_\n",
-//                  **program)
-//        value = getPrimaryExpression(program);
-//        value = createNewNode(OPERATION,
-//                              {.op_value = COS_OP},
-//                              nullptr,
-//                              value);
-//    }
-//    else
-//        value = getPrimaryExpression(program);
-//
-//    return value;
-//}
 
 Node *getVarInit(Tokens *tokens,
                  size_t *index,
@@ -250,7 +147,7 @@ Node *getVarInit(Tokens *tokens,
                                          {.op_value=ASSIGN_OP},
                                          var_node,
                                          init_value);
-//            fprintf(stderr, "assign \n");
+            //            fprintf(stderr, "assign \n");
 
             return createNode(FICTIVE_NODE, {}, init_node, nullptr);
         }
@@ -355,8 +252,8 @@ Node *getWhile(Tokens *tokens,
 }
 
 Node *getSqrt(Tokens *tokens,
-               size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+              size_t *index,
+              char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
@@ -368,8 +265,8 @@ Node *getSqrt(Tokens *tokens,
         Node *value_node =
             getPrimaryExpression(tokens, index, name_table);
 
-        Node *sqrt_node = createNode(SQRT,
-                                     {},
+        Node *sqrt_node = createNode(OPERATOR,
+                                     {.op_value = SQRT},
                                      value_node,
                                      nullptr);
         return createNode(FICTIVE_NODE,
@@ -380,8 +277,8 @@ Node *getSqrt(Tokens *tokens,
 }
 
 Node *getInputFunction(Tokens *tokens,
-                     size_t *index,
-                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+                       size_t *index,
+                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     assert(tokens != nullptr);
     assert(index != nullptr);
@@ -423,12 +320,12 @@ Node *getOutFunction(Tokens *tokens,
         Node *output_value =
             getPrimaryExpression(tokens, index, name_table);
         Node *output_node = createNode(OPERATOR,
-                                      {.op_value = OUTPUT_OP},
+                                       {.op_value = OUTPUT_OP},
                                        output_value,
                                        nullptr);
         return createNode(FICTIVE_NODE,
-                                    {},
-                                    output_node, nullptr);
+                          {},
+                          output_node, nullptr);
     }
     return nullptr;
 }
@@ -603,6 +500,7 @@ Node *getCallFunction(Tokens *tokens,
 
         while (TOKEN.value.bracket != ')')
         {
+            //            params_last->left = getAddSub(tokens, index, name_table);
             params_last->left = getVariable(tokens, index, name_table);
             params_last->right = createNode(FICTIVE_NODE,
                                             {},

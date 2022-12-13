@@ -89,7 +89,6 @@ size_t tokenize(const char *filename,
         else ONE_CHAR_OPERATOR('-', SUB_OP)
         else ONE_CHAR_OPERATOR('*', MUL_OP)
         else ONE_CHAR_OPERATOR('/', DIV_OP)
-        else ONE_CHAR_OPERATOR('^', POW_OP)
         else ONE_CHAR_OPERATOR('!', NOT_OP)
 #undef ONE_CHAR_OPERATOR
         else if (*readPtr == '(' ||

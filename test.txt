@@ -1,18 +1,7 @@
-def solve_square(a, b, c)
+def fib(a)
 {
     print(a)
-    print(b)
-    print(c)
-    solve_linear(c, b)
     return 0
 }
-def solve_linear(e, f)
-{
-    print(e)
-    print(f)
-    return 0
-}
-var x = 1
-var y = 2
-var z = 3
-solve_square(x, y, z)
+var n = 5
+fib(6)

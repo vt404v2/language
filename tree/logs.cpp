@@ -170,8 +170,8 @@ void getValueOfNode(Tree *tree,
                 case DIV_OP:
                     *node_value[0] = '/';
                     break;
-                case POW_OP:
-                    *node_value[0] = '^';
+                case SQRT:
+                    sprintf(*node_value, "SQRT");
                     break;
                 case INPUT_OP:
                     sprintf(*node_value, "INPUT");
@@ -228,9 +228,6 @@ void getValueOfNode(Tree *tree,
             break;
         case FICTIVE_NODE:
             sprintf(*node_value, "FICTIVE_NODE");
-            break;
-        case SQRT:
-            sprintf(*node_value, "SQRT");
             break;
         case NUMBER:
             sprintf(*node_value, "%d", node->value.num_value);
