@@ -255,10 +255,6 @@ void getValueOfNode(Tree *tree,
         case RETURN:
             sprintf(*node_value, "RETURN FROM FUNC");
             break;
-        case ID_IN_NAME_TABLE:
-            sprintf(*node_value, "%s",
-                    tree->var_name_table[node->value.var_value]);
-            break;
         case INCORRECT_TYPE:
             sprintf(*node_value, "%s", "INCORRECT_TYPE");
             break;

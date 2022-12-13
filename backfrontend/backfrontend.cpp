@@ -225,9 +225,6 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             fprintf(fp, "\n");
             break;
         }
-        case ID_IN_NAME_TABLE:
-            fprintf(stderr, "ID_IN_NAME_TABLE NOT SUPPORTED. \n");
-            break;
         case ARG_VARIABLE:
         {
             fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);

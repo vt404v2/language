@@ -370,9 +370,6 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(func_fp, "RET\n");
             break;
         }
-        case ID_IN_NAME_TABLE:
-            fprintf(stderr, "ID_IN_NAME_TABLE NOT SUPPORTED. \n");
-            break;
         case ARG_VARIABLE:
         {
             size_t index = tree->arg_vars_positions[VALUE.var_value];

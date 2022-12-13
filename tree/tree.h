@@ -84,9 +84,6 @@ enum NodeType
     CALL             =  9,
     RETURN           = 10,
     ARG_VARIABLE     = 11,
-//    SQRT             = 12,
-    //not standard
-    ID_IN_NAME_TABLE = 666,
 };
 
 union NodeValue
@@ -114,7 +111,6 @@ struct Tree
     size_t func_num_args[BUFFER_SIZE] = {};
     char var_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
     char func_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
-//    size_t size = 0;
 };
 
 enum TreeErrors
