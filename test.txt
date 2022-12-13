@@ -1,6 +1,9 @@
 def solve_square(a, b, c)
 {
-    solve_linear(b, c)
+    print(a)
+    print(b)
+    print(c)
+    solve_linear(c, b)
     return 0
 }
 def solve_linear(e, f)

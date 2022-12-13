@@ -20,6 +20,8 @@ void assemble_node(Tree *tree, Node *node,
 
 void assemble_args(Tree *tree, Node *node, FILE *fp);
 
-void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index);
+void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index, size_t last_num_args);
+
+void searchWhereCall(Node *nodeSearchIn, Node *node, bool *found, size_t *func_id);
 
 #endif //LANGUAGE__BACKEND_H
