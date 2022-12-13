@@ -266,7 +266,7 @@ Node *getSqrt(Tokens *tokens,
             getPrimaryExpression(tokens, index, name_table);
 
         Node *sqrt_node = createNode(OPERATOR,
-                                     {.op_value = SQRT},
+                                     {.op_value = SQRT_OP},
                                      value_node,
                                      nullptr);
         return createNode(FICTIVE_NODE,

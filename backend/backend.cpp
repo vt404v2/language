@@ -159,7 +159,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     assemble_node(tree, RIGHT_NODE, main_fp, func_fp);
                     fprintf(main_fp, "DIV\n");
                     break;
-                case SQRT:
+                case SQRT_OP:
                     assemble_node(tree, LEFT_NODE, main_fp, func_fp);
                     fprintf(main_fp, "SQRT\n");
                     break;

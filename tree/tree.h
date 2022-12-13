@@ -32,7 +32,7 @@ enum OperationType
     SUB_OP        =  2,
     MUL_OP        =  3,
     DIV_OP        =  4,
-    SQRT          =  5,
+    SQRT_OP       =  5,
     INPUT_OP      =  6,
     OUTPUT_OP     =  7,
     EQUAL_OP      =  8,
@@ -45,10 +45,6 @@ enum OperationType
     OR_OP         = 15,
     AND_OP        = 16,
     ASSIGN_OP     = 17,
-    // not standard
-    LOG_OP        = 18,
-    SIN_OP        = 19,
-    COS_OP        = 20,
 };
 
 union TokenValue

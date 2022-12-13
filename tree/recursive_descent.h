@@ -8,19 +8,6 @@
 #include "cmath"
 #include "tree.h"
 
-// TODO: grammar
-// grammar of recurrent descent
-// recursiveDescent ::= getAddSub '\0'
-// getAddSub ::= getMulDiv {['+', '-'] getMulDiv}*
-// getMulDiv ::= getPow {['+', '-'] getPow}*
-// getPow ::= getLog {getPow ['^'] getLog}*
-// getLog ::= {["log("]? getSin} | getSin
-// getSin ::= {["sin("]? getCos} | getCos
-// getCos ::= {["cos("]? getBrackets} | getBrackets
-// getPrimaryExpression ::= '(' getAddSub ')' | getValue | getVariable
-// getValue ::= [double] | getVariable
-// getVariable ::= ['x'-'z', 'X'-'Z']
-
 Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
@@ -36,23 +23,6 @@ Node *getAddSub(Tokens *tokens,
 Node *getMulDiv(Tokens *tokens,
                 size_t *index,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-Node *getPow(Tokens *tokens,
-             size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-Node *getLog(Tokens *tokens,
-             size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-Node *getSin(Tokens *tokens,
-             size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
-Node *getCos(Tokens *tokens,
-             size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
 
 Node *getVarInit(Tokens *tokens,
                  size_t *index,
