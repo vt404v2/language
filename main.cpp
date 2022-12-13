@@ -1,5 +1,6 @@
 #include "frontend/frontend.h"
 #include "backend/backend.h"
+#include "backfrontend/backfrontend.h"
 
 //#define test "program.txt"
 //#define test "test.txt"
@@ -17,6 +18,7 @@ int main()
 
     convertProgramToTree(test, "tree.txt");
     convertTreeToAsm("tree.txt", "lang.asm", "func_def.asm");
+    convertTreeToCode("tree.txt", "code.txt");
 
     system("cmake --build ./processor --target main");
     system("cd processor; ./main");
