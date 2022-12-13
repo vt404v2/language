@@ -104,21 +104,37 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     {
                         size_t index =
                             tree->arg_vars_positions[LEFT_NODE->value.var_value];
-                        // set rax to rax+i
+
+                        size_t num_args = index;
+                        size_t arg_index = VALUE.var_value + 1;
+
+                        while (num_args < tree->arg_vars_positions[arg_index])
+                        {
+                            num_args = tree->arg_vars_positions[arg_index];
+                            arg_index++;
+                        }
+                        num_args++;
+
+                        // set rax to rax + i - n
                         fprintf(main_fp, "PUSH rax\n");
                         fprintf(main_fp, "PUSH %zu\n", index);
                         fprintf(main_fp, "ADD\n");
+                        fprintf(main_fp, "PUSH %zu\n", num_args);
+                        fprintf(main_fp, "SUB\n");
                         fprintf(main_fp, "POP rax\n");
+
 
                         fprintf(main_fp,
                                 "POP [rax]\n");
                         fprintf(main_fp,
                                 "PUSH [rax]\n");
 
-                        // set rax+i to rax
+                        // set rax + i - n to rax
                         fprintf(main_fp, "PUSH rax\n");
                         fprintf(main_fp, "PUSH %zu\n", index);
                         fprintf(main_fp, "SUB\n");
+                        fprintf(main_fp, "PUSH %zu\n", num_args);
+                        fprintf(main_fp, "ADD\n");
                         fprintf(main_fp, "POP rax\n");
                     }
                     break;
@@ -354,10 +370,6 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             bool found = false;
             size_t func_id = -1;
             searchWhereCall(tree->root, node, &found, &func_id);
-            fprintf(stderr, "ret with %zu\n", tree->func_num_args[func_id]);
-
-            fprintf(func_fp, "PUSH rax\n");
-            fprintf(func_fp, "OUT\n");
 
             fprintf(func_fp, "PUSH rax\n");
             fprintf(func_fp,
@@ -366,8 +378,6 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(func_fp, "SUB\n");
             fprintf(func_fp, "POP rax\n");
 
-            fprintf(func_fp, "PUSH rax\n");
-            fprintf(func_fp, "OUT\n");
             fprintf(func_fp, "RET\n");
             break;
         }
@@ -395,7 +405,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(main_fp, "SUB\n");
             fprintf(main_fp, "POP rax\n");
             fprintf(main_fp, "PUSH [rax]\n");// PUSH[rax + i - n]
-            // set rax + i - n ro rax
+            // set rax + i - n to rax
             fprintf(main_fp, "PUSH rax\n");
             fprintf(main_fp, "PUSH %zu\n", index);
             fprintf(main_fp, "SUB\n");
@@ -435,9 +445,6 @@ void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *index, size_t last_num_a
     }
     else if (NODE_TYPE == ARG_VARIABLE)
     {
-//        fprintf(fp, "PUSH rax\n");
-//        fprintf(fp, "OUT\n");
-//        fprintf(stderr, "arg id %zu, last %zu\n", tree->arg_vars_positions[VALUE.var_value], last_num_args);
         // set rax to rax + id - n - index
         fprintf(fp, "PUSH rax\n");
         fprintf(fp, "PUSH %zu\n", tree->arg_vars_positions[VALUE.var_value]);

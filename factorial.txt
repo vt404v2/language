@@ -1,4 +1,4 @@
-var y = 5
+var y = 6
 def fact(n)
 {
     if (n <= 1)
@@ -7,9 +7,8 @@ def fact(n)
     }
     else
     {
-        n = n - 1
-        print(n)
-        return n
+        var x = n - 1
+        return (fact(x) * n)
     }
 }
-print(fact(y)))
+print(fact(y))
