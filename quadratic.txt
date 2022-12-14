@@ -83,6 +83,6 @@ def solve_const_equal_zero(g)
 }
 
 var x = 0
-var y = 9
-var z = 2
+var y = 2
+var z = 9
 solve_square(x, y, z)

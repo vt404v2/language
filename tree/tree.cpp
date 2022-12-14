@@ -214,9 +214,11 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
     {
         fprintf(fp, " ");
     }
-
+    if (node->node_type == ARG_VARIABLE)
+        node->node_type = VARIABLE;
     if (node->left == nullptr and node->right == nullptr)
     {
+
         fprintf(fp,
                 "{ %d  %zu }\n",
                 node->node_type,

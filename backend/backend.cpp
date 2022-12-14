@@ -11,6 +11,8 @@ void convertTreeToAsm(const char *tree_filename,
 
     FILE *main_fp = fopen(asm_filename, "w");
     FILE *func_fp = fopen(asm_func_filename, "w");
+
+//    fixArgsInFunctions();
     assemble(&tree, tree.root, main_fp, func_fp);
     treeDtor(&tree);
 
@@ -25,6 +27,14 @@ void convertTreeToAsm(const char *tree_filename,
 
     sprintf(command, "rm %s", asm_func_filename);
     system(command);
+}
+
+void fixArgsInFunctions(Tree *tree, Node *node)
+{
+    if (NODE_TYPE == DEF)
+    {
+
+    }
 }
 
 void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
@@ -48,27 +58,45 @@ void fixArgVars(Tree *tree, Node *node)
 {
     size_t index = 0;
     if (NODE_TYPE == DEF)
-        registerArgs(tree, LEFT_NODE, &index);
+        registerArgs(tree, RIGHT_NODE, LEFT_NODE, &index);
     if (LEFT_NODE)
         fixArgVars(tree, LEFT_NODE);
     if (RIGHT_NODE)
         fixArgVars(tree, RIGHT_NODE);
 }
 
-void registerArgs(Tree *tree, Node *node, size_t *index)
+void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
 {
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
-            registerArgs(tree, LEFT_NODE, index);
+            registerArgs(tree, start_node, LEFT_NODE, index);
         if (RIGHT_NODE)
-            registerArgs(tree, RIGHT_NODE, index);
+            registerArgs(tree, start_node, RIGHT_NODE, index);
+    }
+
+    if (NODE_TYPE == VARIABLE)
+    {
+        NODE_TYPE = ARG_VARIABLE;
     }
     if (NODE_TYPE == ARG_VARIABLE)
     {
         tree->arg_vars_positions[VALUE.var_value] = *index;
+        fixArgVarsInBody(start_node, VALUE.var_value);
         //        fprintf(stderr, "var_value: %zu index: %zu\n", VALUE.var_value, *index);
         (*index)++;
+    }
+}
+
+void fixArgVarsInBody(Node *node, size_t index)
+{
+    if (LEFT_NODE)
+        fixArgVarsInBody(LEFT_NODE, index);
+    if (RIGHT_NODE)
+        fixArgVarsInBody(RIGHT_NODE,  index);
+    if (NODE_TYPE == VARIABLE && VALUE.var_value == index)
+    {
+        NODE_TYPE = ARG_VARIABLE;
     }
 }
 
@@ -327,7 +355,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     tree->func_name_table[VALUE.def_value]);
 
             size_t num_args = 0;
-            registerArgs(tree, LEFT_NODE, &num_args);
+            registerArgs(tree, RIGHT_NODE, LEFT_NODE, &num_args);
             tree->func_num_args[VALUE.def_value] = num_args;
 
             for (size_t i = 0; i < num_args; i++)
