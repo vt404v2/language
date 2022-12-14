@@ -85,8 +85,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55aa1b25f600
-:label_0x55aa1b25f4b0
+jbe :label_0x562ca4eac600
+:label_0x562ca4eac4b0
 PUSH rax
 PUSH 1
 ADD
@@ -114,8 +114,8 @@ PUSH 3
 ADD
 POP rax
 call :func_solve_linear
-jmp :label_exit_if_0x55aa1b25f3c0
-:label_0x55aa1b25f600
+jmp :label_exit_if_0x562ca4eac3c0
+:label_0x562ca4eac600
 PUSH rax
 PUSH 1
 ADD
@@ -132,8 +132,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55aa1b260050
-:label_0x55aa1b25f720
+jbe :label_0x562ca4ead050
+:label_0x562ca4eac720
 PUSH rax
 PUSH 2
 ADD
@@ -150,14 +150,14 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55aa1b25f960
-:label_0x55aa1b25f840
+jbe :label_0x562ca4eac960
+:label_0x562ca4eac840
 PUSH 1
 OUT
 PUSH 0
 OUT
-jmp :label_exit_if_0x55aa1b25f750
-:label_0x55aa1b25f960
+jmp :label_exit_if_0x562ca4eac750
+:label_0x562ca4eac960
 PUSH rax
 PUSH 0
 ADD
@@ -188,47 +188,15 @@ MUL
 PUSH 0
 A
 PUSH 0
-jbe :label_0x55aa1b25fb70
-:label_0x55aa1b25fae0
+jbe :label_0x562ca4eacb70
+:label_0x562ca4eacae0
 PUSH 0
 OUT
-jmp :label_exit_if_0x55aa1b25f990
-:label_0x55aa1b25fb70
+jmp :label_exit_if_0x562ca4eac990
+:label_0x562ca4eacb70
 PUSH 2
 OUT
 PUSH -1
-PUSH -1
-PUSH rax
-PUSH 2
-ADD
-PUSH 3
-SUB
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 2
-SUB
-PUSH 3
-ADD
-POP rax
-PUSH rax
-PUSH 0
-ADD
-PUSH 3
-SUB
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 0
-SUB
-PUSH 3
-ADD
-POP rax
-DIV
-MUL
-SQRT
-MUL
-OUT
 PUSH -1
 PUSH rax
 PUSH 2
@@ -259,13 +227,45 @@ POP rax
 DIV
 MUL
 SQRT
+MUL
 OUT
-jmp :label_exit_if_0x55aa1b25f990
-:label_exit_if_0x55aa1b25f990
-jmp :label_exit_if_0x55aa1b25f750
-:label_exit_if_0x55aa1b25f750
-jmp :label_exit_if_0x55aa1b25f630
-:label_0x55aa1b260050
+PUSH -1
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+DIV
+MUL
+SQRT
+OUT
+jmp :label_exit_if_0x562ca4eac990
+:label_exit_if_0x562ca4eac990
+jmp :label_exit_if_0x562ca4eac750
+:label_exit_if_0x562ca4eac750
+jmp :label_exit_if_0x562ca4eac630
+:label_0x562ca4ead050
 PUSH 0
 POP [0]
 PUSH rax
@@ -331,8 +331,8 @@ PUSH [0]
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55aa1b260680
-:label_0x55aa1b260410
+jbe :label_0x562ca4ead680
+:label_0x562ca4ead410
 PUSH 1
 OUT
 PUSH -1
@@ -367,14 +367,14 @@ MUL
 DIV
 MUL
 OUT
-jmp :label_exit_if_0x55aa1b260320
-:label_0x55aa1b260680
+jmp :label_exit_if_0x562ca4ead320
+:label_0x562ca4ead680
 PUSH [0]
 PUSH 0
 A
 PUSH 0
-jbe :label_0x55aa1b260dd0
-:label_0x55aa1b2607a0
+jbe :label_0x562ca4eaddd0
+:label_0x562ca4ead7a0
 PUSH 2
 OUT
 PUSH [0]
@@ -449,18 +449,18 @@ POP rax
 MUL
 DIV
 OUT
-jmp :label_exit_if_0x55aa1b2606b0
-:label_0x55aa1b260dd0
+jmp :label_exit_if_0x562ca4ead6b0
+:label_0x562ca4eaddd0
 PUSH 0
 OUT
-jmp :label_exit_if_0x55aa1b2606b0
-:label_exit_if_0x55aa1b2606b0
-jmp :label_exit_if_0x55aa1b260320
-:label_exit_if_0x55aa1b260320
-jmp :label_exit_if_0x55aa1b25f630
-:label_exit_if_0x55aa1b25f630
-jmp :label_exit_if_0x55aa1b25f3c0
-:label_exit_if_0x55aa1b25f3c0
+jmp :label_exit_if_0x562ca4ead6b0
+:label_exit_if_0x562ca4ead6b0
+jmp :label_exit_if_0x562ca4ead320
+:label_exit_if_0x562ca4ead320
+jmp :label_exit_if_0x562ca4eac630
+:label_exit_if_0x562ca4eac630
+jmp :label_exit_if_0x562ca4eac3c0
+:label_exit_if_0x562ca4eac3c0
 PUSH 0
 PUSH rax
 PUSH 3
@@ -514,8 +514,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55aa1b261250
-:label_0x55aa1b261160
+jbe :label_0x562ca4eae250
+:label_0x562ca4eae160
 PUSH rax
 PUSH 1
 ADD
@@ -530,8 +530,8 @@ PUSH 2
 ADD
 POP rax
 call :func_solve_const_equal_zero
-jmp :label_exit_if_0x55aa1b261070
-:label_0x55aa1b261250
+jmp :label_exit_if_0x562ca4eae070
+:label_0x562ca4eae250
 PUSH 1
 OUT
 PUSH -1
@@ -564,8 +564,8 @@ POP rax
 DIV
 MUL
 OUT
-jmp :label_exit_if_0x55aa1b261070
-:label_exit_if_0x55aa1b261070
+jmp :label_exit_if_0x562ca4eae070
+:label_exit_if_0x562ca4eae070
 PUSH 0
 PUSH rax
 PUSH 2
@@ -606,16 +606,16 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55aa1b261790
-:label_0x55aa1b261700
+jbe :label_0x562ca4eae790
+:label_0x562ca4eae700
 PUSH 993
 OUT
-jmp :label_exit_if_0x55aa1b261610
-:label_0x55aa1b261790
+jmp :label_exit_if_0x562ca4eae610
+:label_0x562ca4eae790
 PUSH 0
 OUT
-jmp :label_exit_if_0x55aa1b261610
-:label_exit_if_0x55aa1b261610
+jmp :label_exit_if_0x562ca4eae610
+:label_exit_if_0x562ca4eae610
 PUSH 0
 PUSH rax
 PUSH 1
