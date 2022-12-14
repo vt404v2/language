@@ -269,21 +269,21 @@ Node *getValueNode(char **readPtr);
     }
 
 #define VALUE (node->value)
-#define VAL_VALUE (VALUE.val_value)
+#define VAL_VALUE (VALUE.num_value)
 #define OP_VALUE (VALUE.op_value)
 #define VAR_VALUE (VALUE.var_value)
 #define LEFT_NODE (node->left)
 #define RIGHT_NODE (node->right)
 #define NODE_TYPE (node->node_type)
-#define IS_OP(OPP) (NODE_TYPE == OPERATION && OP_VALUE == (OPP))
+#define IS_OP(OPP) (NODE_TYPE == OPERATOR && OP_VALUE == (OPP))
 #define IS_NUM_LEFT (LEFT_NODE->node_type == NUMBER)
 #define IS_NUM_RIGHT (RIGHT_NODE->node_type == NUMBER)
 #define IS_ZERO_LEFT (IS_NUM_LEFT && abs(LEFT_VALUE) < EPS)
 #define IS_ZERO_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE) < EPS)
 #define IS_ONE_LEFT (IS_NUM_LEFT && abs(LEFT_VALUE - 1) < EPS)
 #define IS_ONE_RIGHT (IS_NUM_RIGHT && abs(RIGHT_VALUE - 1) < EPS)
-#define LEFT_VALUE (LEFT_NODE->value.val_value)
-#define RIGHT_VALUE (RIGHT_NODE->value.val_value)
+#define LEFT_VALUE (LEFT_NODE->value.num_value)
+#define RIGHT_VALUE (RIGHT_NODE->value.num_value)
 #define LEFT_TYPE LEFT_NODE->node_type
 #define RIGHT_TYPE RIGHT_NODE->node_type
 #define IS_LEFT_TYPE(TYPE) ((LEFT_TYPE) == (TYPE))

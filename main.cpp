@@ -1,26 +1,28 @@
-#include "frontend/frontend.h"
-#include "backend/backend.h"
-#include "backfrontend/backfrontend.h"
+#include <stdlib.h>
 
-//#define test "program.txt"
-//#define test "test.txt"
-//#define test "fib.txt"
-#define test "quadratic.txt"
-//#define test "factorial.txt"
+//#define code_file "program.txt"
+//#define code_file "test.txt"
+//#define code_file "fib.txt"
+#define code_file "quadratic.txt"
+//#define code_file "factorial.txt"
 
 int main()
 {
-    treeClearGraphLogFile();
-    treeSetLogFile();
+    system("cmake --build . --target frontend_run");
+    system("./frontend_run " code_file " tree.txt");
 
-    convertProgramToTree(test, "tree.txt");
-    convertTreeToAsm("tree.txt", "lang.asm", "func_def.asm");
-    convertTreeToCode("tree.txt", "code.txt");
+    system("cmake --build . --target backfrontend_run");
+    system("./backfrontend_run tree.txt code.txt");
+
+    system("cmake --build . --target middleend_run");
+    system("./middleend_run tree.txt tree.txt");
+
+    system("cmake --build . --target backend_run");
+    system("./backend_run tree.txt lang.asm func_def.asm");
 
     system("cmake --build ./processor --target main");
     system("cd processor; ./main");
 
-    treeCloseLogFile();
     return 0;
 }
 
