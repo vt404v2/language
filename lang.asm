@@ -85,8 +85,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x555d0536a130
-:label_0x555d05367d00
+jbe :label_0x5582dafa3020
+:label_0x5582dafa3c20
 PUSH rax
 PUSH 1
 ADD
@@ -114,8 +114,8 @@ PUSH 3
 ADD
 POP rax
 call :func_solve_linear
-jmp :label_exit_if_0x555d05368fc0
-:label_0x555d0536a130
+jmp :label_exit_if_0x5582dafa5c30
+:label_0x5582dafa3020
 PUSH rax
 PUSH 1
 ADD
@@ -132,8 +132,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x555d053690e0
-:label_0x555d05367df0
+jbe :label_0x5582dafa4220
+:label_0x5582dafa2f00
 PUSH rax
 PUSH 2
 ADD
@@ -150,14 +150,14 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x555d05368d80
-:label_0x555d05369ec0
+jbe :label_0x5582dafa4520
+:label_0x5582dafa4f70
 PUSH 1
 OUT
 PUSH 0
 OUT
-jmp :label_exit_if_0x555d05367ee0
-:label_0x555d05368d80
+jmp :label_exit_if_0x5582dafa2f30
+:label_0x5582dafa4520
 PUSH rax
 PUSH 0
 ADD
@@ -188,16 +188,16 @@ MUL
 PUSH 0
 A
 PUSH 0
-jbe :label_0x555d05369860
-:label_0x555d053697d0
+jbe :label_0x5582dafa43a0
+:label_0x5582dafa4880
 PUSH 0
 OUT
-jmp :label_exit_if_0x555d05368db0
-:label_0x555d05369860
+jmp :label_exit_if_0x5582dafa4550
+:label_0x5582dafa43a0
 PUSH 2
 OUT
 PUSH -1
-PUSH 0
+PUSH -1
 PUSH rax
 PUSH 2
 ADD
@@ -225,11 +225,11 @@ PUSH 3
 ADD
 POP rax
 DIV
-SUB
+MUL
 SQRT
 MUL
 OUT
-PUSH 0
+PUSH -1
 PUSH rax
 PUSH 2
 ADD
@@ -257,15 +257,15 @@ PUSH 3
 ADD
 POP rax
 DIV
-SUB
+MUL
 SQRT
 OUT
-jmp :label_exit_if_0x555d05368db0
-:label_exit_if_0x555d05368db0
-jmp :label_exit_if_0x555d05367ee0
-:label_exit_if_0x555d05367ee0
-jmp :label_exit_if_0x555d0536a160
-:label_0x555d053690e0
+jmp :label_exit_if_0x5582dafa4550
+:label_exit_if_0x5582dafa4550
+jmp :label_exit_if_0x5582dafa2f30
+:label_exit_if_0x5582dafa2f30
+jmp :label_exit_if_0x5582dafa2d50
+:label_0x5582dafa4220
 PUSH 0
 POP [0]
 PUSH rax
@@ -331,8 +331,8 @@ PUSH [0]
 PUSH 0
 E
 PUSH 0
-jbe :label_0x555d053686c0
-:label_0x555d053680f0
+jbe :label_0x5582dafa3770
+:label_0x5582dafa31a0
 PUSH 1
 OUT
 PUSH -1
@@ -367,14 +367,14 @@ MUL
 DIV
 MUL
 OUT
-jmp :label_exit_if_0x555d0536a070
-:label_0x555d053686c0
+jmp :label_exit_if_0x5582dafa30b0
+:label_0x5582dafa3770
 PUSH [0]
 PUSH 0
 A
 PUSH 0
-jbe :label_0x555d05368990
-:label_0x555d05368330
+jbe :label_0x5582dafa5390
+:label_0x5582dafa33b0
 PUSH 2
 OUT
 PUSH [0]
@@ -449,18 +449,18 @@ POP rax
 MUL
 DIV
 OUT
-jmp :label_exit_if_0x555d053686f0
-:label_0x555d05368990
+jmp :label_exit_if_0x5582dafa32c0
+:label_0x5582dafa5390
 PUSH 0
 OUT
-jmp :label_exit_if_0x555d053686f0
-:label_exit_if_0x555d053686f0
-jmp :label_exit_if_0x555d0536a070
-:label_exit_if_0x555d0536a070
-jmp :label_exit_if_0x555d0536a160
-:label_exit_if_0x555d0536a160
-jmp :label_exit_if_0x555d05368fc0
-:label_exit_if_0x555d05368fc0
+jmp :label_exit_if_0x5582dafa32c0
+:label_exit_if_0x5582dafa32c0
+jmp :label_exit_if_0x5582dafa30b0
+:label_exit_if_0x5582dafa30b0
+jmp :label_exit_if_0x5582dafa2d50
+:label_exit_if_0x5582dafa2d50
+jmp :label_exit_if_0x5582dafa5c30
+:label_exit_if_0x5582dafa5c30
 PUSH 0
 PUSH rax
 PUSH 3
@@ -514,8 +514,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x555d05369bc0
-:label_0x555d05369ad0
+jbe :label_0x5582dafa4c10
+:label_0x5582dafa4b20
 PUSH rax
 PUSH 1
 ADD
@@ -530,8 +530,8 @@ PUSH 2
 ADD
 POP rax
 call :func_solve_const_equal_zero
-jmp :label_exit_if_0x555d053699e0
-:label_0x555d05369bc0
+jmp :label_exit_if_0x5582dafa4a30
+:label_0x5582dafa4c10
 PUSH 1
 OUT
 PUSH -1
@@ -548,7 +548,6 @@ SUB
 PUSH 2
 ADD
 POP rax
-MUL
 PUSH rax
 PUSH 0
 ADD
@@ -563,9 +562,10 @@ PUSH 2
 ADD
 POP rax
 DIV
+MUL
 OUT
-jmp :label_exit_if_0x555d053699e0
-:label_exit_if_0x555d053699e0
+jmp :label_exit_if_0x5582dafa4a30
+:label_exit_if_0x5582dafa4a30
 PUSH 0
 PUSH rax
 PUSH 2
@@ -606,16 +606,16 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x555d0536a790
-:label_0x555d0536a700
+jbe :label_0x5582dafa57e0
+:label_0x5582dafa5750
 PUSH 993
 OUT
-jmp :label_exit_if_0x555d0536a610
-:label_0x555d0536a790
+jmp :label_exit_if_0x5582dafa5660
+:label_0x5582dafa57e0
 PUSH 0
 OUT
-jmp :label_exit_if_0x555d0536a610
-:label_exit_if_0x555d0536a610
+jmp :label_exit_if_0x5582dafa5660
+:label_exit_if_0x5582dafa5660
 PUSH 0
 PUSH rax
 PUSH 1

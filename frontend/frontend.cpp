@@ -10,30 +10,33 @@ void convertProgramToTree(const char *filename,
 
     tokenize(filename, &name_table, &tokens);
 
-    for (size_t i = 0; i < tokens.size; i++)
-    {
-        printf("token %.2zu: Type: %d ",
-               i,
-               tokens.tokens[i].type);
-        switch (tokens.tokens[i].type)
-        {
-            case NUMBER_TOKEN:
-                printf("Value: %d\n", tokens.tokens[i].value.num_value);
-                break;
-            case KEYWORD_TOKEN:
-                printf("Table id: %zu\n", tokens.tokens[i].value.id_in_table);
-                break;
-            case OPERATOR_TOKEN:
-                printf("Value: %d\n", tokens.tokens[i].value.operation);
-                break;
-            case BRACKET_TOKEN:
-                printf("Value: %c\n", tokens.tokens[i].value.bracket);
-                break;
-            case INCORRECT_TYPE_TOKEN:
-                printf("Value: INCORRECT VALUE\n");
-                break;
-        }
-    }
+//    for (size_t i = 0; i < tokens.size; i++)
+//    {
+//        printf("token %.2zu: Type: %d ",
+//               i,
+//               tokens.tokens[i].type);
+//        switch (tokens.tokens[i].type)
+//        {
+//            case NUMBER_TOKEN:
+//                printf("Value: %d\n", tokens.tokens[i].value.num_value);
+//                break;
+//            case KEYWORD_TOKEN:
+//                printf("Table id: %zu\n", tokens.tokens[i].value.id_in_table);
+//                break;
+//            case OPERATOR_TOKEN:
+//                printf("Value: %d\n", tokens.tokens[i].value.operation);
+//                break;
+//            case BRACKET_TOKEN:
+//                printf("Value: %c\n", tokens.tokens[i].value.bracket);
+//                break;
+//            case SPECIAL_TOKEN:
+//                printf("Value: %c\n", tokens.tokens[i].value.special_token);
+//                break;
+//            case INCORRECT_TYPE_TOKEN:
+//                printf("Value: INCORRECT VALUE\n");
+//                break;
+//        }
+//    }
 
     Tree tree = {};
     treeCtor(&tree);

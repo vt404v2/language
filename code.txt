@@ -23,8 +23,8 @@ def solve_square(a, b, c)
                 else
                 {
                     print(2)
-                    print(-1 * sqrt(0 - c / a))
-                    print(sqrt(0 - c / a))
+                    print(-1 * sqrt(-1 * c / a))
+                    print(sqrt(-1 * c / a))
                 }
             }
         }
