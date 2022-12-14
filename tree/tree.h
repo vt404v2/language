@@ -84,6 +84,7 @@ enum NodeType
     CALL             =  9,
     RETURN           = 10,
     ARG_VARIABLE     = 11,
+    LOCAL_VARIABLE   = 12,
 };
 
 union NodeValue
@@ -111,6 +112,7 @@ struct Tree
     size_t func_num_args[BUFFER_SIZE] = {};
     char var_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
     char func_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
+    char arg_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 };
 
 enum TreeErrors

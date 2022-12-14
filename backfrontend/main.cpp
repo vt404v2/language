@@ -3,7 +3,7 @@
 int main()
 {
     treeSetLogFile();
-    convertTreeToCode("tree.txt", "code.txt");
+    convertTreeToCode("tree_ilya.txt", "code.txt");
     treeCloseLogFile();
     return 0;
 }

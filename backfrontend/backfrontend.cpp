@@ -254,12 +254,10 @@ void printArgs(Tree *tree, Node *node, FILE *fp)
             printArgs(tree, RIGHT_NODE, fp);
         }
     }
-    else if (NODE_TYPE == VARIABLE || NODE_TYPE == ARG_VARIABLE)
-    {
-        fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
-    }
     else
-        fprintf(stderr, "%d\n", NODE_TYPE);
+    {
+        printNode(tree, node, fp, 0);
+    }
 }
 
 void printSpaces(int num_spaces, FILE *fp)

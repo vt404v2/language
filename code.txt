@@ -1,88 +1,25 @@
-var d = 0
-def solve_square(a, b, c)
+def fib(var x)
 {
-    if (a == 0)
+    return print(x)
+}
+
+var a
+a = 0
+def (var )
+{
+        a = a + 1
+if ( > 2)
     {
-        solve_linear(b, c)
+        return ( - 1) + ( - 2)
+
     }
     else
     {
-        if (b == 0)
-        {
-            if (c == 0)
-            {
-                print(1)
-                print(0)
-            }
-            else
-            {
-                if (a * c > 0)
-                {
-                    print(0)
-                }
-                else
-                {
-                    print(2)
-                    print(-1 * sqrt(-1 * c / a))
-                    print(sqrt(-1 * c / a))
-                }
-            }
-        }
-        else
-        {
-            var d = b * b - 4 * a * c
-            if (d == 0)
-            {
-                print(1)
-                print(-1 * b / 2 * a)
-            }
-            else
-            {
-                if (d > 0)
-                {
-                    print(2)
-                    d = sqrt(d)
-                    print(-1 * b + d / 2 * a)
-                    print(-1 * b - d / 2 * a)
-                }
-                else
-                {
-                    print(0)
-                }
-            }
-        }
-    }
-    return 0
-}
+        return 1
 
-def solve_linear(e, f)
-{
-    if (e == 0)
-    {
-        solve_const_equal_zero(f)
-    }
-    else
-    {
-        print(1)
-        print(-1 * f / e)
-    }
-    return 0
-}
+    }}
 
-def solve_const_equal_zero(g)
-{
-    if (g == 0)
-    {
-        print(993)
-    }
-    else
-    {
-        print(0)
-    }
-    return 0
-}
-
-var x = 0
-var y = 9
-var z = 2
-solve_square(x, y, z)
+var x
+x = (5)
+fib(x)
+fib(a)

@@ -1,3 +1,11 @@
-var x
-var y = -7 + 9 - 6
-print(- x)
+var y = 1
+var x = 2
+var z = 3
+def ff(x)
+{
+    var z = 9
+    z = 9
+    return 0
+}
+print(6)
+print(y)

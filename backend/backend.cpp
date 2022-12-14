@@ -33,6 +33,7 @@ void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(main_fp, "POP rax\n");
 
     fixArgVars(tree, node);
+    treeDump(tree);
     //    for (size_t i = 0; i < 16; i++)
     //    {
     //        auto d= tree->arg_vars_positions;
@@ -325,18 +326,18 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                     ":func_%s\n",
                     tree->func_name_table[VALUE.def_value]);
 
-            size_t last_num_args = 0;
-            registerArgs(tree, LEFT_NODE, &last_num_args);
-            tree->func_num_args[VALUE.def_value] = last_num_args;
+            size_t num_args = 0;
+            registerArgs(tree, LEFT_NODE, &num_args);
+            tree->func_num_args[VALUE.def_value] = num_args;
 
-            for (size_t i = 0; i < last_num_args; i++)
+            for (size_t i = 0; i < num_args; i++)
             {
                 fprintf(func_fp, "PUSH rax\n"
                                  "PUSH %zu\n"
                                  "ADD\n"
                                  "PUSH %zu\n"
                                  "SUB\n"
-                                 "POP rax\n", last_num_args - 1, i);
+                                 "POP rax\n", num_args - 1, i);
 
                 fprintf(func_fp, "POP [rax]\n");
                 fprintf(func_fp, "PUSH rax\n"
@@ -344,12 +345,13 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                                  "SUB\n"
                                  "PUSH %zu\n"
                                  "ADD\n"
-                                 "POP rax\n", last_num_args - 1, i);
+                                 "POP rax\n", num_args - 1, i);
             }
             fprintf(func_fp, "PUSH rax\n"
                              "PUSH %zu\n"
                              "ADD\n"
-                             "POP rax\n", last_num_args);
+                             "POP rax\n", num_args);
+
 
             assemble_node(tree, RIGHT_NODE, func_fp, func_fp);
             break;
@@ -394,6 +396,9 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(func_fp, "RET\n");
             break;
         }
+        case LOCAL_VARIABLE:
+            fprintf(stderr, "local var: %zu\n", VALUE.var_value);
+            break;
         case ARG_VARIABLE:
         {
             size_t index = tree->arg_vars_positions[VALUE.var_value];
