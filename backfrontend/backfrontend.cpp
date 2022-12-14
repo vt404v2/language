@@ -15,6 +15,10 @@ void convertTreeToCode(const char *tree_filename, const char *code_filename)
 
 void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 {
+    assert(tree != nullptr);
+    assert(node != nullptr);
+    assert(fp != nullptr);
+
     switch (NODE_TYPE)
     {
         case FICTIVE_NODE:
@@ -52,32 +56,35 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             switch (VALUE.op_value)
             {
                 case ASSIGN_OP:
-//                    printSpaces(num_spaces, fp);
                     fprintf(fp,
                             "%s = ",
                             tree->var_name_table[LEFT_NODE->value.dec_value]);
                     printNode(tree, RIGHT_NODE, fp, 0);
                     break;
-                case ADD_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " + ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case SUB_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " - ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case MUL_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " * ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case DIV_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " / ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
+#define BACKPRINT_OPER(oper, value)         \
+    case ((oper)):                          \
+    {                                       \
+        printNode(tree, LEFT_NODE, fp, 0);  \
+        fprintf(fp, " %s ", #value);        \
+        printNode(tree, RIGHT_NODE, fp, 0); \
+        break;                              \
+    }
+
+                BACKPRINT_OPER(ADD_OP, +)
+                BACKPRINT_OPER(SUB_OP, -)
+                BACKPRINT_OPER(MUL_OP, *)
+                BACKPRINT_OPER(DIV_OP, /)
+                BACKPRINT_OPER(GREATER_OP, >)
+                BACKPRINT_OPER(BELOW_OP, <)
+                BACKPRINT_OPER(GREATER_EQ_OP, >=)
+                BACKPRINT_OPER(BELOW_EQ_OP, <=)
+                BACKPRINT_OPER(EQUAL_OP, ==)
+                BACKPRINT_OPER(NOT_EQ_OP, !=)
+                BACKPRINT_OPER(AND_OP, &&)
+                BACKPRINT_OPER(OR_OP, ||)
+
+#undef BACKPRINT_OPER
+
                 case SQRT_OP:
                     fprintf(fp, "sqrt(");
                     printNode(tree, LEFT_NODE, fp, 0);
@@ -91,49 +98,9 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
-                case GREATER_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " > ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case BELOW_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " < ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case GREATER_EQ_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " >= ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case BELOW_EQ_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " <= ");
-                    break;
-                case EQUAL_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " == ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case NOT_EQ_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " != ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
                 case NOT_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, " ! ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case AND_OP:
                     printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " && ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
-                    break;
-                case OR_OP:
-                    printNode(tree, LEFT_NODE, fp, 0);
-                    fprintf(fp, " || ");
-                    printNode(tree, RIGHT_NODE, fp, 0);
                     break;
                 case INCORRECT_OP:
                     fprintf(stderr, "INCORRECT OPERATOR\n");
@@ -228,6 +195,11 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         case ARG_VARIABLE:
         {
             fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
+            break;
+        }
+        case LOCAL_VARIABLE:
+        {
+            fprintf(fp, "%s", tree->arg_name_table[VALUE.var_value]);
             break;
         }
         case INCORRECT_TYPE:

@@ -2,6 +2,8 @@
 
 void ctorTokens(Tokens *tokens, size_t capacity)
 {
+    assert(tokens != nullptr);
+
     tokens->tokens = (Token_t *) calloc(capacity,
                                         sizeof(tokens->tokens[0]));
     tokens->size = 0;
@@ -10,6 +12,8 @@ void ctorTokens(Tokens *tokens, size_t capacity)
 
 void dtorTokens(Tokens *tokens)
 {
+    assert(tokens != nullptr);
+
     free(tokens->tokens);
     tokens->size = 0;
     tokens->capacity = 0;
@@ -19,6 +23,10 @@ size_t tokenize(const char *filename,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
                 Tokens *tokens)
 {
+    assert(filename != nullptr);
+    assert(name_table != nullptr);
+    assert(tokens != nullptr);
+
     FILE *fp = fopen(filename, "r");
     if (fp == nullptr)
         return CANT_OPEN_TREE_FILE;
@@ -130,6 +138,8 @@ size_t tokenize(const char *filename,
 
 void reallocTokens(Tokens *tokens)
 {
+    assert(tokens != nullptr);
+
     tokens->capacity *= 2;
     tokens->tokens = (Token_t *) realloc(tokens->tokens,
                                          tokens->capacity
@@ -140,6 +150,9 @@ void reallocTokens(Tokens *tokens)
 size_t insertToNameTable(char *word,
                          char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
+    assert(word != nullptr);
+    assert(name_table != nullptr);
+
     bool success = false;
     size_t position = getIdFromNameTable(word, name_table, &success);
     if (success)
@@ -160,6 +173,10 @@ size_t getIdFromNameTable(char *word,
                           char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
                           bool *success)
 {
+    assert(word != nullptr);
+    assert(name_table != nullptr);
+    assert(success != nullptr);
+
     for (size_t i = 0; i < BUFFER_SIZE; i++)
     {
         if (strcasecmp((*name_table)[i], word) == 0)
@@ -174,6 +191,11 @@ size_t getIdFromNameTable(char *word,
 
 void getWord(char **readPtr, char *word, size_t *word_length)
 {
+    assert(readPtr != nullptr);
+    assert(*readPtr != nullptr);
+    assert(word != nullptr);
+    assert(word_length != nullptr);
+
     size_t length = 0;
     do
     {
@@ -187,6 +209,9 @@ void getWord(char **readPtr, char *word, size_t *word_length)
 
 void skipSpaces(char **readPtr)
 {
+    assert(readPtr != nullptr);
+    assert(*readPtr != nullptr);
+
     while (**readPtr == ' ' || **readPtr == '\n')
         (*readPtr)++;
 }

@@ -3,6 +3,9 @@
 void convertProgramToTree(const char *filename,
                           const char *tree_filename)
 {
+    assert(filename != nullptr);
+    assert(tree_filename != nullptr);
+
     char name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 
     Tokens tokens = {};

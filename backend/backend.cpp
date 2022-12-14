@@ -4,6 +4,10 @@ void convertTreeToAsm(const char *tree_filename,
                       const char *asm_filename,
                       const char *asm_func_filename)
 {
+    assert(tree_filename != nullptr);
+    assert(asm_filename != nullptr);
+    assert(asm_func_filename != nullptr);
+
     Tree tree = {};
     treeCtor(&tree);
     readTree(&tree, tree_filename);
@@ -39,8 +43,13 @@ void fixArgsInFunctions(Tree *tree, Node *node)
 
 void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 {
-    fprintf(main_fp, "PUSH 666\n");
-    fprintf(main_fp, "POP rax\n");
+    assert(tree != nullptr);
+    assert(node != nullptr);
+    assert(main_fp != nullptr);
+    assert(func_fp != nullptr);
+
+    fprintf(main_fp, "PUSH 666\n"
+                     "POP rax\n");
     // set function args to arg_variable type
     fixArgVars(tree, node);
     // set local args to local_variable type
@@ -58,6 +67,9 @@ void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 
 void fixArgVars(Tree *tree, Node *node)
 {
+    assert(tree != nullptr);
+    assert(node != nullptr);
+
     size_t index = 0;
     if (NODE_TYPE == DEF)
     {
@@ -73,6 +85,11 @@ void fixArgVars(Tree *tree, Node *node)
 
 void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
 {
+    assert(tree != nullptr);
+    assert(start_node != nullptr);
+    assert(node != nullptr);
+    assert(index != nullptr);
+
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
@@ -96,6 +113,11 @@ void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
 
 void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
 {
+    assert(tree != nullptr);
+    assert(start_node != nullptr);
+    assert(node != nullptr);
+    assert(index != nullptr);
+
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
@@ -119,6 +141,8 @@ void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
 
 void fixArgVarsInBody(Node *node, size_t index)
 {
+    assert(node != nullptr);
+
     if (LEFT_NODE)
         fixArgVarsInBody(LEFT_NODE, index);
     if (RIGHT_NODE)
@@ -131,6 +155,8 @@ void fixArgVarsInBody(Node *node, size_t index)
 
 void fixLocalVarsInBody(Node *node, size_t index)
 {
+    assert(node != nullptr);
+
     if (LEFT_NODE)
         fixLocalVarsInBody(LEFT_NODE, index);
     if (RIGHT_NODE)
@@ -141,8 +167,8 @@ void fixLocalVarsInBody(Node *node, size_t index)
     }
 }
 
-#define CHECK_NULLPTR_ARGS          \
-    {                               \
+#define CHECK_NULLPTR_ARGS            \
+    {                                 \
         assert((tree) != nullptr);    \
         assert((node) != nullptr);    \
         assert((main_fp) != nullptr); \
@@ -218,11 +244,11 @@ void compileOperator(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             break;
 
 #define CASE_OPER(asm_name)                                \
-    case asm_name##_OP:                                    \
+    case (asm_name##_OP):                                  \
     {                                                      \
         assemble_node(tree, LEFT_NODE, main_fp, func_fp);  \
         assemble_node(tree, RIGHT_NODE, main_fp, func_fp); \
-        fprintf(main_fp, "%s\n", #asm_name);               \
+        fprintf(main_fp, "%s\n", (#asm_name));             \
         break;                                             \
     }
 
