@@ -41,119 +41,8 @@ Node *recursiveDescent(Tokens *tokens,
         Node *value = getLogOp(tokens, index, name_table);
         ADD_NODE
     }
-    //    fprintf(stderr, "%zu\n", *index);
 
     return root;
-}
-
-Node *getLogOp(Tokens *tokens,
-               size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    Node *leftValue = getAddSub(tokens, index, name_table);
-    while (TOKEN.type == OPERATOR_TOKEN &&
-        IS_LOGICAL(TOKEN.value.operation))
-    {
-        OperationType tokenValue = TOKEN.value.operation;
-        (*index)++;
-
-        Node *rightValue = getAddSub(tokens, index, name_table);
-        leftValue = createNewNode(OPERATOR,
-                                  {.op_value = tokenValue},
-                                  leftValue,
-                                  rightValue);
-    }
-
-    return leftValue;
-}
-
-Node *getAddSub(Tokens *tokens,
-                size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    Node *leftValue = getMulDiv(tokens, index, name_table);
-
-    while (TOKEN.type == OPERATOR_TOKEN &&
-        (TOKEN.value.operation == ADD_OP ||
-            TOKEN.value.operation == SUB_OP))
-    {
-        OperationType tokenValue = TOKEN.value.operation;
-        (*index)++;
-
-        Node *rightValue = getMulDiv(tokens, index, name_table);
-        leftValue = createNewNode(OPERATOR,
-                                  {.op_value = tokenValue},
-                                  leftValue,
-                                  rightValue);
-    }
-
-    return leftValue;
-}
-
-Node *getMulDiv(Tokens *tokens,
-                size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
-
-    while (TOKEN.type == OPERATOR_TOKEN &&
-        (TOKEN.value.operation == MUL_OP ||
-            TOKEN.value.operation == DIV_OP))
-    {
-        OperationType tokenValue = TOKEN.value.operation;
-        (*index)++;
-
-        Node *rightValue = getPrimaryExpression(tokens, index, name_table);
-        leftValue = createNewNode(OPERATOR,
-                                  {.op_value = tokenValue},
-                                  leftValue,
-                                  rightValue);
-
-    }
-
-    return leftValue;
-}
-
-Node *getVarInit(Tokens *tokens,
-                 size_t *index,
-                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    if (TOKEN.type == KEYWORD_TOKEN &&
-        !is_keyword((*name_table)[TOKEN.value.id_in_table]))
-    {
-        size_t variable_id = TOKEN.value.id_in_table;
-        (*index)++;
-        if (TOKEN.type == OPERATOR_TOKEN &&
-            TOKEN.value.operation == ASSIGN_OP)
-        {
-            (*index)++;
-            Node *var_node = createNode(VARIABLE,
-                                        {.var_value = variable_id},
-                                        nullptr,
-                                        nullptr);
-            Node *init_value = getVarInit(tokens, index, name_table);
-            if (init_value == nullptr)
-                init_value = getLogOp(tokens, index, name_table);
-            Node *init_node = createNode(OPERATOR,
-                                         {.op_value=ASSIGN_OP},
-                                         var_node,
-                                         init_value);
-            //            fprintf(stderr, "assign \n");
-
-            return createNode(FICTIVE_NODE, {}, init_node, nullptr);
-        }
-        (*index)--;
-    }
-    return nullptr;
 }
 
 Node *getVarDec(Tokens *tokens,
@@ -184,6 +73,38 @@ Node *getVarDec(Tokens *tokens,
                 TOKEN.value.operation == ASSIGN_OP)
                 (*index)--;
             return fictive_node;
+        }
+        (*index)--;
+    }
+    return nullptr;
+}
+
+Node *getVarInit(Tokens *tokens,
+                 size_t *index,
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        !is_keyword((*name_table)[TOKEN.value.id_in_table]))
+    {
+        size_t variable_id = TOKEN.value.id_in_table;
+        (*index)++;
+        if (TOKEN.type == OPERATOR_TOKEN &&
+            TOKEN.value.operation == ASSIGN_OP)
+        {
+            (*index)++;
+            Node *var_node = createNode(VARIABLE,
+                                        {.var_value = variable_id},
+                                        nullptr,
+                                        nullptr);
+            Node *init_value = getVarInit(tokens, index, name_table);
+            if (init_value == nullptr)
+                init_value = getLogOp(tokens, index, name_table);
+            Node *init_node = createNode(OPERATOR,
+                                         {.op_value=ASSIGN_OP},
+                                         var_node,
+                                         init_value);
+
+            return createNode(FICTIVE_NODE, {}, init_node, nullptr);
         }
         (*index)--;
     }
@@ -276,6 +197,7 @@ Node *getSqrt(Tokens *tokens,
     return nullptr;
 }
 
+
 Node *getInputFunction(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -353,28 +275,6 @@ Node *getReturn(Tokens *tokens,
     return nullptr;
 }
 
-Node *getCodeBlock(Tokens *tokens,
-                   size_t *index,
-                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
-{
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    Node *root = nullptr;
-    Node *last_node = root;
-
-    while (*index < tokens->size)
-    {
-        Node *value = getLogOp(tokens, index, name_table);
-        ADD_NODE
-        if (TOKEN.type == BRACKET_TOKEN &&
-            TOKEN.value.bracket == '}')
-            break;
-    }
-
-    return root;
-}
-
 Node *getDefFunction(Tokens *tokens,
                      size_t *index,
                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -438,42 +338,6 @@ Node *getDefFunction(Tokens *tokens,
     return nullptr;
 }
 
-void changeFuncVarsToArgVariables(Node *node, Node *params)
-{
-    if (NODE_TYPE == VARIABLE)
-    {
-        bool is_arg_var = false;
-        checkId(node, params, &is_arg_var);
-        if (is_arg_var)
-            NODE_TYPE = ARG_VARIABLE;
-    }
-    if (LEFT_NODE)
-        changeFuncVarsToArgVariables(LEFT_NODE, params);
-    if (RIGHT_NODE)
-        changeFuncVarsToArgVariables(RIGHT_NODE, params);
-}
-
-void checkId(Node *node, Node *params, bool *is_arg_var)
-{
-    if (params->node_type == ARG_VARIABLE)
-    {
-        if (params->value.var_value == node->value.var_value)
-        {
-            *is_arg_var = true;
-            return;
-        }
-    }
-    if (params->left)
-        checkId(node, params->left, is_arg_var);
-    if (params->right)
-        checkId(node, params->right, is_arg_var);
-
-    if (LEFT_NODE)
-        checkId(LEFT_NODE, params, is_arg_var);
-    if (RIGHT_NODE)
-        checkId(RIGHT_NODE, params, is_arg_var);
-}
-
 Node *getCallFunction(Tokens *tokens,
                       size_t *index,
                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -500,7 +364,6 @@ Node *getCallFunction(Tokens *tokens,
         while (TOKEN.value.bracket != ')')
         {
             params_last->left = getLogOp(tokens, index, name_table);
-//            params_last->left = getVariable(tokens, index, name_table);
             params_last->right = createNode(FICTIVE_NODE,
                                             {},
                                             nullptr,
@@ -533,6 +396,139 @@ Node *getCallFunction(Tokens *tokens,
     }
     return nullptr;
 }
+
+Node *getCodeBlock(Tokens *tokens,
+                   size_t *index,
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *root = nullptr;
+    Node *last_node = root;
+
+    while (*index < tokens->size)
+    {
+        Node *value = getLogOp(tokens, index, name_table);
+        ADD_NODE
+        if (TOKEN.type == BRACKET_TOKEN &&
+            TOKEN.value.bracket == '}')
+            break;
+    }
+
+    return root;
+}
+
+Node *getLogOp(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *leftValue = getAddSub(tokens, index, name_table);
+    while (TOKEN.type == OPERATOR_TOKEN &&
+        IS_LOGICAL(TOKEN.value.operation))
+    {
+        OperationType tokenValue = TOKEN.value.operation;
+        (*index)++;
+
+        Node *rightValue = getAddSub(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
+                                  {.op_value = tokenValue},
+                                  leftValue,
+                                  rightValue);
+    }
+
+    return leftValue;
+}
+
+Node *getAddSub(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *leftValue = getMulDiv(tokens, index, name_table);
+
+    while (TOKEN.type == OPERATOR_TOKEN &&
+        (TOKEN.value.operation == ADD_OP ||
+            TOKEN.value.operation == SUB_OP))
+    {
+        OperationType tokenValue = TOKEN.value.operation;
+        (*index)++;
+
+        Node *rightValue = getMulDiv(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
+                                  {.op_value = tokenValue},
+                                  leftValue,
+                                  rightValue);
+    }
+
+    return leftValue;
+}
+
+Node *getMulDiv(Tokens *tokens,
+                size_t *index,
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
+
+    while (TOKEN.type == OPERATOR_TOKEN &&
+        (TOKEN.value.operation == MUL_OP ||
+            TOKEN.value.operation == DIV_OP))
+    {
+        OperationType tokenValue = TOKEN.value.operation;
+        (*index)++;
+
+        Node *rightValue = getPrimaryExpression(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
+                                  {.op_value = tokenValue},
+                                  leftValue,
+                                  rightValue);
+
+    }
+
+    return leftValue;
+}
+
+Node *getVariable(Tokens *tokens,
+                  size_t *index,
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+
+    Node *value = createNewNode(VARIABLE,
+                                {.var_value = TOKEN.value.id_in_table},
+                                nullptr,
+                                nullptr);
+
+    (*index)++;
+
+    return value;
+}
+
+Node *getValue(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    Node *value = createNewNode(NUMBER,
+                                {.num_value =
+                                tokens->tokens[*index].value.num_value},
+                                nullptr,
+                                nullptr);
+    (*index)++;
+
+    return value;
+}
+
 
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
@@ -603,37 +599,40 @@ Node *getPrimaryExpression(Tokens *tokens,
     return value;
 }
 
-Node *getValue(Tokens *tokens,
-               size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+void changeFuncVarsToArgVariables(Node *node, Node *params)
 {
-    assert(tokens != nullptr);
-    assert(index != nullptr);
-
-    Node *value = createNewNode(NUMBER,
-                                {.num_value =
-                                tokens->tokens[*index].value.num_value},
-                                nullptr,
-                                nullptr);
-    (*index)++;
-
-    return value;
+    if (NODE_TYPE == VARIABLE)
+    {
+        bool is_arg_var = false;
+        checkId(node, params, &is_arg_var);
+        if (is_arg_var)
+            NODE_TYPE = ARG_VARIABLE;
+    }
+    if (LEFT_NODE)
+        changeFuncVarsToArgVariables(LEFT_NODE, params);
+    if (RIGHT_NODE)
+        changeFuncVarsToArgVariables(RIGHT_NODE, params);
 }
 
-Node *getVariable(Tokens *tokens,
-                  size_t *index,
-                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+void checkId(Node *node, Node *params, bool *is_arg_var)
 {
-    assert(tokens != nullptr);
+    if (params->node_type == ARG_VARIABLE)
+    {
+        if (params->value.var_value == node->value.var_value)
+        {
+            *is_arg_var = true;
+            return;
+        }
+    }
+    if (params->left)
+        checkId(node, params->left, is_arg_var);
+    if (params->right)
+        checkId(node, params->right, is_arg_var);
 
-    Node *value = createNewNode(VARIABLE,
-                                {.var_value = TOKEN.value.id_in_table},
-                                nullptr,
-                                nullptr);
-
-    (*index)++;
-
-    return value;
+    if (LEFT_NODE)
+        checkId(LEFT_NODE, params, is_arg_var);
+    if (RIGHT_NODE)
+        checkId(RIGHT_NODE, params, is_arg_var);
 }
 
 bool is_keyword(char *word)

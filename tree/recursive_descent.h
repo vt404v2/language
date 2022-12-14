@@ -8,6 +8,37 @@
 #include "cmath"
 #include "tree.h"
 
+// grammar of recursive descent
+// recursiveDescent ::= getLogOp '\0'
+// getAddSub ::= getMulDiv {['+', '-'] getMulDiv}*
+// getMulDiv ::= getPrimaryExpression {['+', '-'] getPrimaryExpression}*
+// getVarInit ::= ['x'-'z', 'X'-'Z', '_'] {'=' getVarInit | getLogOp }*
+// getVarDec ::= 'var' ['x'-'z', 'X'-'Z', '_']
+// getIf ::= 'if' getPrimaryExpression getPrimaryExpression {'else' getPrimaryExpression}
+// getWhile ::= 'while' getPrimaryExpression getPrimaryExpression
+// getSqrt ::= 'sqrt' getPrimaryExpression
+// getInputFunction ::= input '(' ')'
+// getOutputFunction ::= output()
+// getReturn ::= 'return' getLogOp
+// getCodeBlock ::= '{' {getLogOp}* '}'
+// getDefFunction ::= 'def' ['x'-'z', 'X'-'Z', '_']
+//                    '('
+//                      {['x'-'z', 'X'-'Z', '_'] ','}+ ['x'-'z', 'X'-'Z', '_'] |
+//                                                     ['x'-'z', 'X'-'Z', '_'] |
+//                    ')'
+// getCallFunction ::= ['x'-'z', 'X'-'Z', '_']
+//                    '('
+//                      {['x'-'z', 'X'-'Z', '_'] ','}+ ['x'-'z', 'X'-'Z', '_'] |
+//                                                     ['x'-'z', 'X'-'Z', '_'] |
+//                    ')'
+// getPrimaryExpression ::= getVarDec | getVarInit | getIf | getWhile |
+//                          getSqrt | getInputFunction | getOutFunction |
+//                          getReturn | getDefFunction | getCallFunction |
+//                          '{' getCodeBlock '}' |
+//                          '(' getLogOp ')' | getVariable | getValue
+// getValue ::= [double] | getVariable
+// getVariable ::= ['x'-'z', 'X'-'Z']
+
 Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
@@ -24,13 +55,13 @@ Node *getMulDiv(Tokens *tokens,
                 size_t *index,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
-Node *getVarInit(Tokens *tokens,
-                 size_t *index,
-                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
-
 Node *getVarDec(Tokens *tokens,
                 size_t *index,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getVarInit(Tokens *tokens,
+                 size_t *index,
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 Node *getIf(Tokens *tokens,
             size_t *index,
