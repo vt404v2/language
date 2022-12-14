@@ -41,14 +41,16 @@ void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 {
     fprintf(main_fp, "PUSH 666\n");
     fprintf(main_fp, "POP rax\n");
-
+    // set function args to arg_variable type
     fixArgVars(tree, node);
+    // set local args to local_variable type
+
     treeDump(tree);
-    //    for (size_t i = 0; i < 16; i++)
-    //    {
-    //        auto d= tree->arg_vars_positions;
-    //        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
-    //    }
+//    for (size_t i = 0; i < 16; i++)
+//    {
+//        auto d= tree->arg_vars_positions;
+//        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
+//    }
     assemble_node(tree, node, main_fp, func_fp);
 
     fprintf(main_fp, "HLT");
@@ -58,11 +60,15 @@ void fixArgVars(Tree *tree, Node *node)
 {
     size_t index = 0;
     if (NODE_TYPE == DEF)
+    {
         registerArgs(tree, RIGHT_NODE, LEFT_NODE, &index);
+        //registerLocalArgs(tree, RIGHT_NODE, RIGHT_NODE, &index);
+    }
     if (LEFT_NODE)
         fixArgVars(tree, LEFT_NODE);
     if (RIGHT_NODE)
         fixArgVars(tree, RIGHT_NODE);
+//    fprintf(stderr, "index: %zu\n", index);
 }
 
 void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
@@ -88,6 +94,29 @@ void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
     }
 }
 
+void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
+{
+    if (NODE_TYPE == FICTIVE_NODE)
+    {
+        if (LEFT_NODE)
+            registerLocalArgs(tree, start_node, LEFT_NODE, index);
+        if (RIGHT_NODE)
+            registerLocalArgs(tree, start_node, RIGHT_NODE, index);
+    }
+
+    if (NODE_TYPE == VAR_DEC)
+    {
+        NODE_TYPE = LOCAL_VARIABLE;
+    }
+    if (NODE_TYPE == LOCAL_VARIABLE)
+    {
+        tree->arg_vars_positions[VALUE.var_value] = *index;
+        fixLocalVarsInBody(start_node, VALUE.var_value);
+//        fprintf(stderr, "var_value: %zu index: %zu\n", VALUE.var_value, *index);
+        (*index)++;
+    }
+}
+
 void fixArgVarsInBody(Node *node, size_t index)
 {
     if (LEFT_NODE)
@@ -97,6 +126,18 @@ void fixArgVarsInBody(Node *node, size_t index)
     if (NODE_TYPE == VARIABLE && VALUE.var_value == index)
     {
         NODE_TYPE = ARG_VARIABLE;
+    }
+}
+
+void fixLocalVarsInBody(Node *node, size_t index)
+{
+    if (LEFT_NODE)
+        fixLocalVarsInBody(LEFT_NODE, index);
+    if (RIGHT_NODE)
+        fixLocalVarsInBody(RIGHT_NODE,  index);
+    if (NODE_TYPE == VARIABLE && VALUE.var_value == index)
+    {
+        NODE_TYPE = LOCAL_VARIABLE;
     }
 }
 
@@ -356,6 +397,8 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 
             size_t num_args = 0;
             registerArgs(tree, RIGHT_NODE, LEFT_NODE, &num_args);
+            //registerLocalArgs(tree, RIGHT_NODE, RIGHT_NODE, &num_args);
+            fprintf(stderr, "num_args: %zu\n", num_args);
             tree->func_num_args[VALUE.def_value] = num_args;
 
             for (size_t i = 0; i < num_args; i++)

@@ -15,7 +15,11 @@ void fixArgVars(Tree *tree, Node *node);
 
 void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index);
 
+void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index);
+
 void fixArgVarsInBody(Node *node, size_t index);
+
+void fixLocalVarsInBody(Node *node, size_t index);
 
 void assemble_node(Tree *tree, Node *node,
                    FILE *main_fp, FILE *func_fp);

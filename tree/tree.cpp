@@ -214,15 +214,24 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
     {
         fprintf(fp, " ");
     }
-    if (node->node_type == ARG_VARIABLE)
-        node->node_type = VARIABLE;
-    if (node->left == nullptr and node->right == nullptr)
+    if (NODE_TYPE == ARG_VARIABLE)
+        NODE_TYPE = VARIABLE;
+    if (LEFT_NODE == nullptr && RIGHT_NODE == nullptr)
     {
-
-        fprintf(fp,
-                "{ %d  %zu }\n",
-                node->node_type,
-                node->value.call_value);
+        if (NODE_TYPE == NUMBER)
+        {
+            fprintf(fp,
+                    "{ %d  %d }\n",
+                    node->node_type,
+                    node->value.num_value);
+        }
+        else
+        {
+            fprintf(fp,
+                    "{ %d  %zu }\n",
+                    node->node_type,
+                    node->value.call_value);
+        }
         return TREE_NO_ERRORS;
     }
     else
@@ -334,14 +343,29 @@ Node *getValueNode(char **readPtr)
     (*readPtr) += length;
     skipSpaces(readPtr);
 
-    skipSpaces(readPtr);
-    sscanf(*readPtr, "%zu%n", &value, &length);
-    (*readPtr) += length;
-    skipSpaces(readPtr);
-    Node *value_node =  createNode((NodeType) node_type,
-                                  {.call_value=value},
-                                  nullptr,
-                                  nullptr);
+    Node *value_node = nullptr;
+    if (node_type == NUMBER)
+    {
+        int num_value = 0;
+        sscanf(*readPtr, "%d%n", &num_value, &length);
+        (*readPtr) += length;
+        skipSpaces(readPtr);
+        value_node = createNode((NodeType) node_type,
+                                {.num_value=num_value},
+                                nullptr,
+                                nullptr);
+    }
+    else
+    {
+        sscanf(*readPtr, "%zu%n", &value, &length);
+        (*readPtr) += length;
+        skipSpaces(readPtr);
+        value_node =  createNode((NodeType) node_type,
+                                 {.call_value=value},
+                                 nullptr,
+                                 nullptr);
+    }
+
     if (**readPtr == '}')
     {
         return value_node;

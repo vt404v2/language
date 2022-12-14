@@ -1,11 +1,16 @@
-var y = 1
 var x = 2
+var y = 1
 var z = 3
 def ff(x)
 {
-    var z = 9
-    z = 9
+    var z = 69
+    print(z)
+    z = 42
+    print(z)
+    ff(x + 8)
     return 0
 }
-print(6)
+ff(6)
+print(x)
 print(y)
+print(z)
