@@ -24,6 +24,22 @@ void fixLocalVarsInBody(Node *node, size_t index);
 void assemble_node(Tree *tree, Node *node,
                    FILE *main_fp, FILE *func_fp);
 
+void compileOperator(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileAssign(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileWhile(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileIf(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileDef(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileCall(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileReturn(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
+void compileArgVariable(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp);
+
 void assemble_args(Tree *tree, Node *node, FILE *fp);
 
 void pushArgs(Tree *tree, Node *node, FILE *fp, size_t *new_arg_id, size_t last_num_args);
