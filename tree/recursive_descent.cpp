@@ -500,8 +500,8 @@ Node *getCallFunction(Tokens *tokens,
 
         while (TOKEN.value.bracket != ')')
         {
-            //            params_last->left = getAddSub(tokens, index, name_table);
-            params_last->left = getVariable(tokens, index, name_table);
+            params_last->left = getAddSub(tokens, index, name_table);
+//            params_last->left = getVariable(tokens, index, name_table);
             params_last->right = createNode(FICTIVE_NODE,
                                             {},
                                             nullptr,

@@ -1,7 +1,7 @@
-def fib(a)
+def f(a)
 {
     print(a)
     return 0
 }
-var n = 5
-fib(6)
+var n = 99
+f(n - 4)

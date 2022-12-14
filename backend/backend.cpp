@@ -324,9 +324,41 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(func_fp,
                     ":func_%s\n",
                     tree->func_name_table[VALUE.def_value]);
+
             size_t last_num_args = 0;
             registerArgs(tree, LEFT_NODE, &last_num_args);
             tree->func_num_args[VALUE.def_value] = last_num_args;
+            fprintf(stderr, "args: %zu\n", last_num_args);
+
+            for (size_t i = 0; i < last_num_args; i++)
+            {
+                fprintf(func_fp, "PUSH rax\n"
+                                 "PUSH %zu\n"
+                                 "ADD\n"
+                                 "PUSH %zu\n"
+                                 "SUB\n"
+                                 "POP rax\n", last_num_args - 1, i);
+//                fprintf(func_fp, "PUSH rax\n"
+//                                 "OUT\n");
+
+                fprintf(func_fp, "POP [rax]\n");
+                fprintf(func_fp, "PUSH rax\n"
+                                 "PUSH %zu\n"
+                                 "SUB\n"
+                                 "PUSH %zu\n"
+                                 "ADD\n"
+                                 "POP rax\n", last_num_args - 1, i);
+
+//                fprintf(func_fp, "PUSH rax\n");
+//                fprintf(func_fp, "PUSH 1\n");
+//                fprintf(func_fp, "ADD\n");
+//                fprintf(func_fp, "POP rax\n");
+            }
+            fprintf(func_fp, "PUSH rax\n"
+                             "PUSH %zu\n"
+                             "ADD\n"
+                             "POP rax", last_num_args);
+
             assemble_node(tree, RIGHT_NODE, func_fp, func_fp);
             break;
         }
@@ -346,6 +378,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                      main_fp,
                      &num_args,
                      last_num_args);
+//            fprintf(main_fp, "OUT");
 
             fprintf(main_fp,
                     "call :func_%s\n",
@@ -384,6 +417,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             num_args++;
 
             // set rax to rax + i - n
+//            fprintf(stderr, "index: %zu\n", index);
             fprintf(main_fp, "PUSH rax\n");
             fprintf(main_fp, "PUSH %zu\n", index);
             fprintf(main_fp, "ADD\n");
@@ -422,6 +456,13 @@ void pushArgs(Tree *tree,
         if (RIGHT_NODE)
             pushArgs(tree, RIGHT_NODE, fp, new_arg_id, last_num_args);
     }
+    else
+    {
+        assemble_node(tree, node, fp, fp);
+        (*new_arg_id)++;
+    }
+    return;
+
     if (NODE_TYPE == VARIABLE)
     {
         fprintf(fp, "PUSH [%zu]\n", VALUE.var_value);

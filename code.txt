@@ -1,6 +1,11 @@
 var d = 0
 def solve_square(a, b, c)
 {
+    print(a)
+    print(b)
+    print(c)
+    return 0
+
     if (a == 0)
     {
         solve_linear(b, c)
@@ -51,7 +56,16 @@ def solve_linear(e, f)
 {
     if (e == 0)
     {
-        solve_const(f)
+        if (f == 0)
+        {
+            print(993)
+        }
+        else
+        {
+            print(0)
+        }
+        return 0
+
     }
     else
     {
@@ -61,20 +75,7 @@ def solve_linear(e, f)
     return 0
 }
 
-def solve_const(g)
-{
-    if (g == 0)
-    {
-        print(993)
-    }
-    else
-    {
-        print(0)
-    }
-    return 0
-}
-
-var x = 1
+var x = 6
 var y = 5
-var z = 1
+var z = 7
 solve_square(x, y, z)

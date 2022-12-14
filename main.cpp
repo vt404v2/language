@@ -5,8 +5,8 @@
 //#define test "program.txt"
 //#define test "test.txt"
 //#define test "fib.txt"
-#define test "quadratic.txt"
-//#define test "factorial.txt"
+//#define test "quadratic.txt"
+#define test "factorial.txt"
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
 
     convertProgramToTree(test, "tree.txt");
     convertTreeToAsm("tree.txt", "lang.asm", "func_def.asm");
-    convertTreeToCode("tree.txt", "code.txt");
+//    convertTreeToCode("tree.txt", "code.txt");
 
     system("cmake --build ./processor --target main");
     system("cd processor; ./main");
