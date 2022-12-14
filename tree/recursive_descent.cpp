@@ -341,8 +341,7 @@ Node *getReturn(Tokens *tokens,
     {
         (*index)++;
 
-        Node *return_value =
-            getPrimaryExpression(tokens, index, name_table);
+        Node *return_value = getAddSub(tokens, index, name_table);
         Node *return_node = createNode(RETURN,
                                        {},
                                        return_value,
