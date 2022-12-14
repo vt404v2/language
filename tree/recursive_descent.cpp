@@ -341,7 +341,7 @@ Node *getReturn(Tokens *tokens,
     {
         (*index)++;
 
-        Node *return_value = getAddSub(tokens, index, name_table);
+        Node *return_value = getLogOp(tokens, index, name_table);
         Node *return_node = createNode(RETURN,
                                        {},
                                        return_value,
@@ -499,7 +499,7 @@ Node *getCallFunction(Tokens *tokens,
 
         while (TOKEN.value.bracket != ')')
         {
-            params_last->left = getAddSub(tokens, index, name_table);
+            params_last->left = getLogOp(tokens, index, name_table);
 //            params_last->left = getVariable(tokens, index, name_table);
             params_last->right = createNode(FICTIVE_NODE,
                                             {},
