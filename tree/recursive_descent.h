@@ -31,11 +31,12 @@
 //                      {['x'-'z', 'X'-'Z', '_'] ','}+ ['x'-'z', 'X'-'Z', '_'] |
 //                                                     ['x'-'z', 'X'-'Z', '_'] |
 //                    ')'
+// getNegativeExpression ::= '-' getLogOp
 // getPrimaryExpression ::= getVarDec | getVarInit | getIf | getWhile |
 //                          getSqrt | getInputFunction | getOutFunction |
 //                          getReturn | getDefFunction | getCallFunction |
 //                          '{' getCodeBlock '}' |
-//                          '(' getLogOp ')' | getVariable | getValue
+//                          '(' getNegativeExpression | getLogOp ')' | getVariable | getValue
 // getValue ::= [double] | getVariable
 // getVariable ::= ['x'-'z', 'X'-'Z']
 

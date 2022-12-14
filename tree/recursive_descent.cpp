@@ -529,6 +529,38 @@ Node *getValue(Tokens *tokens,
     return value;
 }
 
+Node *getNegativeExpression(Tokens *tokens,
+                            size_t *index,
+                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == OPERATOR_TOKEN &&
+        TOKEN.value.operation == SUB_OP)
+    {
+        (*index)++;
+        Node *negativeExpression = createNode(NUMBER,
+                                              {.num_value = -1},
+                                              nullptr,
+                                              nullptr);
+        Node *expression = getLogOp(tokens,
+                                    index,
+                                    name_table);
+
+        Node *mulNode = createNode(OPERATOR,
+                                   {.op_value = MUL_OP},
+                                   negativeExpression,
+                                   expression);
+
+        return createNode(FICTIVE_NODE,
+                          {},
+                          mulNode,
+                          nullptr);
+    }
+    return nullptr;
+}
+
 
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
@@ -538,7 +570,7 @@ Node *getPrimaryExpression(Tokens *tokens,
     assert(index != nullptr);
     ASSERT_OK(TOKEN.value.bracket != '}',
               "Expected not }, but got _%c_\n",
-              TOKEN.value.bracket)
+              TOKEN.value.bracket);
     Node *value = getVarDec(tokens, index, name_table);
     if (value)
         return value;
@@ -585,7 +617,9 @@ Node *getPrimaryExpression(Tokens *tokens,
     {
         (*index)++;
 
-        value = getLogOp(tokens, index, name_table);
+        value = getNegativeExpression(tokens, index, name_table);
+        if (value == nullptr)
+            value = getLogOp(tokens, index, name_table);
         ASSERT_OK(TOKEN.value.bracket == ')',
                   "Expected ), but got _%c_\n",
                   TOKEN.value.bracket)

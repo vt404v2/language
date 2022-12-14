@@ -23,8 +23,8 @@ def solve_square(a, b, c)
                 else
                 {
                     print(2)
-                    print(0 - sqrt(0 - c / a))
-                    print(0 + sqrt(0 - c / a))
+                    print(- sqrt(0 - c / a))
+                    print(sqrt(0 - c / a))
                 }
             }
         }
@@ -34,7 +34,7 @@ def solve_square(a, b, c)
             if (d == 0)
             {
                 print(1)
-                print((0 - b)/(2 * a))
+                print(- b/(2 * a))
             }
             else
             {
@@ -42,8 +42,8 @@ def solve_square(a, b, c)
                 {
                     print(2)
                     d = sqrt(d)
-                    print((0 - b + d)/(2 * a))
-                    print((0 - b - d)/(2 * a))
+                    print((- b + d)/(2 * a))
+                    print((- b - d)/(2 * a))
                 }
                 else
                 {
@@ -64,7 +64,7 @@ def solve_linear(e, f)
     else
     {
         print(1)
-        print((0 - f) / e)
+        print((- f) / e)
     }
     return 0
 }
@@ -83,6 +83,6 @@ def solve_const_equal_zero(g)
 }
 
 var x = 0
-var y = 3
+var y = 9
 var z = 2
 solve_square(x, y, z)
