@@ -2,14 +2,579 @@ PUSH 666
 POP rax
 PUSH 0
 POP [0]
-PUSH 6
+PUSH 0
+POP [0]
+PUSH [0]
+PUSH 0
+POP [7]
+PUSH 0
+POP [7]
+PUSH [7]
+PUSH 0
+POP [8]
+PUSH 0
+POP [8]
+PUSH [8]
+PUSH 0
+POP [9]
+PUSH 1
+POP [9]
+PUSH [9]
+PUSH [7]
+PUSH [8]
+PUSH [9]
+call :func_solve_square
+HLT
+:func_solve_square
+PUSH rax
+PUSH 2
+ADD
+PUSH 0
+SUB
+POP rax
+POP [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 0
+ADD
+POP rax
+PUSH rax
+PUSH 2
+ADD
+PUSH 1
+SUB
+POP rax
+POP [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 1
+ADD
+POP rax
+PUSH rax
+PUSH 2
+ADD
+PUSH 2
+SUB
+POP rax
+POP [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 2
+ADD
+POP rax
+PUSH rax
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55b1404a67d0
+:label_0x55b1404a8780
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+call :func_solve_linear
+jmp :label_exit_if_0x55b1404a7310
+:label_0x55b1404a67d0
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55b1404a6e60
+:label_0x55b1404a73a0
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55b1404a7a60
+:label_0x55b1404a39c0
+PUSH 1
+OUT
+PUSH 0
+OUT
+jmp :label_exit_if_0x55b1404a73d0
+:label_0x55b1404a7a60
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+PUSH 0
+A
+PUSH 0
+jbe :label_0x55b1404a6d10
+:label_0x55b1404a6c80
+PUSH 0
+OUT
+jmp :label_exit_if_0x55b1404a7a90
+:label_0x55b1404a6d10
+PUSH 2
+OUT
+PUSH 0
+PUSH 0
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+DIV
+SUB
+SQRT
+SUB
+OUT
+PUSH 0
+PUSH 0
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+DIV
+SUB
+SQRT
+ADD
+OUT
+jmp :label_exit_if_0x55b1404a7a90
+:label_exit_if_0x55b1404a7a90
+jmp :label_exit_if_0x55b1404a73d0
+:label_exit_if_0x55b1404a73d0
+jmp :label_exit_if_0x55b1404a6800
+:label_0x55b1404a6e60
+PUSH 0
+POP [0]
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+PUSH 4
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+PUSH rax
+PUSH 2
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 2
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+SUB
 POP [0]
 PUSH [0]
 PUSH [0]
-call :func_fact
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55b1404a5f30
+:label_0x55b1404a61a0
+PUSH 1
 OUT
-HLT
-:func_fact
+PUSH 0
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+SUB
+PUSH 2
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+DIV
+OUT
+jmp :label_exit_if_0x55b1404a5d50
+:label_0x55b1404a5f30
+PUSH [0]
+PUSH 0
+A
+PUSH 0
+jbe :label_0x55b1404a6650
+:label_0x55b1404a6050
+PUSH 2
+OUT
+PUSH [0]
+SQRT
+POP [0]
+PUSH [0]
+PUSH 0
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+SUB
+PUSH [0]
+ADD
+PUSH 2
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+DIV
+OUT
+PUSH 0
+PUSH rax
+PUSH 1
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 3
+ADD
+POP rax
+SUB
+PUSH [0]
+SUB
+PUSH 2
+PUSH rax
+PUSH 0
+ADD
+PUSH 3
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 3
+ADD
+POP rax
+MUL
+DIV
+OUT
+jmp :label_exit_if_0x55b1404a5f60
+:label_0x55b1404a6650
+PUSH 0
+OUT
+jmp :label_exit_if_0x55b1404a5f60
+:label_exit_if_0x55b1404a5f60
+jmp :label_exit_if_0x55b1404a5d50
+:label_exit_if_0x55b1404a5d50
+jmp :label_exit_if_0x55b1404a6800
+:label_exit_if_0x55b1404a6800
+jmp :label_exit_if_0x55b1404a7310
+:label_exit_if_0x55b1404a7310
+PUSH 0
+PUSH rax
+PUSH 3
+SUB
+POP rax
+RET
+:func_solve_linear
+PUSH rax
+PUSH 1
+ADD
+PUSH 0
+SUB
+POP rax
+POP [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 0
+ADD
+POP rax
+PUSH rax
+PUSH 1
+ADD
+PUSH 1
+SUB
+POP rax
+POP [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 1
+ADD
+POP rax
+PUSH rax
+PUSH 2
+ADD
+POP rax
+PUSH rax
+PUSH 0
+ADD
+PUSH 2
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 2
+ADD
+POP rax
+PUSH 0
+E
+PUSH 0
+jbe :label_0x55b1404a77f0
+:label_0x55b1404a7700
+PUSH rax
+PUSH 1
+ADD
+PUSH 2
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 2
+ADD
+POP rax
+call :func_solve_const
+jmp :label_exit_if_0x55b1404a7610
+:label_0x55b1404a77f0
+PUSH 1
+OUT
+PUSH 0
+PUSH rax
+PUSH 1
+ADD
+PUSH 2
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 1
+SUB
+PUSH 2
+ADD
+POP rax
+SUB
+PUSH rax
+PUSH 0
+ADD
+PUSH 2
+SUB
+POP rax
+PUSH [rax]
+PUSH rax
+PUSH 0
+SUB
+PUSH 2
+ADD
+POP rax
+DIV
+OUT
+jmp :label_exit_if_0x55b1404a7610
+:label_exit_if_0x55b1404a7610
+PUSH 0
+PUSH rax
+PUSH 2
+SUB
+POP rax
+RET
+:func_solve_const
 PUSH rax
 PUSH 0
 ADD
@@ -26,7 +591,7 @@ POP rax
 PUSH rax
 PUSH 1
 ADD
-POP raxPUSH 1
+POP rax
 PUSH rax
 PUSH 0
 ADD
@@ -40,57 +605,22 @@ SUB
 PUSH 1
 ADD
 POP rax
-AE
 PUSH 0
-jbe :label_0x558ac2b48e80
-:label_0x558ac2b48df0
-PUSH 1
+E
+PUSH 0
+jbe :label_0x55b1404a8360
+:label_0x55b1404a82d0
+PUSH 993
+OUT
+jmp :label_exit_if_0x55b1404a81e0
+:label_0x55b1404a8360
+PUSH 0
+OUT
+jmp :label_exit_if_0x55b1404a81e0
+:label_exit_if_0x55b1404a81e0
+PUSH 0
 PUSH rax
 PUSH 1
 SUB
 POP rax
 RET
-jmp :label_exit_if_0x558ac2b49000
-:label_0x558ac2b48e80
-PUSH 0
-POP [2]
-PUSH rax
-PUSH 0
-ADD
-PUSH 1
-SUB
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 0
-SUB
-PUSH 1
-ADD
-POP rax
-PUSH 1
-SUB
-POP [2]
-PUSH [2]
-PUSH [2]
-call :func_fact
-PUSH rax
-PUSH 0
-ADD
-PUSH 1
-SUB
-POP rax
-PUSH [rax]
-PUSH rax
-PUSH 0
-SUB
-PUSH 1
-ADD
-POP rax
-MUL
-PUSH rax
-PUSH 1
-SUB
-POP rax
-RET
-jmp :label_exit_if_0x558ac2b49000
-:label_exit_if_0x558ac2b49000

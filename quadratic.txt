@@ -84,5 +84,5 @@ def solve_const(g)
 
 var x = 0
 var y = 0
-var z = 0
-solve_square(x+1, y, z)
+var z = 1
+solve_square(x, y, z)

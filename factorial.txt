@@ -7,8 +7,7 @@ def fact(n)
     }
     else
     {
-        var x = n - 1
-        return (fact(x) * n)
+        return (fact(n - 1) * n)
     }
 }
 print(fact(y))
