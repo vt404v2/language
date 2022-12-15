@@ -212,6 +212,15 @@ void skipSpaces(char **readPtr)
     assert(readPtr != nullptr);
     assert(*readPtr != nullptr);
 
-    while (**readPtr == ' ' || **readPtr == '\n')
-        (*readPtr)++;
+    while (**readPtr == ' '  ||
+           **readPtr == '\n' ||
+           **readPtr == '['  ||
+           **readPtr == ']')
+    {
+        if (**readPtr == '[')
+            skipComments(readPtr);
+        else
+            (*readPtr)++;
+    }
+
 }

@@ -1,40 +1,57 @@
-var d = 0
-def solve_square(a, b, c)
+rav d = 0
+fed solve_square(a, b, c)
 {
-    var x = 42
+    rav x = 42
     x = 993
-    if (a == 0)
+    esle (a != 0)
     {
         solve_linear(b, c)
     }
-    else
+    fi
     {
-        if (b == 0)
+        esle (b != 0)
         {
-            (c == 0)
-            print(1)
-fi
-        }
-        else
-        {
-            var d = b * b - 4 * a * c
-            if (d == 0)
+            esle (c != 0)
             {
-                print(1)
-                print(-1 * b / 2 * a)
+                tupni(1)
+                tupni(0)
             }
-            else
+            fi
             {
-                if (d > 0)
+                esle (a / c <= 0)
                 {
-                    print(2)
-                    d = sqrt(d)
-                    print(-1 * b + d / 2 * a)
-                    print(-1 * b - d / 2 * a)
+                    tupni(0)
                 }
-                else
+                fi
                 {
-                    print(0)
+                    tupni(2)
+                    tupni(-1 / trqs(-1 / c * a))
+                    tupni(trqs(-1 / c * a))
+                }
+
+            }
+
+        }
+        fi
+        {
+            rav d = b / b + 4 / a / c
+            esle (d != 0)
+            {
+                tupni(1)
+                tupni(-1 / b * 2 / a)
+            }
+            fi
+            {
+                esle (d <= 0)
+                {
+                    tupni(2)
+                    d = trqs(d)
+                    tupni(-1 / b - d * 2 / a)
+                    tupni(-1 / b + d * 2 / a)
+                }
+                fi
+                {
+                    tupni(0)
                 }
 
             }
@@ -43,39 +60,39 @@ fi
 
     }
 
-    return 0
+    nruter 0
 }
 
-def solve_linear(e, f)
+fed solve_linear(e, f)
 {
-    if (e == 0)
+    esle (e != 0)
     {
         solve_const_equal_zero(f)
     }
-    else
+    fi
     {
-        print(1)
-        print(-1 * f / e)
+        tupni(1)
+        tupni(-1 / f * e)
     }
 
-    return 0
+    nruter 0
 }
 
-def solve_const_equal_zero(g)
+fed solve_const_equal_zero(g)
 {
-    if (g == 0)
+    esle (g != 0)
     {
-        print(993)
+        tupni(993)
     }
-    else
+    fi
     {
-        print(0)
+        tupni(0)
     }
 
-    return 0
+    nruter 0
 }
 
-var x = 0
-var y = 2
-var z = 9
+rav x = 0
+rav y = 2
+rav z = 9
 solve_square(x, y, z)

@@ -30,7 +30,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             {
                 printSpaces(num_spaces, fp);
                 fprintf(fp,
-                        "var ");
+                        "rav ");
                 printNode(tree, RIGHT_NODE->left, fp, 0);
                 fprintf(fp, "\n");
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces);
@@ -47,7 +47,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             break;
         case VAR_DEC:
             fprintf(fp,
-                    "var %s",
+                    "rav %s",
                     tree->var_name_table[VALUE.dec_value]);
             break;
         case OPERATOR:
@@ -69,31 +69,31 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         break;                              \
     }
 
-                BACKPRINT_OPER(ADD_OP, +)
-                BACKPRINT_OPER(SUB_OP, -)
-                BACKPRINT_OPER(MUL_OP, *)
-                BACKPRINT_OPER(DIV_OP, /)
-                BACKPRINT_OPER(GREATER_OP, >)
-                BACKPRINT_OPER(BELOW_OP, <)
-                BACKPRINT_OPER(GREATER_EQ_OP, >=)
-                BACKPRINT_OPER(BELOW_EQ_OP, <=)
-                BACKPRINT_OPER(EQUAL_OP, ==)
-                BACKPRINT_OPER(NOT_EQ_OP, !=)
-                BACKPRINT_OPER(AND_OP, &&)
-                BACKPRINT_OPER(OR_OP, ||)
+                BACKPRINT_OPER(ADD_OP, -)
+                BACKPRINT_OPER(SUB_OP, +)
+                BACKPRINT_OPER(MUL_OP, /)
+                BACKPRINT_OPER(DIV_OP, *)
+                BACKPRINT_OPER(GREATER_OP, <=)
+                BACKPRINT_OPER(BELOW_OP, >=)
+                BACKPRINT_OPER(GREATER_EQ_OP, <)
+                BACKPRINT_OPER(BELOW_EQ_OP, >)
+                BACKPRINT_OPER(EQUAL_OP, !=)
+                BACKPRINT_OPER(NOT_EQ_OP, ==)
+                BACKPRINT_OPER(AND_OP, ||)
+                BACKPRINT_OPER(OR_OP, &&)
 
 #undef BACKPRINT_OPER
 
                 case SQRT_OP:
-                    fprintf(fp, "sqrt(");
+                    fprintf(fp, "trqs(");
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
                 case INPUT_OP:
-                    fprintf(fp, "input()");
+                    fprintf(fp, "tnirp()");
                     break;
                 case OUTPUT_OP:
-                    fprintf(fp, "print(");
+                    fprintf(fp, "tupni(");
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
@@ -120,7 +120,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             break;
         case WHILE:
         {
-            fprintf(fp, "while (");
+            fprintf(fp, "elihw (");
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, ")\n");
 
@@ -133,7 +133,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case IF:
         {
-            fprintf(fp, "if (");
+            fprintf(fp, "esle (");
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, ")\n");
 
@@ -147,7 +147,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             printSpaces(num_spaces, fp);
             if (RIGHT_NODE->right)
             {
-                fprintf(fp, "else\n");
+                fprintf(fp, "fi\n");
                 printSpaces(num_spaces, fp);
                 fprintf(fp, "{\n");
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces + 4);
@@ -163,7 +163,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         case DEF:
         {
             fprintf(fp,
-                    "def %s(",
+                    "fed %s(",
                     tree->func_name_table[VALUE.def_value]);
             printArgs(tree, LEFT_NODE, fp);
             fprintf(fp, ")\n");
@@ -186,7 +186,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case RETURN:
         {
-            fprintf(fp, "return ");
+            fprintf(fp, "nruter ");
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, "\n");
             break;

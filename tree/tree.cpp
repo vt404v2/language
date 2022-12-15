@@ -326,8 +326,10 @@ size_t readTree(Tree *tree, const char *filename)
     fclose(fp);
 
     char *readPtr = tree_buffer;
+    skipComments(&readPtr);
     parseVariables(&readPtr, tree);
     parseFunctions(&readPtr, tree);
+    skipComments(&readPtr);
     tree->root = parseNode(&readPtr);
 
     return TREE_NO_ERRORS;

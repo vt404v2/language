@@ -60,3 +60,20 @@ int skipUnusedSymbols()
 
     return 0;
 }
+
+void skipComments(char **readPtr)
+{
+    while (**readPtr == '[')
+    {
+        while (**readPtr != ']' && **readPtr != EOF)
+            (*readPtr)++;
+
+        if (**readPtr == EOF)
+        {
+            fprintf(stderr, "Incorrect comment. Got EOF, but don't got ']'\n");
+            abort();
+        }
+        if (**readPtr == ']')
+            (*readPtr)++;
+    }
+}

@@ -14,4 +14,6 @@ size_t gets(char *s);
 
 int skipUnusedSymbols();
 
+void skipComments(char **readPtr);
+
 #endif //DIFFERENTIATOR__UTILS_H

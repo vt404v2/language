@@ -3,7 +3,6 @@
 ## Project description
 
 We have our common standard of abstract syntax tree(AST) that represents program on our programming languages.
-# TODO: comments
 
 ## Standard of file with tree
 Tree file contains the following parts
