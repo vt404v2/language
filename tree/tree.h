@@ -83,8 +83,7 @@ enum NodeType
     DEF              =  8,
     CALL             =  9,
     RETURN           = 10,
-    ARG_VARIABLE     = 11,
-    LOCAL_VARIABLE   = 12,
+    LOCAL_VARIABLE   = 11,
 };
 
 union NodeValue
@@ -112,7 +111,6 @@ struct Tree
     size_t func_num_args[BUFFER_SIZE] = {};
     char var_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
     char func_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
-    char arg_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 };
 
 enum TreeErrors
@@ -183,11 +181,14 @@ void printVariables(Node *node,
 
 void fixVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
+                  size_t (*func_ids_table)[BUFFER_SIZE],
                   size_t *length);
 
 void getVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
-                  size_t *length);
+                  size_t (*func_ids_table)[BUFFER_SIZE],
+                  size_t *length,
+                  size_t *func_id);
 
 void printFunctions(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],

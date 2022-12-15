@@ -299,7 +299,7 @@ Node *getDefFunction(Tokens *tokens,
 
         while (TOKEN.value.bracket != ')')
         {
-            params_last->left = createNewNode(ARG_VARIABLE,
+            params_last->left = createNewNode(LOCAL_VARIABLE,
                                               {.var_value = TOKEN.value.id_in_table},
                                               nullptr,
                                               nullptr);
@@ -640,7 +640,7 @@ void changeFuncVarsToArgVariables(Node *node, Node *params)
         bool is_arg_var = false;
         checkId(node, params, &is_arg_var);
         if (is_arg_var)
-            NODE_TYPE = ARG_VARIABLE;
+            NODE_TYPE = LOCAL_VARIABLE;
     }
     if (LEFT_NODE)
         changeFuncVarsToArgVariables(LEFT_NODE, params);
@@ -650,7 +650,7 @@ void changeFuncVarsToArgVariables(Node *node, Node *params)
 
 void checkId(Node *node, Node *params, bool *is_arg_var)
 {
-    if (params->node_type == ARG_VARIABLE)
+    if (params->node_type == LOCAL_VARIABLE)
     {
         if (params->value.var_value == node->value.var_value)
         {

@@ -1,15 +1,10 @@
 var y = 1000
-def g()
+def g(y)
 {
     print(y)
-    return y
+    if (y > 0)
+        return g(y - 7)
+    return 0
 }
-while (y > 0)
-{
-    if (y > 100)
-    {
-        print(g())
-    }
-    y = y - 7
-}
+g(y)
 print(y)

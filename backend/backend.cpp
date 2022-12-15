@@ -33,14 +33,6 @@ void convertTreeToAsm(const char *tree_filename,
     system(command);
 }
 
-void fixArgsInFunctions(Tree *tree, Node *node)
-{
-    if (NODE_TYPE == DEF)
-    {
-
-    }
-}
-
 void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 {
     assert(tree != nullptr);
@@ -74,7 +66,7 @@ void fixArgVars(Tree *tree, Node *node)
     if (NODE_TYPE == DEF)
     {
         registerArgs(tree, RIGHT_NODE, LEFT_NODE, &index);
-        //registerLocalArgs(tree, RIGHT_NODE, RIGHT_NODE, &index);
+        registerLocalVars(tree, RIGHT_NODE, RIGHT_NODE, &index);
     }
     if (LEFT_NODE)
         fixArgVars(tree, LEFT_NODE);
@@ -100,18 +92,17 @@ void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
 
     if (NODE_TYPE == VARIABLE)
     {
-        NODE_TYPE = ARG_VARIABLE;
+        NODE_TYPE = LOCAL_VARIABLE;
     }
-    if (NODE_TYPE == ARG_VARIABLE)
+    if (NODE_TYPE == LOCAL_VARIABLE)
     {
         tree->arg_vars_positions[VALUE.var_value] = *index;
-        fixArgVarsInBody(start_node, VALUE.var_value);
-        //        fprintf(stderr, "var_value: %zu index: %zu\n", VALUE.var_value, *index);
+        fixLocalVarsInBody(start_node, VALUE.var_value);
         (*index)++;
     }
 }
 
-void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
+void registerLocalVars(Tree *tree, Node *start_node, Node *node, size_t *index)
 {
     assert(tree != nullptr);
     assert(start_node != nullptr);
@@ -121,9 +112,9 @@ void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
-            registerLocalArgs(tree, start_node, LEFT_NODE, index);
+            registerLocalVars(tree, start_node, LEFT_NODE, index);
         if (RIGHT_NODE)
-            registerLocalArgs(tree, start_node, RIGHT_NODE, index);
+            registerLocalVars(tree, start_node, RIGHT_NODE, index);
     }
 
     if (NODE_TYPE == VAR_DEC)
@@ -132,24 +123,10 @@ void registerLocalArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
     }
     if (NODE_TYPE == LOCAL_VARIABLE)
     {
+//        fprintf(stderr, "assert: %zu\n", tree->arg_vars_positions[VALUE.var_value] == *index);
         tree->arg_vars_positions[VALUE.var_value] = *index;
-        fixLocalVarsInBody(start_node, VALUE.var_value);
-//        fprintf(stderr, "var_value: %zu index: %zu\n", VALUE.var_value, *index);
+//        fixLocalVarsInBody(start_node, VALUE.var_value);
         (*index)++;
-    }
-}
-
-void fixArgVarsInBody(Node *node, size_t index)
-{
-    assert(node != nullptr);
-
-    if (LEFT_NODE)
-        fixArgVarsInBody(LEFT_NODE, index);
-    if (RIGHT_NODE)
-        fixArgVarsInBody(RIGHT_NODE,  index);
-    if (NODE_TYPE == VARIABLE && VALUE.var_value == index)
-    {
-        NODE_TYPE = ARG_VARIABLE;
     }
 }
 
@@ -160,7 +137,7 @@ void fixLocalVarsInBody(Node *node, size_t index)
     if (LEFT_NODE)
         fixLocalVarsInBody(LEFT_NODE, index);
     if (RIGHT_NODE)
-        fixLocalVarsInBody(RIGHT_NODE,  index);
+        fixLocalVarsInBody(RIGHT_NODE, index);
     if (NODE_TYPE == VARIABLE && VALUE.var_value == index)
     {
         NODE_TYPE = LOCAL_VARIABLE;
@@ -218,10 +195,10 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
         case RETURN:
             compileReturn(tree, node, main_fp, func_fp);
             break;
+//        case LOCAL_VARIABLE:
+//            fprintf(stderr, "local var: %zu\n", VALUE.var_value);
+//            break;
         case LOCAL_VARIABLE:
-            fprintf(stderr, "local var: %zu\n", VALUE.var_value);
-            break;
-        case ARG_VARIABLE:
             compileArgVariable(tree, node, main_fp, func_fp);
             break;
         case INCORRECT_TYPE:
@@ -392,7 +369,7 @@ void compileAssign(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             arg_index++;
         }
         num_args++;
-
+//        fprintf(stderr, "num_args: %zu\n", num_args);
         // set rax to rax + i - n
         fprintf(main_fp, "PUSH rax\n"
                          "PUSH %zu\n"
@@ -482,10 +459,12 @@ void compileDef(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     size_t num_args = 0;
     registerArgs(tree, RIGHT_NODE, LEFT_NODE, &num_args);
 
-    //registerLocalArgs(tree, RIGHT_NODE, RIGHT_NODE, &num_args);
-    //            fprintf(stderr, "num_args: %zu\n", num_args);
+    size_t num_all_vars = num_args;
+//    fprintf(stderr, "here\n");
+    registerLocalVars(tree, RIGHT_NODE, RIGHT_NODE, &num_all_vars);
+//    fprintf(stderr, "%zu %zu\n", num_all_vars, num_args);
 
-    tree->func_num_args[VALUE.def_value] = num_args;
+    tree->func_num_args[VALUE.def_value] = num_all_vars;
 
     for (size_t i = 0; i < num_args; i++)
     {
@@ -507,7 +486,7 @@ void compileDef(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(func_fp, "PUSH rax\n"
                      "PUSH %zu\n"
                      "ADD\n"
-                     "POP rax\n", num_args);
+                     "POP rax\n", num_all_vars);
 
 
     assemble_node(tree, RIGHT_NODE, func_fp, func_fp);

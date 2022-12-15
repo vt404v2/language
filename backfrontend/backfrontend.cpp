@@ -33,7 +33,6 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                         "var ");
                 printNode(tree, RIGHT_NODE->left, fp, 0);
                 fprintf(fp, "\n");
-//                printSpaces(num_spaces, fp);
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces);
                 break;
             }
@@ -190,14 +189,9 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             fprintf(fp, "\n");
             break;
         }
-        case ARG_VARIABLE:
-        {
-            fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
-            break;
-        }
         case LOCAL_VARIABLE:
         {
-            fprintf(fp, "%s", tree->arg_name_table[VALUE.var_value]);
+            fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
             break;
         }
         case INCORRECT_TYPE:

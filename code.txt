@@ -1,14 +1,81 @@
-def fib(a)
+var d = 0
+def solve_square(solve_square_a, solve_square_b, solve_square_c)
 {
-    if (a == 1 || a == 0)
+    var solve_square_hh
+    if (solve_square_a == 0)
     {
-        return 1
-    }
+        solve_linear(solve_square_b, solve_square_c)    }
     else
     {
-        return fib(a - 1) + fib(a - 2)
+        if (solve_square_b == 0)
+        {
+            if (solve_square_c == 0)
+            {
+                print(1)
+                print(0)            }
+            else
+            {
+                if (solve_square_a * solve_square_c > 0)
+                {
+                    print(0)                }
+                else
+                {
+                    print(2)
+                    print(-1 * sqrt(-1 * solve_square_c / solve_square_a))
+                    print(sqrt(-1 * solve_square_c / solve_square_a))                }
+            }
+        }
+        else
+        {
+            var d = solve_square_b * solve_square_b - 4 * solve_square_a * solve_square_c
+            if (d == 0)
+            {
+                print(1)
+                print(-1 * solve_square_b / 2 * solve_square_a)            }
+            else
+            {
+                if (d > 0)
+                {
+                    print(2)
+                    d = sqrt(d)
+                    print(-1 * solve_square_b + d / 2 * solve_square_a)
+                    print(-1 * solve_square_b - d / 2 * solve_square_a)                }
+                else
+                {
+                    print(0)                }
+            }
+        }
     }
+
+    return 0
 }
 
-var n = 6
-print(fib(n))
+def solve_linear(solve_linear_e, solve_linear_f)
+{
+    if (solve_linear_e == 0)
+    {
+        solve_const_equal_zero(solve_linear_f)    }
+    else
+    {
+        print(1)
+        print(-1 * solve_linear_f / solve_linear_e)    }
+
+    return 0
+}
+
+def solve_const_equal_zero(solve_const_equal_zero_g)
+{
+    if (solve_const_equal_zero_g == 0)
+    {
+        print(993)    }
+    else
+    {
+        print(0)    }
+
+    return 0
+}
+
+var x = 0
+var y = 2
+var z = 9
+solve_square(x, y, z)

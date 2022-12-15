@@ -1,6 +1,13 @@
-var x = 2
-var y = 1 + 5 * 4 + 0 * (5 + 8)
-var z = 3
-print(x)
-print(y)
+var z = 7
+def f(x, y)
+{
+    print(x)
+    print(y)
+    var z = 9
+    print(z)
+    return 0
+}
+var a = 2
+var b = 3
+f(a, b)
 print(z)

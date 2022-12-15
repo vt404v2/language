@@ -97,21 +97,27 @@ void printVariables(Node *node,
                     FILE *fp)
 {
     size_t var_table[BUFFER_SIZE] = {};
+    size_t func_ids_table[BUFFER_SIZE] = {};
     size_t length = 0;
-    getVariables(node, &var_table, &length);
+    size_t func_id = -1;
+    getVariables(node, &var_table, &func_ids_table, &length, &func_id);
     fprintf(fp, "%zu\n", length);
     for (size_t i = 0; i < length; i++)
     {
-        fprintf(fp, "%s\n", (*name_table)[var_table[i]]);
+        if (func_ids_table[i] != size_t(-1))
+            fprintf(fp, "%s_%s\n", (*name_table)[func_ids_table[i]], (*name_table)[var_table[i]]);
+        else
+            fprintf(fp, "%s\n", (*name_table)[var_table[i]]);
     }
-    fixVariables(node, &var_table, &length);
+    fixVariables(node, &var_table, &func_ids_table, &length);
 }
 
 void fixVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
+                  size_t (*func_ids_table)[BUFFER_SIZE],
                   size_t *length)
 {
-    if (NODE_TYPE == VAR_DEC || NODE_TYPE == VARIABLE || NODE_TYPE == ARG_VARIABLE)
+    if (NODE_TYPE == VAR_DEC || NODE_TYPE == VARIABLE || NODE_TYPE == LOCAL_VARIABLE)
     {
         for (size_t i = 0; i < *length; i++)
         {
@@ -122,17 +128,23 @@ void fixVariables(Node *node,
             }
         }
     }
-    if (node->left)
-        fixVariables(node->left, var_table, length);
-    if (node->right)
-        fixVariables(node->right, var_table, length);
+    if (LEFT_NODE)
+        fixVariables(LEFT_NODE, var_table, func_ids_table, length);
+    if (RIGHT_NODE)
+        fixVariables(RIGHT_NODE, var_table, func_ids_table, length);
 }
 
 void getVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
-                  size_t *length)
+                  size_t (*func_ids_table)[BUFFER_SIZE],
+                  size_t *length,
+                  size_t *func_id)
 {
-    if (NODE_TYPE == VAR_DEC || NODE_TYPE == ARG_VARIABLE)
+    if (NODE_TYPE == DEF)
+    {
+        *func_id = VALUE.def_value;
+    }
+    if (NODE_TYPE == VAR_DEC || NODE_TYPE == LOCAL_VARIABLE)
     {
         bool exist = false;
         for (size_t i = 0; i < *length; i++)
@@ -143,13 +155,18 @@ void getVariables(Node *node,
         if (!exist)
         {
             (*var_table)[*length] = VALUE.var_value;
+            (*func_ids_table)[*length] = *func_id;
             (*length)++;
         }
     }
-    if (node->left)
-        getVariables(node->left, var_table, length);
-    if (node->right)
-        getVariables(node->right, var_table, length);
+    if (LEFT_NODE)
+        getVariables(LEFT_NODE, var_table, func_ids_table, length, func_id);
+    if (RIGHT_NODE)
+        getVariables(RIGHT_NODE, var_table, func_ids_table, length, func_id);
+    if (NODE_TYPE == DEF)
+    {
+        *func_id = -1;
+    }
 }
 
 void printFunctions(Node *node,
@@ -214,7 +231,7 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
     {
         fprintf(fp, " ");
     }
-    if (NODE_TYPE == ARG_VARIABLE)
+    if (NODE_TYPE == LOCAL_VARIABLE)
         NODE_TYPE = VARIABLE;
     if (LEFT_NODE == nullptr && RIGHT_NODE == nullptr)
     {
