@@ -1,243 +1,1515 @@
 digraph TREE {
     rankdir=TB;
-    node_0x563588122e20[shape="record", 
+    node_0x55a536da3ea0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | 0x563588122e50} | {INDEX | 0x563588122e20} | {RIGHT | 0x563588122e80}}}"]
-    node_0x563588122e50[shape="record", 
+            {{LEFT | 0x55a536da3ed0} | {INDEX | 0x55a536da3ea0} | {RIGHT | 0x55a536da3f00}}}"]
+    node_0x55a536da3ed0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {VARIABLE DECLARATION: 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588122e50} | {RIGHT | (nil)}}}"]
-    node_0x563588122e80[shape="record", 
+            {VARIABLE DECLARATION: 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da3ed0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da3f00[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | 0x563588122eb0} | {INDEX | 0x563588122e80} | {RIGHT | 0x563588122f40}}}"]
-    node_0x563588122eb0[shape="record", 
+            {{LEFT | 0x55a536da3f30} | {INDEX | 0x55a536da3f00} | {RIGHT | 0x55a536da3fc0}}}"]
+    node_0x55a536da3f30[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {= |
-            {{LEFT | 0x563588122ee0} | {INDEX | 0x563588122eb0} | {RIGHT | 0x563588122f10}}}"]
-    node_0x563588122ee0[shape="record", 
+            {{LEFT | 0x55a536da3f60} | {INDEX | 0x55a536da3f30} | {RIGHT | 0x55a536da3f90}}}"]
+    node_0x55a536da3f60[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588122ee0} | {RIGHT | (nil)}}}"]
-    node_0x563588122f10[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {1000 |
-            {{LEFT | (nil)} | {INDEX | 0x563588122f10} | {RIGHT | (nil)}}}"]
-    node_0x563588122f40[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x563588122f70} | {INDEX | 0x563588122f40} | {RIGHT | 0x563588123420}}}"]
-    node_0x563588122f70[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FUNCTION DECLARATION: 'g' |
-            {{LEFT | 0x563588122fa0} | {INDEX | 0x563588122f70} | {RIGHT | 0x563588123030}}}"]
-    node_0x563588122fa0[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x563588122fd0} | {INDEX | 0x563588122fa0} | {RIGHT | 0x563588123000}}}"]
-    node_0x563588122fd0[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {LOCAL_VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588122fd0} | {RIGHT | (nil)}}}"]
-    node_0x563588123000[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | (nil)} | {INDEX | 0x563588123000} | {RIGHT | (nil)}}}"]
-    node_0x563588123030[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x563588123060} | {INDEX | 0x563588123030} | {RIGHT | 0x5635881230c0}}}"]
-    node_0x563588123060[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {OUTPUT |
-            {{LEFT | 0x563588123090} | {INDEX | 0x563588123060} | {RIGHT | (nil)}}}"]
-    node_0x563588123090[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {LOCAL_VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588123090} | {RIGHT | (nil)}}}"]
-    node_0x5635881230c0[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x5635881230f0} | {INDEX | 0x5635881230c0} | {RIGHT | 0x563588123390}}}"]
-    node_0x5635881230f0[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {IF OPERATOR |
-            {{LEFT | 0x563588123120} | {INDEX | 0x5635881230f0} | {RIGHT | 0x5635881231b0}}}"]
-    node_0x563588123120[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {&gt; |
-            {{LEFT | 0x563588123150} | {INDEX | 0x563588123120} | {RIGHT | 0x563588123180}}}"]
-    node_0x563588123150[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {LOCAL_VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588123150} | {RIGHT | (nil)}}}"]
-    node_0x563588123180[shape="record", 
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da3f60} | {RIGHT | (nil)}}}"]
+    node_0x55a536da3f90[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x563588123180} | {RIGHT | (nil)}}}"]
-    node_0x5635881231b0[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {IF ACTIONS |
-            {{LEFT | 0x5635881231e0} | {INDEX | 0x5635881231b0} | {RIGHT | (nil)}}}"]
-    node_0x5635881231e0[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x55a536da3f90} | {RIGHT | (nil)}}}"]
+    node_0x55a536da3fc0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | 0x563588123210} | {INDEX | 0x5635881231e0} | {RIGHT | (nil)}}}"]
-    node_0x563588123210[shape="record", 
+            {{LEFT | 0x55a536da3ff0} | {INDEX | 0x55a536da3fc0} | {RIGHT | 0x55a536da5f10}}}"]
+    node_0x55a536da3ff0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {RETURN FROM FUNC |
-            {{LEFT | 0x563588123240} | {INDEX | 0x563588123210} | {RIGHT | (nil)}}}"]
-    node_0x563588123240[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x563588123270} | {INDEX | 0x563588123240} | {RIGHT | (nil)}}}"]
-    node_0x563588123270[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FUNCTION CALL: 'g' |
-            {{LEFT | 0x5635881232a0} | {INDEX | 0x563588123270} | {RIGHT | (nil)}}}"]
-    node_0x5635881232a0[shape="record", 
+            {FUNCTION DECLARATION: 'solve_square' |
+            {{LEFT | 0x55a536da4020} | {INDEX | 0x55a536da3ff0} | {RIGHT | 0x55a536da4170}}}"]
+    node_0x55a536da4020[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | 0x5635881232d0} | {INDEX | 0x5635881232a0} | {RIGHT | 0x563588123360}}}"]
-    node_0x5635881232d0[shape="record", 
+            {{LEFT | 0x55a536da4050} | {INDEX | 0x55a536da4020} | {RIGHT | 0x55a536da4080}}}"]
+    node_0x55a536da4050[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4050} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4080[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da40b0} | {INDEX | 0x55a536da4080} | {RIGHT | 0x55a536da40e0}}}"]
+    node_0x55a536da40b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da40b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da40e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4110} | {INDEX | 0x55a536da40e0} | {RIGHT | 0x55a536da4140}}}"]
+    node_0x55a536da4110[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4110} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4140[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4140} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4170[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da41a0} | {INDEX | 0x55a536da4170} | {RIGHT | 0x55a536da41d0}}}"]
+    node_0x55a536da41a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_x' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da41a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da41d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4200} | {INDEX | 0x55a536da41d0} | {RIGHT | 0x55a536da4290}}}"]
+    node_0x55a536da4200[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da4230} | {INDEX | 0x55a536da4200} | {RIGHT | 0x55a536da4260}}}"]
+    node_0x55a536da4230[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'solve_square_x' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4230} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4260[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {42 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4260} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4290[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da42c0} | {INDEX | 0x55a536da4290} | {RIGHT | 0x55a536da43b0}}}"]
+    node_0x55a536da42c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da42f0} | {INDEX | 0x55a536da42c0} | {RIGHT | 0x55a536da4320}}}"]
+    node_0x55a536da42f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'solve_square_x' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da42f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4320[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {- |
-            {{LEFT | 0x563588123300} | {INDEX | 0x5635881232d0} | {RIGHT | 0x563588123330}}}"]
-    node_0x563588123300[shape="record", 
+            {{LEFT | 0x55a536da4350} | {INDEX | 0x55a536da4320} | {RIGHT | 0x55a536da4380}}}"]
+    node_0x55a536da4350[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {LOCAL_VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588123300} | {RIGHT | (nil)}}}"]
-    node_0x563588123330[shape="record", 
+            {1000 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4350} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4380[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {7 |
-            {{LEFT | (nil)} | {INDEX | 0x563588123330} | {RIGHT | (nil)}}}"]
-    node_0x563588123360[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4380} | {RIGHT | (nil)}}}"]
+    node_0x55a536da43b0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | (nil)} | {INDEX | 0x563588123360} | {RIGHT | (nil)}}}"]
-    node_0x563588123390[shape="record", 
+            {{LEFT | 0x55a536da43e0} | {INDEX | 0x55a536da43b0} | {RIGHT | 0x55a536da5e80}}}"]
+    node_0x55a536da43e0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x5635881233c0} | {INDEX | 0x563588123390} | {RIGHT | (nil)}}}"]
-    node_0x5635881233c0[shape="record", 
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da4410} | {INDEX | 0x55a536da43e0} | {RIGHT | 0x55a536da44a0}}}"]
+    node_0x55a536da4410[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {RETURN FROM FUNC |
-            {{LEFT | 0x5635881233f0} | {INDEX | 0x5635881233c0} | {RIGHT | (nil)}}}"]
-    node_0x5635881233f0[shape="record", 
+            {== |
+            {{LEFT | 0x55a536da4440} | {INDEX | 0x55a536da4410} | {RIGHT | 0x55a536da4470}}}"]
+    node_0x55a536da4440[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4440} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4470[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {0 |
-            {{LEFT | (nil)} | {INDEX | 0x5635881233f0} | {RIGHT | (nil)}}}"]
-    node_0x563588123420[shape="record", 
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4470} | {RIGHT | (nil)}}}"]
+    node_0x55a536da44a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da44d0} | {INDEX | 0x55a536da44a0} | {RIGHT | 0x55a536da4620}}}"]
+    node_0x55a536da44d0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | 0x563588123450} | {INDEX | 0x563588123420} | {RIGHT | 0x563588123510}}}"]
-    node_0x563588123450[shape="record", 
+            {{LEFT | 0x55a536da4500} | {INDEX | 0x55a536da44d0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4500[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
-            {FUNCTION CALL: 'g' |
-            {{LEFT | 0x563588123480} | {INDEX | 0x563588123450} | {RIGHT | (nil)}}}"]
-    node_0x563588123480[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {FICTIVE_NODE |
-            {{LEFT | 0x5635881234b0} | {INDEX | 0x563588123480} | {RIGHT | 0x5635881234e0}}}"]
-    node_0x5635881234b0[shape="record", 
-        color="#6be871",        fillcolor="#caf2d4", 
-        style="rounded, filled", 
-        label="
-            {VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x5635881234b0} | {RIGHT | (nil)}}}"]
-    node_0x5635881234e0[shape="record", 
+            {FUNCTION CALL: 'solve_linear' |
+            {{LEFT | 0x55a536da4530} | {INDEX | 0x55a536da4500} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4530[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | (nil)} | {INDEX | 0x5635881234e0} | {RIGHT | (nil)}}}"]
-    node_0x563588123510[shape="record", 
+            {{LEFT | 0x55a536da4560} | {INDEX | 0x55a536da4530} | {RIGHT | 0x55a536da4590}}}"]
+    node_0x55a536da4560[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4560} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4590[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {FICTIVE_NODE |
-            {{LEFT | 0x563588123540} | {INDEX | 0x563588123510} | {RIGHT | (nil)}}}"]
-    node_0x563588123540[shape="record", 
+            {{LEFT | 0x55a536da45c0} | {INDEX | 0x55a536da4590} | {RIGHT | 0x55a536da45f0}}}"]
+    node_0x55a536da45c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da45c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da45f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da45f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4620[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4650} | {INDEX | 0x55a536da4620} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4650[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da4680} | {INDEX | 0x55a536da4650} | {RIGHT | 0x55a536da4710}}}"]
+    node_0x55a536da4680[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {== |
+            {{LEFT | 0x55a536da46b0} | {INDEX | 0x55a536da4680} | {RIGHT | 0x55a536da46e0}}}"]
+    node_0x55a536da46b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da46b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da46e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da46e0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4710[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da4740} | {INDEX | 0x55a536da4710} | {RIGHT | 0x55a536da5070}}}"]
+    node_0x55a536da4740[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4770} | {INDEX | 0x55a536da4740} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4770[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da47a0} | {INDEX | 0x55a536da4770} | {RIGHT | 0x55a536da4830}}}"]
+    node_0x55a536da47a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {== |
+            {{LEFT | 0x55a536da47d0} | {INDEX | 0x55a536da47a0} | {RIGHT | 0x55a536da4800}}}"]
+    node_0x55a536da47d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da47d0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4800[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4800} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4830[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da4860} | {INDEX | 0x55a536da4830} | {RIGHT | 0x55a536da4980}}}"]
+    node_0x55a536da4860[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4890} | {INDEX | 0x55a536da4860} | {RIGHT | 0x55a536da48f0}}}"]
+    node_0x55a536da4890[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {OUTPUT |
-            {{LEFT | 0x563588123570} | {INDEX | 0x563588123540} | {RIGHT | (nil)}}}"]
-    node_0x563588123570[shape="record", 
+            {{LEFT | 0x55a536da48c0} | {INDEX | 0x55a536da4890} | {RIGHT | (nil)}}}"]
+    node_0x55a536da48c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da48c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da48f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4920} | {INDEX | 0x55a536da48f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4920[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da4950} | {INDEX | 0x55a536da4920} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4950[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4950} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4980[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da49b0} | {INDEX | 0x55a536da4980} | {RIGHT | (nil)}}}"]
+    node_0x55a536da49b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da49e0} | {INDEX | 0x55a536da49b0} | {RIGHT | 0x55a536da4ad0}}}"]
+    node_0x55a536da49e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {&gt; |
+            {{LEFT | 0x55a536da4a10} | {INDEX | 0x55a536da49e0} | {RIGHT | 0x55a536da4aa0}}}"]
+    node_0x55a536da4a10[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da4a40} | {INDEX | 0x55a536da4a10} | {RIGHT | 0x55a536da4a70}}}"]
+    node_0x55a536da4a40[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4a40} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4a70[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4a70} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4aa0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4aa0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4ad0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da4b00} | {INDEX | 0x55a536da4ad0} | {RIGHT | 0x55a536da4b90}}}"]
+    node_0x55a536da4b00[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4b30} | {INDEX | 0x55a536da4b00} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4b30[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da4b60} | {INDEX | 0x55a536da4b30} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4b60[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4b60} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4b90[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4bc0} | {INDEX | 0x55a536da4b90} | {RIGHT | 0x55a536da4c20}}}"]
+    node_0x55a536da4bc0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da4bf0} | {INDEX | 0x55a536da4bc0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4bf0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4bf0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4c20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4c50} | {INDEX | 0x55a536da4c20} | {RIGHT | 0x55a536da4e90}}}"]
+    node_0x55a536da4c50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da4c80} | {INDEX | 0x55a536da4c50} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4c80[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4cb0} | {INDEX | 0x55a536da4c80} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4cb0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da4ce0} | {INDEX | 0x55a536da4cb0} | {RIGHT | 0x55a536da4d10}}}"]
+    node_0x55a536da4ce0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4ce0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4d10[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4d40} | {INDEX | 0x55a536da4d10} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4d40[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {SQRT |
+            {{LEFT | 0x55a536da4d70} | {INDEX | 0x55a536da4d40} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4d70[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4da0} | {INDEX | 0x55a536da4d70} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4da0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da4dd0} | {INDEX | 0x55a536da4da0} | {RIGHT | 0x55a536da4e00}}}"]
+    node_0x55a536da4dd0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4dd0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4e00[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x55a536da4e30} | {INDEX | 0x55a536da4e00} | {RIGHT | 0x55a536da4e60}}}"]
+    node_0x55a536da4e30[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4e30} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4e60[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4e60} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4e90[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4ec0} | {INDEX | 0x55a536da4e90} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4ec0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da4ef0} | {INDEX | 0x55a536da4ec0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4ef0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4f20} | {INDEX | 0x55a536da4ef0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4f20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {SQRT |
+            {{LEFT | 0x55a536da4f50} | {INDEX | 0x55a536da4f20} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4f50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da4f80} | {INDEX | 0x55a536da4f50} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4f80[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da4fb0} | {INDEX | 0x55a536da4f80} | {RIGHT | 0x55a536da4fe0}}}"]
+    node_0x55a536da4fb0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da4fb0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da4fe0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x55a536da5010} | {INDEX | 0x55a536da4fe0} | {RIGHT | 0x55a536da5040}}}"]
+    node_0x55a536da5010[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5010} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5040[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5040} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5070[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da50a0} | {INDEX | 0x55a536da5070} | {RIGHT | 0x55a536da50d0}}}"]
+    node_0x55a536da50a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE DECLARATION: 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da50a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da50d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5100} | {INDEX | 0x55a536da50d0} | {RIGHT | 0x55a536da5310}}}"]
+    node_0x55a536da5100[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da5130} | {INDEX | 0x55a536da5100} | {RIGHT | 0x55a536da5160}}}"]
+    node_0x55a536da5130[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5130} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5160[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {- |
+            {{LEFT | 0x55a536da5190} | {INDEX | 0x55a536da5160} | {RIGHT | 0x55a536da5220}}}"]
+    node_0x55a536da5190[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da51c0} | {INDEX | 0x55a536da5190} | {RIGHT | 0x55a536da51f0}}}"]
+    node_0x55a536da51c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da51c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da51f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da51f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5220[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5250} | {INDEX | 0x55a536da5220} | {RIGHT | 0x55a536da52e0}}}"]
+    node_0x55a536da5250[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5280} | {INDEX | 0x55a536da5250} | {RIGHT | 0x55a536da52b0}}}"]
+    node_0x55a536da5280[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {4 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5280} | {RIGHT | (nil)}}}"]
+    node_0x55a536da52b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da52b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da52e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_c' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da52e0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5310[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5340} | {INDEX | 0x55a536da5310} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5340[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da5370} | {INDEX | 0x55a536da5340} | {RIGHT | 0x55a536da5400}}}"]
+    node_0x55a536da5370[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {== |
+            {{LEFT | 0x55a536da53a0} | {INDEX | 0x55a536da5370} | {RIGHT | 0x55a536da53d0}}}"]
+    node_0x55a536da53a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da53a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da53d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da53d0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5400[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da5430} | {INDEX | 0x55a536da5400} | {RIGHT | 0x55a536da56a0}}}"]
+    node_0x55a536da5430[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5460} | {INDEX | 0x55a536da5430} | {RIGHT | 0x55a536da54c0}}}"]
+    node_0x55a536da5460[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da5490} | {INDEX | 0x55a536da5460} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5490[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5490} | {RIGHT | (nil)}}}"]
+    node_0x55a536da54c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da54f0} | {INDEX | 0x55a536da54c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da54f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da5520} | {INDEX | 0x55a536da54f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5520[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5550} | {INDEX | 0x55a536da5520} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5550[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5580} | {INDEX | 0x55a536da5550} | {RIGHT | 0x55a536da55b0}}}"]
+    node_0x55a536da5580[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5580} | {RIGHT | (nil)}}}"]
+    node_0x55a536da55b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x55a536da55e0} | {INDEX | 0x55a536da55b0} | {RIGHT | 0x55a536da5610}}}"]
+    node_0x55a536da55e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da55e0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5610[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5640} | {INDEX | 0x55a536da5610} | {RIGHT | 0x55a536da5670}}}"]
+    node_0x55a536da5640[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5640} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5670[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5670} | {RIGHT | (nil)}}}"]
+    node_0x55a536da56a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da56d0} | {INDEX | 0x55a536da56a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da56d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da5700} | {INDEX | 0x55a536da56d0} | {RIGHT | 0x55a536da5790}}}"]
+    node_0x55a536da5700[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {&gt; |
+            {{LEFT | 0x55a536da5730} | {INDEX | 0x55a536da5700} | {RIGHT | 0x55a536da5760}}}"]
+    node_0x55a536da5730[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5730} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5760[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5760} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5790[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da57c0} | {INDEX | 0x55a536da5790} | {RIGHT | 0x55a536da5df0}}}"]
+    node_0x55a536da57c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da57f0} | {INDEX | 0x55a536da57c0} | {RIGHT | 0x55a536da5850}}}"]
+    node_0x55a536da57f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da5820} | {INDEX | 0x55a536da57f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5820[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5820} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5850[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5880} | {INDEX | 0x55a536da5850} | {RIGHT | 0x55a536da5970}}}"]
+    node_0x55a536da5880[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da58b0} | {INDEX | 0x55a536da5880} | {RIGHT | 0x55a536da58e0}}}"]
+    node_0x55a536da58b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da58b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da58e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5910} | {INDEX | 0x55a536da58e0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5910[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {SQRT |
+            {{LEFT | 0x55a536da5940} | {INDEX | 0x55a536da5910} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5940[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5940} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5970[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da59a0} | {INDEX | 0x55a536da5970} | {RIGHT | 0x55a536da5bb0}}}"]
+    node_0x55a536da59a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da59d0} | {INDEX | 0x55a536da59a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da59d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x55a536da5a00} | {INDEX | 0x55a536da59d0} | {RIGHT | 0x55a536da5b20}}}"]
+    node_0x55a536da5a00[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5a30} | {INDEX | 0x55a536da5a00} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5a30[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5a60} | {INDEX | 0x55a536da5a30} | {RIGHT | 0x55a536da5a90}}}"]
+    node_0x55a536da5a60[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5a60} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5a90[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {+ |
+            {{LEFT | 0x55a536da5ac0} | {INDEX | 0x55a536da5a90} | {RIGHT | 0x55a536da5af0}}}"]
+    node_0x55a536da5ac0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5ac0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5af0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5af0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5b20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5b50} | {INDEX | 0x55a536da5b20} | {RIGHT | 0x55a536da5b80}}}"]
+    node_0x55a536da5b50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5b50} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5b80[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5b80} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5bb0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5be0} | {INDEX | 0x55a536da5bb0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5be0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da5c10} | {INDEX | 0x55a536da5be0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5c10[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x55a536da5c40} | {INDEX | 0x55a536da5c10} | {RIGHT | 0x55a536da5d60}}}"]
+    node_0x55a536da5c40[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5c70} | {INDEX | 0x55a536da5c40} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5c70[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5ca0} | {INDEX | 0x55a536da5c70} | {RIGHT | 0x55a536da5cd0}}}"]
+    node_0x55a536da5ca0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5ca0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5cd0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {- |
+            {{LEFT | 0x55a536da5d00} | {INDEX | 0x55a536da5cd0} | {RIGHT | 0x55a536da5d30}}}"]
+    node_0x55a536da5d00[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_b' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5d00} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5d30[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'd' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5d30} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5d60[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da5d90} | {INDEX | 0x55a536da5d60} | {RIGHT | 0x55a536da5dc0}}}"]
+    node_0x55a536da5d90[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5d90} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5dc0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_square_a' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5dc0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5df0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5e20} | {INDEX | 0x55a536da5df0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5e20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da5e50} | {INDEX | 0x55a536da5e20} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5e50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5e50} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5e80[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5eb0} | {INDEX | 0x55a536da5e80} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5eb0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {RETURN FROM FUNC |
+            {{LEFT | 0x55a536da5ee0} | {INDEX | 0x55a536da5eb0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5ee0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5ee0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5f10[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5f40} | {INDEX | 0x55a536da5f10} | {RIGHT | 0x55a536da6510}}}"]
+    node_0x55a536da5f40[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FUNCTION DECLARATION: 'solve_linear' |
+            {{LEFT | 0x55a536da5f70} | {INDEX | 0x55a536da5f40} | {RIGHT | 0x55a536da6060}}}"]
+    node_0x55a536da5f70[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da5fa0} | {INDEX | 0x55a536da5f70} | {RIGHT | 0x55a536da5fd0}}}"]
+    node_0x55a536da5fa0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_linear_e' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da5fa0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da5fd0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6000} | {INDEX | 0x55a536da5fd0} | {RIGHT | 0x55a536da6030}}}"]
+    node_0x55a536da6000[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_linear_f' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6000} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6030[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6030} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6060[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6090} | {INDEX | 0x55a536da6060} | {RIGHT | 0x55a536da6480}}}"]
+    node_0x55a536da6090[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da60c0} | {INDEX | 0x55a536da6090} | {RIGHT | 0x55a536da6150}}}"]
+    node_0x55a536da60c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {== |
+            {{LEFT | 0x55a536da60f0} | {INDEX | 0x55a536da60c0} | {RIGHT | 0x55a536da6120}}}"]
+    node_0x55a536da60f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_linear_e' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da60f0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6120[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6120} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6150[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da6180} | {INDEX | 0x55a536da6150} | {RIGHT | 0x55a536da6270}}}"]
+    node_0x55a536da6180[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da61b0} | {INDEX | 0x55a536da6180} | {RIGHT | (nil)}}}"]
+    node_0x55a536da61b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FUNCTION CALL: 'solve_const_equal_zero' |
+            {{LEFT | 0x55a536da61e0} | {INDEX | 0x55a536da61b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da61e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6210} | {INDEX | 0x55a536da61e0} | {RIGHT | 0x55a536da6240}}}"]
+    node_0x55a536da6210[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_linear_f' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6210} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6240[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6240} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6270[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da62a0} | {INDEX | 0x55a536da6270} | {RIGHT | 0x55a536da6300}}}"]
+    node_0x55a536da62a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da62d0} | {INDEX | 0x55a536da62a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da62d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da62d0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6300[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6330} | {INDEX | 0x55a536da6300} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6330[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da6360} | {INDEX | 0x55a536da6330} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6360[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6390} | {INDEX | 0x55a536da6360} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6390[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {* |
+            {{LEFT | 0x55a536da63c0} | {INDEX | 0x55a536da6390} | {RIGHT | 0x55a536da63f0}}}"]
+    node_0x55a536da63c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {-1 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da63c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da63f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {/ |
+            {{LEFT | 0x55a536da6420} | {INDEX | 0x55a536da63f0} | {RIGHT | 0x55a536da6450}}}"]
+    node_0x55a536da6420[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_linear_f' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6420} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6450[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_linear_e' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6450} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6480[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da64b0} | {INDEX | 0x55a536da6480} | {RIGHT | (nil)}}}"]
+    node_0x55a536da64b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {RETURN FROM FUNC |
+            {{LEFT | 0x55a536da64e0} | {INDEX | 0x55a536da64b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da64e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da64e0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6510[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6540} | {INDEX | 0x55a536da6510} | {RIGHT | 0x55a536da68d0}}}"]
+    node_0x55a536da6540[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FUNCTION DECLARATION: 'solve_const_equal_zero' |
+            {{LEFT | 0x55a536da6570} | {INDEX | 0x55a536da6540} | {RIGHT | 0x55a536da6600}}}"]
+    node_0x55a536da6570[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da65a0} | {INDEX | 0x55a536da6570} | {RIGHT | 0x55a536da65d0}}}"]
+    node_0x55a536da65a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_const_equal_zero_g' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da65a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da65d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da65d0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6600[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6630} | {INDEX | 0x55a536da6600} | {RIGHT | 0x55a536da6840}}}"]
+    node_0x55a536da6630[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF OPERATOR |
+            {{LEFT | 0x55a536da6660} | {INDEX | 0x55a536da6630} | {RIGHT | 0x55a536da66f0}}}"]
+    node_0x55a536da6660[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {== |
+            {{LEFT | 0x55a536da6690} | {INDEX | 0x55a536da6660} | {RIGHT | 0x55a536da66c0}}}"]
+    node_0x55a536da6690[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {LOCAL_VARIABLE 'solve_const_equal_zero_g' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6690} | {RIGHT | (nil)}}}"]
+    node_0x55a536da66c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da66c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da66f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {IF ACTIONS |
+            {{LEFT | 0x55a536da6720} | {INDEX | 0x55a536da66f0} | {RIGHT | 0x55a536da67b0}}}"]
+    node_0x55a536da6720[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6750} | {INDEX | 0x55a536da6720} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6750[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da6780} | {INDEX | 0x55a536da6750} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6780[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {993 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6780} | {RIGHT | (nil)}}}"]
+    node_0x55a536da67b0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da67e0} | {INDEX | 0x55a536da67b0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da67e0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {OUTPUT |
+            {{LEFT | 0x55a536da6810} | {INDEX | 0x55a536da67e0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6810[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6810} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6840[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6870} | {INDEX | 0x55a536da6840} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6870[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {RETURN FROM FUNC |
+            {{LEFT | 0x55a536da68a0} | {INDEX | 0x55a536da6870} | {RIGHT | (nil)}}}"]
+    node_0x55a536da68a0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da68a0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da68d0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6900} | {INDEX | 0x55a536da68d0} | {RIGHT | 0x55a536da6930}}}"]
+    node_0x55a536da6900[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE DECLARATION: 'solve_square_x' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6900} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6930[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6960} | {INDEX | 0x55a536da6930} | {RIGHT | 0x55a536da69f0}}}"]
+    node_0x55a536da6960[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da6990} | {INDEX | 0x55a536da6960} | {RIGHT | 0x55a536da69c0}}}"]
+    node_0x55a536da6990[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'solve_square_x' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6990} | {RIGHT | (nil)}}}"]
+    node_0x55a536da69c0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {0 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da69c0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da69f0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6a20} | {INDEX | 0x55a536da69f0} | {RIGHT | 0x55a536da6a50}}}"]
+    node_0x55a536da6a20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE DECLARATION: 'y' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6a20} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6a50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6a80} | {INDEX | 0x55a536da6a50} | {RIGHT | 0x55a536da6b10}}}"]
+    node_0x55a536da6a80[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da6ab0} | {INDEX | 0x55a536da6a80} | {RIGHT | 0x55a536da6ae0}}}"]
+    node_0x55a536da6ab0[shape="record", 
         color="#6be871",        fillcolor="#caf2d4", 
         style="rounded, filled", 
         label="
             {VARIABLE 'y' |
-            {{LEFT | (nil)} | {INDEX | 0x563588123570} | {RIGHT | (nil)}}}"]
-    node_0x563588122e20->node_0x563588122e50[color="#a66be8", fontcolor="#6be871"];    node_0x563588122e20->node_0x563588122e80[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588122e80->node_0x563588122eb0[color="#a66be8", fontcolor="#6be871"];    node_0x563588122eb0->node_0x563588122ee0[color="#a66be8", fontcolor="#6be871"];    node_0x563588122eb0->node_0x563588122f10[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588122e80->node_0x563588122f40[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588122f40->node_0x563588122f70[color="#a66be8", fontcolor="#6be871"];    node_0x563588122f70->node_0x563588122fa0[color="#a66be8", fontcolor="#6be871"];    node_0x563588122fa0->node_0x563588122fd0[color="#a66be8", fontcolor="#6be871"];    node_0x563588122fa0->node_0x563588123000[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588122f70->node_0x563588123030[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588123030->node_0x563588123060[color="#a66be8", fontcolor="#6be871"];    node_0x563588123060->node_0x563588123090[color="#a66be8", fontcolor="#6be871"];    node_0x563588123030->node_0x5635881230c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5635881230c0->node_0x5635881230f0[color="#a66be8", fontcolor="#6be871"];    node_0x5635881230f0->node_0x563588123120[color="#a66be8", fontcolor="#6be871"];    node_0x563588123120->node_0x563588123150[color="#a66be8", fontcolor="#6be871"];    node_0x563588123120->node_0x563588123180[color="#a66be8", fontcolor="#e87b6b"];    node_0x5635881230f0->node_0x5635881231b0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5635881231b0->node_0x5635881231e0[color="#a66be8", fontcolor="#6be871"];    node_0x5635881231e0->node_0x563588123210[color="#a66be8", fontcolor="#6be871"];    node_0x563588123210->node_0x563588123240[color="#a66be8", fontcolor="#6be871"];    node_0x563588123240->node_0x563588123270[color="#a66be8", fontcolor="#6be871"];    node_0x563588123270->node_0x5635881232a0[color="#a66be8", fontcolor="#6be871"];    node_0x5635881232a0->node_0x5635881232d0[color="#a66be8", fontcolor="#6be871"];    node_0x5635881232d0->node_0x563588123300[color="#a66be8", fontcolor="#6be871"];    node_0x5635881232d0->node_0x563588123330[color="#a66be8", fontcolor="#e87b6b"];    node_0x5635881232a0->node_0x563588123360[color="#a66be8", fontcolor="#e87b6b"];    node_0x5635881230c0->node_0x563588123390[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588123390->node_0x5635881233c0[color="#a66be8", fontcolor="#6be871"];    node_0x5635881233c0->node_0x5635881233f0[color="#a66be8", fontcolor="#6be871"];    node_0x563588122f40->node_0x563588123420[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588123420->node_0x563588123450[color="#a66be8", fontcolor="#6be871"];    node_0x563588123450->node_0x563588123480[color="#a66be8", fontcolor="#6be871"];    node_0x563588123480->node_0x5635881234b0[color="#a66be8", fontcolor="#6be871"];    node_0x563588123480->node_0x5635881234e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588123420->node_0x563588123510[color="#a66be8", fontcolor="#e87b6b"];    node_0x563588123510->node_0x563588123540[color="#a66be8", fontcolor="#6be871"];    node_0x563588123540->node_0x563588123570[color="#a66be8", fontcolor="#6be871"];}
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6ab0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6ae0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {2 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6ae0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6b10[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6b40} | {INDEX | 0x55a536da6b10} | {RIGHT | 0x55a536da6b70}}}"]
+    node_0x55a536da6b40[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE DECLARATION: 'z' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6b40} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6b70[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6ba0} | {INDEX | 0x55a536da6b70} | {RIGHT | 0x55a536da6c30}}}"]
+    node_0x55a536da6ba0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {= |
+            {{LEFT | 0x55a536da6bd0} | {INDEX | 0x55a536da6ba0} | {RIGHT | 0x55a536da6c00}}}"]
+    node_0x55a536da6bd0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'z' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6bd0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6c00[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {9 |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6c00} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6c30[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6c60} | {INDEX | 0x55a536da6c30} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6c60[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FUNCTION CALL: 'solve_square' |
+            {{LEFT | 0x55a536da6c90} | {INDEX | 0x55a536da6c60} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6c90[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6cc0} | {INDEX | 0x55a536da6c90} | {RIGHT | 0x55a536da6cf0}}}"]
+    node_0x55a536da6cc0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'solve_square_x' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6cc0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6cf0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6d20} | {INDEX | 0x55a536da6cf0} | {RIGHT | 0x55a536da6d50}}}"]
+    node_0x55a536da6d20[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'y' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6d20} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6d50[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | 0x55a536da6d80} | {INDEX | 0x55a536da6d50} | {RIGHT | 0x55a536da6db0}}}"]
+    node_0x55a536da6d80[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {VARIABLE 'z' |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6d80} | {RIGHT | (nil)}}}"]
+    node_0x55a536da6db0[shape="record", 
+        color="#6be871",        fillcolor="#caf2d4", 
+        style="rounded, filled", 
+        label="
+            {FICTIVE_NODE |
+            {{LEFT | (nil)} | {INDEX | 0x55a536da6db0} | {RIGHT | (nil)}}}"]
+    node_0x55a536da3ea0->node_0x55a536da3ed0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da3ea0->node_0x55a536da3f00[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da3f00->node_0x55a536da3f30[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da3f30->node_0x55a536da3f60[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da3f30->node_0x55a536da3f90[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da3f00->node_0x55a536da3fc0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da3fc0->node_0x55a536da3ff0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da3ff0->node_0x55a536da4020[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4020->node_0x55a536da4050[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4020->node_0x55a536da4080[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4080->node_0x55a536da40b0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4080->node_0x55a536da40e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da40e0->node_0x55a536da4110[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da40e0->node_0x55a536da4140[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da3ff0->node_0x55a536da4170[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4170->node_0x55a536da41a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4170->node_0x55a536da41d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da41d0->node_0x55a536da4200[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4200->node_0x55a536da4230[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4200->node_0x55a536da4260[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da41d0->node_0x55a536da4290[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4290->node_0x55a536da42c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da42c0->node_0x55a536da42f0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da42c0->node_0x55a536da4320[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4320->node_0x55a536da4350[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4320->node_0x55a536da4380[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4290->node_0x55a536da43b0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da43b0->node_0x55a536da43e0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da43e0->node_0x55a536da4410[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4410->node_0x55a536da4440[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4410->node_0x55a536da4470[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da43e0->node_0x55a536da44a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da44a0->node_0x55a536da44d0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da44d0->node_0x55a536da4500[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4500->node_0x55a536da4530[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4530->node_0x55a536da4560[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4530->node_0x55a536da4590[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4590->node_0x55a536da45c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4590->node_0x55a536da45f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da44a0->node_0x55a536da4620[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4620->node_0x55a536da4650[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4650->node_0x55a536da4680[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4680->node_0x55a536da46b0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4680->node_0x55a536da46e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4650->node_0x55a536da4710[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4710->node_0x55a536da4740[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4740->node_0x55a536da4770[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4770->node_0x55a536da47a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da47a0->node_0x55a536da47d0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da47a0->node_0x55a536da4800[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4770->node_0x55a536da4830[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4830->node_0x55a536da4860[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4860->node_0x55a536da4890[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4890->node_0x55a536da48c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4860->node_0x55a536da48f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da48f0->node_0x55a536da4920[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4920->node_0x55a536da4950[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4830->node_0x55a536da4980[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4980->node_0x55a536da49b0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da49b0->node_0x55a536da49e0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da49e0->node_0x55a536da4a10[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4a10->node_0x55a536da4a40[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4a10->node_0x55a536da4a70[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da49e0->node_0x55a536da4aa0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da49b0->node_0x55a536da4ad0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4ad0->node_0x55a536da4b00[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4b00->node_0x55a536da4b30[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4b30->node_0x55a536da4b60[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4ad0->node_0x55a536da4b90[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4b90->node_0x55a536da4bc0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4bc0->node_0x55a536da4bf0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4b90->node_0x55a536da4c20[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4c20->node_0x55a536da4c50[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4c50->node_0x55a536da4c80[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4c80->node_0x55a536da4cb0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4cb0->node_0x55a536da4ce0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4cb0->node_0x55a536da4d10[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4d10->node_0x55a536da4d40[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4d40->node_0x55a536da4d70[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4d70->node_0x55a536da4da0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4da0->node_0x55a536da4dd0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4da0->node_0x55a536da4e00[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4e00->node_0x55a536da4e30[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4e00->node_0x55a536da4e60[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4c20->node_0x55a536da4e90[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4e90->node_0x55a536da4ec0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4ec0->node_0x55a536da4ef0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4ef0->node_0x55a536da4f20[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4f20->node_0x55a536da4f50[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4f50->node_0x55a536da4f80[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4f80->node_0x55a536da4fb0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4f80->node_0x55a536da4fe0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4fe0->node_0x55a536da5010[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da4fe0->node_0x55a536da5040[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da4710->node_0x55a536da5070[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5070->node_0x55a536da50a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5070->node_0x55a536da50d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da50d0->node_0x55a536da5100[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5100->node_0x55a536da5130[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5100->node_0x55a536da5160[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5160->node_0x55a536da5190[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5190->node_0x55a536da51c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5190->node_0x55a536da51f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5160->node_0x55a536da5220[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5220->node_0x55a536da5250[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5250->node_0x55a536da5280[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5250->node_0x55a536da52b0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5220->node_0x55a536da52e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da50d0->node_0x55a536da5310[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5310->node_0x55a536da5340[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5340->node_0x55a536da5370[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5370->node_0x55a536da53a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5370->node_0x55a536da53d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5340->node_0x55a536da5400[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5400->node_0x55a536da5430[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5430->node_0x55a536da5460[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5460->node_0x55a536da5490[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5430->node_0x55a536da54c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da54c0->node_0x55a536da54f0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da54f0->node_0x55a536da5520[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5520->node_0x55a536da5550[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5550->node_0x55a536da5580[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5550->node_0x55a536da55b0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da55b0->node_0x55a536da55e0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da55b0->node_0x55a536da5610[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5610->node_0x55a536da5640[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5610->node_0x55a536da5670[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5400->node_0x55a536da56a0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da56a0->node_0x55a536da56d0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da56d0->node_0x55a536da5700[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5700->node_0x55a536da5730[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5700->node_0x55a536da5760[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da56d0->node_0x55a536da5790[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5790->node_0x55a536da57c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da57c0->node_0x55a536da57f0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da57f0->node_0x55a536da5820[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da57c0->node_0x55a536da5850[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5850->node_0x55a536da5880[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5880->node_0x55a536da58b0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5880->node_0x55a536da58e0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da58e0->node_0x55a536da5910[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5910->node_0x55a536da5940[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5850->node_0x55a536da5970[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5970->node_0x55a536da59a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da59a0->node_0x55a536da59d0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da59d0->node_0x55a536da5a00[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5a00->node_0x55a536da5a30[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5a30->node_0x55a536da5a60[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5a30->node_0x55a536da5a90[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5a90->node_0x55a536da5ac0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5a90->node_0x55a536da5af0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da59d0->node_0x55a536da5b20[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5b20->node_0x55a536da5b50[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5b20->node_0x55a536da5b80[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5970->node_0x55a536da5bb0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5bb0->node_0x55a536da5be0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5be0->node_0x55a536da5c10[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5c10->node_0x55a536da5c40[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5c40->node_0x55a536da5c70[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5c70->node_0x55a536da5ca0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5c70->node_0x55a536da5cd0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5cd0->node_0x55a536da5d00[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5cd0->node_0x55a536da5d30[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5c10->node_0x55a536da5d60[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5d60->node_0x55a536da5d90[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5d60->node_0x55a536da5dc0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5790->node_0x55a536da5df0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5df0->node_0x55a536da5e20[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5e20->node_0x55a536da5e50[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da43b0->node_0x55a536da5e80[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5e80->node_0x55a536da5eb0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5eb0->node_0x55a536da5ee0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da3fc0->node_0x55a536da5f10[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5f10->node_0x55a536da5f40[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5f40->node_0x55a536da5f70[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5f70->node_0x55a536da5fa0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5f70->node_0x55a536da5fd0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5fd0->node_0x55a536da6000[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5fd0->node_0x55a536da6030[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da5f40->node_0x55a536da6060[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6060->node_0x55a536da6090[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6090->node_0x55a536da60c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da60c0->node_0x55a536da60f0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da60c0->node_0x55a536da6120[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6090->node_0x55a536da6150[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6150->node_0x55a536da6180[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6180->node_0x55a536da61b0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da61b0->node_0x55a536da61e0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da61e0->node_0x55a536da6210[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da61e0->node_0x55a536da6240[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6150->node_0x55a536da6270[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6270->node_0x55a536da62a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da62a0->node_0x55a536da62d0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6270->node_0x55a536da6300[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6300->node_0x55a536da6330[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6330->node_0x55a536da6360[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6360->node_0x55a536da6390[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6390->node_0x55a536da63c0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6390->node_0x55a536da63f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da63f0->node_0x55a536da6420[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da63f0->node_0x55a536da6450[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6060->node_0x55a536da6480[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6480->node_0x55a536da64b0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da64b0->node_0x55a536da64e0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da5f10->node_0x55a536da6510[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6510->node_0x55a536da6540[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6540->node_0x55a536da6570[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6570->node_0x55a536da65a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6570->node_0x55a536da65d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6540->node_0x55a536da6600[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6600->node_0x55a536da6630[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6630->node_0x55a536da6660[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6660->node_0x55a536da6690[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6660->node_0x55a536da66c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6630->node_0x55a536da66f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da66f0->node_0x55a536da6720[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6720->node_0x55a536da6750[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6750->node_0x55a536da6780[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da66f0->node_0x55a536da67b0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da67b0->node_0x55a536da67e0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da67e0->node_0x55a536da6810[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6600->node_0x55a536da6840[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6840->node_0x55a536da6870[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6870->node_0x55a536da68a0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6510->node_0x55a536da68d0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da68d0->node_0x55a536da6900[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da68d0->node_0x55a536da6930[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6930->node_0x55a536da6960[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6960->node_0x55a536da6990[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6960->node_0x55a536da69c0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6930->node_0x55a536da69f0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da69f0->node_0x55a536da6a20[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da69f0->node_0x55a536da6a50[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6a50->node_0x55a536da6a80[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6a80->node_0x55a536da6ab0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6a80->node_0x55a536da6ae0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6a50->node_0x55a536da6b10[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6b10->node_0x55a536da6b40[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6b10->node_0x55a536da6b70[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6b70->node_0x55a536da6ba0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6ba0->node_0x55a536da6bd0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6ba0->node_0x55a536da6c00[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6b70->node_0x55a536da6c30[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6c30->node_0x55a536da6c60[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6c60->node_0x55a536da6c90[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6c90->node_0x55a536da6cc0[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6c90->node_0x55a536da6cf0[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6cf0->node_0x55a536da6d20[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6cf0->node_0x55a536da6d50[color="#a66be8", fontcolor="#e87b6b"];    node_0x55a536da6d50->node_0x55a536da6d80[color="#a66be8", fontcolor="#6be871"];    node_0x55a536da6d50->node_0x55a536da6db0[color="#a66be8", fontcolor="#e87b6b"];}

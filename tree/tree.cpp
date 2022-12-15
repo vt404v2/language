@@ -12,8 +12,8 @@ size_t nodeCtor(Node *node)
 {
     CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
 
-    node->left = nullptr;
-    node->right = nullptr;
+    LEFT_NODE = nullptr;
+    RIGHT_NODE = nullptr;
 
     return TREE_NO_ERRORS;
 }
@@ -30,10 +30,10 @@ size_t nodeDtor(Node *node)
 {
     CHECK_NULLPTR_ERROR(node, NODE_IS_NULLPTR)
 
-    if (node->left)
-        nodeDtor(node->left);
-    if (node->right)
-        nodeDtor(node->right);
+    if (LEFT_NODE)
+        nodeDtor(LEFT_NODE);
+    if (RIGHT_NODE)
+        nodeDtor(RIGHT_NODE);
 
     free(node);
     return TREE_NO_ERRORS;
@@ -52,10 +52,10 @@ Node *createNewNode(NodeType node_type,
                     Node *right_node)
 {
     Node *node = (Node *) calloc(1, sizeof(node[0]));
-    node->left = left_node;
-    node->right = right_node;
-    node->node_type = node_type;
-    node->value = node_value;
+    LEFT_NODE = left_node;
+    RIGHT_NODE = right_node;
+    NODE_TYPE = node_type;
+    VALUE = node_value;
     return node;
 }
 
@@ -96,6 +96,10 @@ void printVariables(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
                     FILE *fp)
 {
+    assert(node != nullptr);
+    assert(name_table != nullptr);
+    assert(fp != nullptr);
+
     size_t var_table[BUFFER_SIZE] = {};
     size_t func_ids_table[BUFFER_SIZE] = {};
     size_t length = 0;
@@ -117,6 +121,11 @@ void fixVariables(Node *node,
                   size_t (*func_ids_table)[BUFFER_SIZE],
                   size_t *length)
 {
+    assert(node != nullptr);
+    assert(var_table != nullptr);
+    assert(func_ids_table != nullptr);
+    assert(length != nullptr);
+
     if (NODE_TYPE == VAR_DEC || NODE_TYPE == VARIABLE || NODE_TYPE == LOCAL_VARIABLE)
     {
         for (size_t i = 0; i < *length; i++)
@@ -140,6 +149,12 @@ void getVariables(Node *node,
                   size_t *length,
                   size_t *func_id)
 {
+    assert(node != nullptr);
+    assert(var_table != nullptr);
+    assert(func_ids_table != nullptr);
+    assert(length != nullptr);
+    assert(func_id != nullptr);
+
     if (NODE_TYPE == DEF)
     {
         *func_id = VALUE.def_value;
@@ -173,6 +188,10 @@ void printFunctions(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
                     FILE *fp)
 {
+    assert(node != nullptr);
+    assert(name_table != nullptr);
+    assert(fp != nullptr);
+
     size_t func_table[BUFFER_SIZE] = {};
     size_t length = 0;
     getFunctions(node, &func_table, &length);
@@ -188,6 +207,10 @@ void fixFunctions(Node *node,
                   size_t (*func_table)[BUFFER_SIZE],
                   size_t *length)
 {
+    assert(node != nullptr);
+    assert(func_table != nullptr);
+    assert(length != nullptr);
+
     if (NODE_TYPE == DEF || NODE_TYPE == CALL)
     {
         for (size_t i = 0; i < *length; i++)
@@ -209,6 +232,10 @@ void getFunctions(Node *node,
                   size_t (*func_table)[BUFFER_SIZE],
                   size_t *length)
 {
+    assert(node != nullptr);
+    assert(func_table != nullptr);
+    assert(length != nullptr);
+
     if (NODE_TYPE == DEF)
     {
         (*func_table)[*length] = VALUE.def_value;
@@ -282,6 +309,9 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
 
 size_t readTree(Tree *tree, const char *filename)
 {
+    assert(tree != nullptr);
+    assert(filename != nullptr);
+
     FILE *fp = fopen(filename, "r");
     if (fp == nullptr)
         return CANT_OPEN_TREE_FILE;
@@ -300,6 +330,10 @@ size_t readTree(Tree *tree, const char *filename)
 
 void parseVariables(char **readPtr, Tree *tree)
 {
+    assert(readPtr != nullptr);
+    assert(*readPtr != nullptr);
+    assert(tree != nullptr);
+
     size_t num_variables = 0;
     int length = 0;
     sscanf(*readPtr, "%zu%n", &num_variables, &length);
@@ -315,6 +349,10 @@ void parseVariables(char **readPtr, Tree *tree)
 
 void parseFunctions(char **readPtr, Tree *tree)
 {
+    assert(readPtr != nullptr);
+    assert(*readPtr != nullptr);
+    assert(tree != nullptr);
+
     size_t num_functions = 0;
     int length = 0;
     sscanf(*readPtr, "%zu%n", &num_functions, &length);
@@ -330,6 +368,9 @@ void parseFunctions(char **readPtr, Tree *tree)
 
 Node *parseNode(char **readPtr)
 {
+    assert(readPtr != nullptr);
+    assert(*readPtr != nullptr);
+
     skipSpaces(readPtr);
 
     if (**readPtr == '{')
@@ -350,6 +391,9 @@ Node *parseNode(char **readPtr)
 
 Node *getValueNode(char **readPtr)
 {
+    assert(readPtr != nullptr);
+    assert(*readPtr != nullptr);
+
     int node_type = 0;
     int length = 0;
     size_t value = 0;

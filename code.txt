@@ -1,7 +1,8 @@
 var d = 0
 def solve_square(solve_square_a, solve_square_b, solve_square_c)
 {
-    var solve_square_hh
+    var solve_square_x = 42
+    solve_square_x = 1000 - 7
     if (solve_square_a == 0)
     {
         solve_linear(solve_square_b, solve_square_c)    }
@@ -75,7 +76,7 @@ def solve_const_equal_zero(solve_const_equal_zero_g)
     return 0
 }
 
-var x = 0
+var solve_square_x = 0
 var y = 2
 var z = 9
-solve_square(x, y, z)
+solve_square(solve_square_x, y, z)

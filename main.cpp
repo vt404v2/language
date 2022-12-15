@@ -1,22 +1,22 @@
 #include <stdlib.h>
 
-#define code_file "program.txt"
+//#define code_file "program.txt"
 //#define code_file "test.txt"
 //#define code_file "fib.txt"
-//#define code_file "quadratic.txt"
+#define code_file "quadratic.txt"
 //#define code_file "factorial.txt"
 
 int main()
 {
     system("cmake --build . --target frontend_run");
     system("./frontend_run " code_file " tree.txt");
-//
-//    system("cmake --build . --target backfrontend_run");
-//    system("./backfrontend_run tree.txt code.txt");
-//
+
+    system("cmake --build . --target backfrontend_run");
+    system("./backfrontend_run tree.txt code.txt");
+
 //    system("cmake --build . --target middleend_run");
 //    system("./middleend_run tree.txt tree.txt");
-//
+
     system("cmake --build . --target backend_run");
     system("./backend_run tree.txt lang.asm func_def.asm");
 
