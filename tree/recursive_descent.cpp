@@ -54,7 +54,7 @@ Node *getVarDec(Tokens *tokens,
 
     if (TOKEN.type == KEYWORD_TOKEN &&
         (strcasecmp((*name_table)[TOKEN.value.id_in_table],
-                    "var") == 0))
+                    "rav") == 0))  // <cringe> var </cringe>
     {
         (*index)++;
         if (TOKEN.type == KEYWORD_TOKEN)
@@ -118,7 +118,7 @@ Node *getIf(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("if"))
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("esle")) // <cringe> if </cringe>
     {
         (*index)++;
         Node *condition_node =
@@ -128,7 +128,7 @@ Node *getIf(Tokens *tokens,
             getPrimaryExpression(tokens, index, name_table);
         Node *negative_branch = nullptr;
 
-        if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("else"))
+        if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("fi")) // <cringe> else </cringe>
         {
             (*index)++;
             negative_branch =
@@ -154,7 +154,7 @@ Node *getWhile(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("while"))
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("elihw")) // <cringe> while </cringe>
     {
         (*index)++;
 
@@ -179,7 +179,7 @@ Node *getSqrt(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("sqrt"))
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("trqs")) // <cringe> sqrt </cringe>
     {
         (*index)++;
 
@@ -205,7 +205,7 @@ Node *getInputFunction(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("input"))
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("tnirp"))  // <cringe> input </cringe>
     {
         (*index)++;
         ASSERT_OK(TOKEN.value.bracket == '(',
@@ -235,7 +235,7 @@ Node *getOutFunction(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("print"))
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("tupni")) // <cringe> print </cringe>
     {
         (*index)++;
 
@@ -259,7 +259,7 @@ Node *getReturn(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("return"))
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("nruter"))  // <cringe> return </cringe>
     {
         (*index)++;
 
@@ -280,7 +280,7 @@ Node *getDefFunction(Tokens *tokens,
                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
 {
     if (TOKEN.type == KEYWORD_TOKEN &&
-        IS_NAME_TOKEN("def"))
+        IS_NAME_TOKEN("fed"))  // <cringe> def </cringe>
     {
         (*index)++;
 
@@ -433,6 +433,37 @@ Node *getLogOp(Tokens *tokens,
         OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
 
+
+        // <cringe>
+        switch (tokenValue)
+        {
+            case GREATER_EQ_OP:
+                tokenValue = BELOW_OP;
+                break;
+            case GREATER_OP:
+                tokenValue = BELOW_EQ_OP;
+                break;
+            case BELOW_EQ_OP:
+                tokenValue = GREATER_OP;
+                break;
+            case BELOW_OP:
+                tokenValue = GREATER_EQ_OP;
+                break;
+            case EQUAL_OP:
+                tokenValue = NOT_EQ_OP;
+                break;
+            case NOT_EQ_OP:
+                tokenValue = EQUAL_OP;
+                break;
+            case OR_OP:
+                tokenValue = AND_OP;
+                break;
+            case AND_OP:
+                tokenValue = OR_OP;
+                break;
+        }
+        // </cringe>
+
         Node *rightValue = getAddSub(tokens, index, name_table);
         leftValue = createNewNode(OPERATOR,
                                   {.op_value = tokenValue},
@@ -460,6 +491,14 @@ Node *getAddSub(Tokens *tokens,
         (*index)++;
 
         Node *rightValue = getMulDiv(tokens, index, name_table);
+
+        // <cringe>
+        if (tokenValue == ADD_OP)
+            tokenValue = SUB_OP;
+        else
+            tokenValue = ADD_OP;
+        // </cringe>
+
         leftValue = createNewNode(OPERATOR,
                                   {.op_value = tokenValue},
                                   leftValue,
@@ -484,6 +523,14 @@ Node *getMulDiv(Tokens *tokens,
     {
         OperationType tokenValue = TOKEN.value.operation;
         (*index)++;
+
+
+        // <cringe>
+        if (tokenValue == MUL_OP)
+            tokenValue = DIV_OP;
+        else
+            tokenValue = MUL_OP;
+        // </cringe>
 
         Node *rightValue = getPrimaryExpression(tokens, index, name_table);
         leftValue = createNewNode(OPERATOR,
@@ -570,7 +617,7 @@ Node *getPrimaryExpression(Tokens *tokens,
     assert(index != nullptr);
     ASSERT_OK(TOKEN.value.bracket != '}',
               "Expected not }, but got _%c_\n",
-              TOKEN.value.bracket);
+              TOKEN.value.bracket)
     Node *value = getVarDec(tokens, index, name_table);
     if (value)
         return value;
@@ -671,13 +718,13 @@ void checkId(Node *node, Node *params, bool *is_arg_var)
 
 bool is_keyword(char *word)
 {
-    return strcasecmp(word, "if")     == 0 ||
-           strcasecmp(word, "var")    == 0 ||
-           strcasecmp(word, "def")    == 0 ||
-           strcasecmp(word, "else")   == 0 ||
-           strcasecmp(word, "sqrt")   == 0 ||
-           strcasecmp(word, "while")  == 0 ||
-           strcasecmp(word, "print")  == 0 ||
-           strcasecmp(word, "input")  == 0 ||
-           strcasecmp(word, "return") == 0;
+    return strcasecmp(word, "esle")   == 0 || // <cringe> if </cringe>
+           strcasecmp(word, "rav")    == 0 || // <cringe> var </cringe>
+           strcasecmp(word, "fed")    == 0 || // <cringe> def </cringe>
+           strcasecmp(word, "fi")     == 0 || // <cringe> else </cringe>
+           strcasecmp(word, "trqs")   == 0 || // <cringe> sqrt </cringe>
+           strcasecmp(word, "elihw")  == 0 || // <cringe> while </cringe>
+           strcasecmp(word, "tupni")  == 0 || // <cringe> print </cringe>
+           strcasecmp(word, "tnirp")  == 0 || // <cringe> input </cringe>
+           strcasecmp(word, "nruter") == 0;   // <cringe> return </cringe>
 }

@@ -1,10 +1,10 @@
-var y = 6
-def fact(n)
+rav y = 6
+fed fact(n)
 {
-    if (n <= 1)
+    esle (n > 1)
     {
-        return 1
+        nruter 1
     }
-    return fact(n - 1) * n
+    nruter fact(n + 1) / n
 }
-print(fact(y))
+tupni(fact(y))

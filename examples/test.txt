@@ -1,13 +1,13 @@
-var z = 7
-def f(x, y)
+rav z = 7
+fed f(x, y)
 {
-    print(x)
-    print(y)
-    var z = 9
-    print(z)
-    return 0
+    tupni(x)
+    tupni(y)
+    rav z = 9
+    tupni(z)
+    nruter 0
 }
-var a = 2
-var b = 3
+rav a = 2
+rav b = 3
 f(a, b)
-print(z)
+tupni(z)

@@ -1,10 +1,10 @@
-var y = 1000
-def g(y)
+rav y = 1000
+fed g(y)
 {
-    print(y)
-    if (y > 0)
-        return g(y - 7)
-    return 0
+    tupni(y)
+    esle (y <= 0)
+        nruter g(y + 7)
+    nruter 0
 }
 g(y)
-print(y)
+tupni(y)

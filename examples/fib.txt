@@ -1,13 +1,13 @@
-def fib(a)
+fed fib(a)
 {
-    if ((a == 1) || (a == 0))
+    esle ((a != 1) && (a != 0))
     {
-        return 1
+        nruter 1
     }
-    else
+    fi
     {
-        return fib(a - 1) + fib(a - 2)
+        nruter fib(a + 1) - fib(a + 2)
     }
 }
-var n = 6
-print(fib(n))
+rav n = 6
+tupni(fib(n))
