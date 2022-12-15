@@ -126,7 +126,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
-            printNode(tree, RIGHT_NODE, fp, num_spaces + 4);
+            printNode(tree, RIGHT_NODE, fp, num_spaces + NUM_SPACES);
             printSpaces(num_spaces, fp);
             fprintf(fp, "\n}");
             break;
@@ -139,7 +139,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
-            printNode(tree, RIGHT_NODE->left, fp, num_spaces + 4);
+            printNode(tree, RIGHT_NODE->left, fp, num_spaces + NUM_SPACES);
             fprintf(fp, "\n");
             printSpaces(num_spaces, fp);
             fprintf(fp, "}\n");
@@ -150,7 +150,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 fprintf(fp, "fi\n"); // <cringe> else </cringe>
                 printSpaces(num_spaces, fp);
                 fprintf(fp, "{\n");
-                printNode(tree, RIGHT_NODE->right, fp, num_spaces + 4);
+                printNode(tree, RIGHT_NODE->right, fp, num_spaces + NUM_SPACES);
                 fprintf(fp, "\n");
                 printSpaces(num_spaces, fp);
                 fprintf(fp, "}\n");
@@ -170,7 +170,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
-            printNode(tree, RIGHT_NODE, fp, num_spaces + 4);
+            printNode(tree, RIGHT_NODE, fp, num_spaces + NUM_SPACES);
             printSpaces(num_spaces, fp);
             fprintf(fp, "}\n");
             break;

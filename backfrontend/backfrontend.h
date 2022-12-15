@@ -3,6 +3,8 @@
 
 #include "../tree/tree.h"
 
+const int NUM_SPACES = 4;
+
 void convertTreeToCode(const char *tree_filename, const char *code_filename);
 
 void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces);

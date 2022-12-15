@@ -486,12 +486,12 @@ void assembleCall(Tree *tree,
     CHECK_NULLPTR_ARGS
 
     size_t num_args = 0;
-    size_t func_id = -1;
+    size_t func_id = POISONED_SIZE_T;
     bool found = false;
     searchWhereCall(tree->root, node, &found, &func_id);
 
     size_t last_num_args = 0;
-    if (func_id != (size_t) -1)
+    if (func_id != (size_t) POISONED_SIZE_T)
         last_num_args = tree->func_num_args[func_id];
 
     pushArgs(tree,
@@ -581,7 +581,7 @@ void assembleReturn(Tree *tree,
     assemble_node(tree, LEFT_NODE, func_fp, func_fp);
 
     bool found = false;
-    size_t func_id = -1;
+    size_t func_id = POISONED_SIZE_T;
     searchWhereCall(tree->root, node, &found, &func_id);
 
     fprintf(func_fp, "PUSH rax\n"
