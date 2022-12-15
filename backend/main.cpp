@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     else
         fprintf(stderr, "got incorrect number of arguments");
 
+    treeClearGraphLogFile();
     treeSetLogFile();
     convertTreeToAsm(tree_filename, main_asm_filename, func_asm_filename);
     treeCloseLogFile();

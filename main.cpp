@@ -19,17 +19,18 @@ int main(int argc, char *argv[])
                 "executable_files/frontend_run %s "
                 "internal/standard_tree.txt",
                 code_filename);
+        system(command);
     }
     else
     {
         system("executable_files/frontend_run " code_file " internal/standard_tree.txt");
     }
 
-    system("cmake --build . --target backfrontend_run");
-    system("executable_files/backfrontend_run internal/standard_tree.txt examples/code.txt");
-
     system("cmake --build . --target middleend_run");
     system("executable_files/middleend_run internal/standard_tree.txt internal/standard_tree.txt");
+
+    system("cmake --build . --target backfrontend_run");
+    system("executable_files/backfrontend_run internal/standard_tree.txt examples/code.txt");
 
     system("cmake --build . --target backend_run");
     system("executable_files/backend_run internal/standard_tree.txt internal/lang.asm internal/func_def.asm");

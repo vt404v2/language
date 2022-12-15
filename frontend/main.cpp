@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     else
         fprintf(stderr, "got incorrect number of arguments");
 
+    treeClearGraphLogFile();
     treeSetLogFile();
     convertProgramToTree(program_filename, standard_tree_filename);
     treeCloseLogFile();
