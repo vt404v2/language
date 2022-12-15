@@ -1,9 +1,10 @@
 #include "middleend.h"
 
-void simplifyTree(const char *input_tree_filename, const char *output_tree_filename)
+void simplifyTree(const char *input_tree_filename,
+                  const char *output_standard_tree_filename)
 {
     assert(input_tree_filename != nullptr);
-    assert(output_tree_filename != nullptr);
+    assert(output_standard_tree_filename != nullptr);
 
     Tree tree = {};
     treeCtor(&tree);
@@ -12,13 +13,33 @@ void simplifyTree(const char *input_tree_filename, const char *output_tree_filen
 
     simplifyNode(tree.root);
 
-    FILE *output_fp = fopen(output_tree_filename, "w");
+    FILE *output_standard_file = fopen(output_standard_tree_filename, "w");
 
-    printVariables(tree.root, &tree.var_name_table, output_fp);
-    printFunctions(tree.root, &tree.func_name_table, output_fp);
-    nodePreOrderPrint(tree.root, output_fp, 0);
+    size_t num_vars = 0;
+    while (strcasecmp(tree.var_name_table[num_vars], "") != 0)
+    {
+        num_vars++;
+    }
+    fprintf(output_standard_file, "%zu\n", num_vars);
+    for (size_t i = 0; i < num_vars; i++)
+    {
+        fprintf(output_standard_file, "%s\n", tree.var_name_table[i]);
+    }
 
-    fclose(output_fp);
+    size_t num_func = 0;
+    while (strcasecmp(tree.func_name_table[num_func], "") != 0)
+    {
+        num_func++;
+    }
+    fprintf(output_standard_file, "%zu\n", num_func);
+    for (size_t i = 0; i < num_func; i++)
+    {
+        fprintf(output_standard_file, "%s\n", tree.func_name_table[i]);
+    }
+
+    nodePreOrderPrint(tree.root, output_standard_file, 0);
+
+    fclose(output_standard_file);
 
     treeDtor(&tree);
 }

@@ -3,7 +3,8 @@
 
 #include "../tree/tree.h"
 
-void simplifyTree(const char *input_tree_filename, const char *output_tree_filename);
+void simplifyTree(const char *input_tree_filename,
+                  const char *output_standard_tree_filename);
 
 void simplifyNode(Node *node);
 

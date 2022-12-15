@@ -82,37 +82,56 @@ Node *createNode(NodeType node_type,
 
 size_t treeSaveToFile(Tree *tree,
                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                      FILE *fp)
+                      FILE *standard_file,
+                      FILE *backend_file)
 {
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
 
-    printVariables(tree->root, name_table, fp);
-    printFunctions(tree->root, name_table, fp);
+    printVariables(tree->root, name_table, standard_file, backend_file);
+    printFunctions(tree->root, name_table, standard_file, backend_file);
 
-    return nodePreOrderPrint(tree->root, fp, 0);
+    size_t error = NO_ERRORS;
+    error = nodePreOrderPrint(tree->root, backend_file, 0);
+    error = nodePreOrderPrint(tree->root, standard_file, 0);
+    return error;
 }
 
 void printVariables(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *fp)
+                    FILE *standard_file,
+                    FILE *backend_file)
 {
     assert(node != nullptr);
     assert(name_table != nullptr);
-    assert(fp != nullptr);
+    assert(standard_file != nullptr);
 
     size_t var_table[BUFFER_SIZE] = {};
     size_t func_ids_table[BUFFER_SIZE] = {};
     size_t length = 0;
     size_t func_id = -1;
+
     getVariables(node, &var_table, &func_ids_table, &length, &func_id);
-    fprintf(fp, "%zu\n", length);
+
+    fprintf(standard_file, "%zu\n", length);
+    if (backend_file)
+        fprintf(backend_file, "%zu\n", length);
+
     for (size_t i = 0; i < length; i++)
     {
-        if (func_ids_table[i] != size_t(-1))
-            fprintf(fp, "%s_%s\n", (*name_table)[func_ids_table[i]], (*name_table)[var_table[i]]);
-        else
-            fprintf(fp, "%s\n", (*name_table)[var_table[i]]);
+        fprintf(standard_file, "%s\n", (*name_table)[var_table[i]]);
+
+        if (backend_file)
+        {
+            if (func_ids_table[i] != size_t(-1))
+                fprintf(backend_file, "%s_%s\n", (*name_table)[func_ids_table[i]], (*name_table)[var_table[i]]);
+            else
+                fprintf(backend_file, "%s\n", (*name_table)[var_table[i]]);
+        }
+
     }
+
+    // change values in nodes with variables,
+    // because their indexes were changed
     fixVariables(node, &var_table, &func_ids_table, &length);
 }
 
@@ -186,20 +205,30 @@ void getVariables(Node *node,
 
 void printFunctions(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *fp)
+                    FILE *standard_file,
+                    FILE *backend_file)
 {
     assert(node != nullptr);
     assert(name_table != nullptr);
-    assert(fp != nullptr);
+    assert(standard_file != nullptr);
 
     size_t func_table[BUFFER_SIZE] = {};
     size_t length = 0;
+
     getFunctions(node, &func_table, &length);
-    fprintf(fp, "%zu\n", length);
+
+    fprintf(standard_file, "%zu\n", length);
+    if (backend_file)
+        fprintf(backend_file, "%zu\n", length);
     for (size_t i = 0; i < length; i++)
     {
-        fprintf(fp, "%s\n", (*name_table)[func_table[i]]);
+        fprintf(standard_file, "%s\n", (*name_table)[func_table[i]]);
+        if (backend_file)
+            fprintf(backend_file, "%s\n", (*name_table)[func_table[i]]);
     }
+
+    // change values in nodes with functions,
+    // because their indexes were changed
     fixFunctions(node, &func_table, &length);
 }
 

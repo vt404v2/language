@@ -1,10 +1,12 @@
 #include "frontend.h"
 
 void convertProgramToTree(const char *filename,
-                          const char *tree_filename)
+                          const char *standard_tree_filename,
+                          const char *backend_tree_filename)
 {
     assert(filename != nullptr);
-    assert(tree_filename != nullptr);
+    assert(standard_tree_filename != nullptr);
+    assert(backend_tree_filename != nullptr);
 
     char name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
 
@@ -47,9 +49,11 @@ void convertProgramToTree(const char *filename,
     tree.root = readRecursiveDescentNode(&tokens, &name_table);
     treeDump(&tree);
 
-    FILE *tree_file = fopen(tree_filename, "w");
-    treeSaveToFile(&tree, &name_table, tree_file);
-    fclose(tree_file);
+    FILE *standard_tree_file = fopen(standard_tree_filename, "w");
+    FILE *backend_tree_file = fopen(backend_tree_filename, "w");
+    treeSaveToFile(&tree, &name_table, standard_tree_file, backend_tree_file);
+    fclose(standard_tree_file);
+    fclose(backend_tree_file);
 
     treeDtor(&tree);
 

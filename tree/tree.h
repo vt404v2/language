@@ -168,16 +168,18 @@ size_t nodeDtor(Node *node);
  * @brief saves tree to file
  *
  * @param tree tree to save
- * @param fp file for saving
+ * @param standard_file file for saving
  * @return error code
  */
 size_t treeSaveToFile(Tree *tree,
                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                      FILE *fp);
+                      FILE *standard_file,
+                      FILE *backend_file);
 
 void printVariables(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *fp);
+                    FILE *standard_file,
+                    FILE *backend_file);
 
 void fixVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
@@ -192,7 +194,8 @@ void getVariables(Node *node,
 
 void printFunctions(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *fp);
+                    FILE *standard_file,
+                    FILE *backend_file);
 
 void fixFunctions(Node *node,
                   size_t (*func_table)[BUFFER_SIZE],

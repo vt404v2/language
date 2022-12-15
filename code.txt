@@ -1,82 +1,98 @@
 var d = 0
-def solve_square(solve_square_a, solve_square_b, solve_square_c)
+def solve_square(a, b, c)
 {
-    var solve_square_x = 42
-    solve_square_x = 1000 - 7
-    if (solve_square_a == 0)
+    var x = 42
+    x = 1000 - 7
+    if (a == 0)
     {
-        solve_linear(solve_square_b, solve_square_c)    }
+        solve_linear(b, c)
+    }
     else
     {
-        if (solve_square_b == 0)
+        if (b == 0)
         {
-            if (solve_square_c == 0)
+            if (c == 0)
             {
                 print(1)
-                print(0)            }
+                print(0)
+            }
             else
             {
-                if (solve_square_a * solve_square_c > 0)
+                if (a * c > 0)
                 {
-                    print(0)                }
+                    print(0)
+                }
                 else
                 {
                     print(2)
-                    print(-1 * sqrt(-1 * solve_square_c / solve_square_a))
-                    print(sqrt(-1 * solve_square_c / solve_square_a))                }
+                    print(-1 * sqrt(-1 * c / a))
+                    print(sqrt(-1 * c / a))
+                }
+
             }
+
         }
         else
         {
-            var d = solve_square_b * solve_square_b - 4 * solve_square_a * solve_square_c
+            var d = b * b - 4 * a * c
             if (d == 0)
             {
                 print(1)
-                print(-1 * solve_square_b / 2 * solve_square_a)            }
+                print(-1 * b / 2 * a)
+            }
             else
             {
                 if (d > 0)
                 {
                     print(2)
                     d = sqrt(d)
-                    print(-1 * solve_square_b + d / 2 * solve_square_a)
-                    print(-1 * solve_square_b - d / 2 * solve_square_a)                }
+                    print(-1 * b + d / 2 * a)
+                    print(-1 * b - d / 2 * a)
+                }
                 else
                 {
-                    print(0)                }
+                    print(0)
+                }
+
             }
+
         }
+
     }
 
     return 0
 }
 
-def solve_linear(solve_linear_e, solve_linear_f)
+def solve_linear(e, f)
 {
-    if (solve_linear_e == 0)
+    if (e == 0)
     {
-        solve_const_equal_zero(solve_linear_f)    }
+        solve_const_equal_zero(f)
+    }
     else
     {
         print(1)
-        print(-1 * solve_linear_f / solve_linear_e)    }
+        print(-1 * f / e)
+    }
 
     return 0
 }
 
-def solve_const_equal_zero(solve_const_equal_zero_g)
+def solve_const_equal_zero(g)
 {
-    if (solve_const_equal_zero_g == 0)
+    if (g == 0)
     {
-        print(993)    }
+        print(993)
+    }
     else
     {
-        print(0)    }
+        print(0)
+    }
 
     return 0
 }
 
-var solve_square_x = 0
+var x = 0
 var y = 2
 var z = 9
-solve_square(solve_square_x, y, z)
+solve_square(x, y, z)
