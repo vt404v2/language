@@ -30,7 +30,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             {
                 printSpaces(num_spaces, fp);
                 fprintf(fp,
-                        "rav ");
+                        "rav "); // <cringe> var </cringe>
                 printNode(tree, RIGHT_NODE->left, fp, 0);
                 fprintf(fp, "\n");
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces);
@@ -48,7 +48,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         case VAR_DEC:
             fprintf(fp,
                     "rav %s",
-                    tree->var_name_table[VALUE.dec_value]);
+                    tree->var_name_table[VALUE.dec_value]); // <cringe> var </cringe>
             break;
         case OPERATOR:
         {
@@ -69,31 +69,31 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         break;                              \
     }
 
-                BACKPRINT_OPER(ADD_OP, -)
-                BACKPRINT_OPER(SUB_OP, +)
-                BACKPRINT_OPER(MUL_OP, /)
-                BACKPRINT_OPER(DIV_OP, *)
-                BACKPRINT_OPER(GREATER_OP, <=)
-                BACKPRINT_OPER(BELOW_OP, >=)
-                BACKPRINT_OPER(GREATER_EQ_OP, <)
-                BACKPRINT_OPER(BELOW_EQ_OP, >)
-                BACKPRINT_OPER(EQUAL_OP, !=)
-                BACKPRINT_OPER(NOT_EQ_OP, ==)
-                BACKPRINT_OPER(AND_OP, ||)
-                BACKPRINT_OPER(OR_OP, &&)
+                BACKPRINT_OPER(ADD_OP, -) // <cringe> + </cringe>
+                BACKPRINT_OPER(SUB_OP, +) // <cringe> - </cringe>
+                BACKPRINT_OPER(MUL_OP, /) // <cringe> * </cringe>
+                BACKPRINT_OPER(DIV_OP, *) // <cringe> / </cringe>
+                BACKPRINT_OPER(GREATER_OP, <=) // <cringe> > </cringe>
+                BACKPRINT_OPER(BELOW_OP, >=) // <cringe> < </cringe>
+                BACKPRINT_OPER(GREATER_EQ_OP, <) // <cringe> >= </cringe>
+                BACKPRINT_OPER(BELOW_EQ_OP, >) // <cringe> <= </cringe>
+                BACKPRINT_OPER(EQUAL_OP, !=) // <cringe> == </cringe>
+                BACKPRINT_OPER(NOT_EQ_OP, ==) // <cringe> != </cringe>
+                BACKPRINT_OPER(AND_OP, ||) // <cringe> && </cringe>
+                BACKPRINT_OPER(OR_OP, &&) // <cringe> || </cringe>
 
 #undef BACKPRINT_OPER
 
                 case SQRT_OP:
-                    fprintf(fp, "trqs(");
+                    fprintf(fp, "trqs(");  // <cringe> sqrt( </cringe>
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
                 case INPUT_OP:
-                    fprintf(fp, "tnirp()");
+                    fprintf(fp, "tnirp()"); // <cringe> input() </cringe>
                     break;
                 case OUTPUT_OP:
-                    fprintf(fp, "tupni(");
+                    fprintf(fp, "tupni("); // <cringe> print( </cringe>
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
@@ -120,7 +120,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             break;
         case WHILE:
         {
-            fprintf(fp, "elihw (");
+            fprintf(fp, "elihw ("); // <cringe> while </cringe>
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, ")\n");
 
@@ -133,7 +133,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case IF:
         {
-            fprintf(fp, "esle (");
+            fprintf(fp, "esle ("); // <cringe> if </cringe>
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, ")\n");
 
@@ -147,7 +147,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             printSpaces(num_spaces, fp);
             if (RIGHT_NODE->right)
             {
-                fprintf(fp, "fi\n");
+                fprintf(fp, "fi\n"); // <cringe> else </cringe>
                 printSpaces(num_spaces, fp);
                 fprintf(fp, "{\n");
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces + 4);
@@ -163,7 +163,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         case DEF:
         {
             fprintf(fp,
-                    "fed %s(",
+                    "fed %s(",  // <cringe> def </cringe>
                     tree->func_name_table[VALUE.def_value]);
             printArgs(tree, LEFT_NODE, fp);
             fprintf(fp, ")\n");
@@ -186,7 +186,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case RETURN:
         {
-            fprintf(fp, "nruter ");
+            fprintf(fp, "nruter "); // <cringe> return </cringe>
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, "\n");
             break;
