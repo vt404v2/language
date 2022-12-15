@@ -107,7 +107,7 @@ struct Node
 struct Tree
 {
     Node *root = nullptr;
-    size_t arg_vars_positions[BUFFER_SIZE] = {};
+//    size_t arg_vars_positions[BUFFER_SIZE] = {};
     size_t func_num_args[BUFFER_SIZE] = {};
     char var_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
     char func_name_table[BUFFER_SIZE][BUFFER_SIZE] = {};
@@ -168,18 +168,16 @@ size_t nodeDtor(Node *node);
  * @brief saves tree to file
  *
  * @param tree tree to save
- * @param standard_file file for saving
+ * @param fp file for saving
  * @return error code
  */
 size_t treeSaveToFile(Tree *tree,
                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                      FILE *standard_file,
-                      FILE *backend_file);
+                      FILE *fp);
 
 void printVariables(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *standard_file,
-                    FILE *backend_file);
+                    FILE *fp);
 
 void fixVariables(Node *node,
                   size_t (*var_table)[BUFFER_SIZE],
@@ -194,8 +192,7 @@ void getVariables(Node *node,
 
 void printFunctions(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *standard_file,
-                    FILE *backend_file);
+                    FILE *fp);
 
 void fixFunctions(Node *node,
                   size_t (*func_table)[BUFFER_SIZE],

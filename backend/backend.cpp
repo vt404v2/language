@@ -33,7 +33,10 @@ void convertTreeToAsm(const char *tree_filename,
     system(command);
 }
 
-void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assemble(Tree *tree,
+              Node *node,
+              FILE *main_fp,
+              FILE *func_fp)
 {
     assert(tree != nullptr);
     assert(node != nullptr);
@@ -42,106 +45,10 @@ void assemble(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
 
     fprintf(main_fp, "PUSH 666\n"
                      "POP rax\n");
-    // set function args to arg_variable type
-    fixArgVars(tree, node);
-    // set local args to local_variable type
 
-    treeDump(tree);
-//    for (size_t i = 0; i < 16; i++)
-//    {
-//        auto d= tree->arg_vars_positions;
-//        fprintf(stderr, "table[%zu] = %zu\n", i, tree->arg_vars_positions[i]);
-//    }
     assemble_node(tree, node, main_fp, func_fp);
 
     fprintf(main_fp, "HLT");
-}
-
-void fixArgVars(Tree *tree, Node *node)
-{
-    assert(tree != nullptr);
-    assert(node != nullptr);
-
-    size_t index = 0;
-    if (NODE_TYPE == DEF)
-    {
-        registerArgs(tree, RIGHT_NODE, LEFT_NODE, &index);
-        registerLocalVars(tree, RIGHT_NODE, RIGHT_NODE, &index);
-    }
-    if (LEFT_NODE)
-        fixArgVars(tree, LEFT_NODE);
-    if (RIGHT_NODE)
-        fixArgVars(tree, RIGHT_NODE);
-//    fprintf(stderr, "index: %zu\n", index);
-}
-
-void registerArgs(Tree *tree, Node *start_node, Node *node, size_t *index)
-{
-    assert(tree != nullptr);
-    assert(start_node != nullptr);
-    assert(node != nullptr);
-    assert(index != nullptr);
-
-    if (NODE_TYPE == FICTIVE_NODE)
-    {
-        if (LEFT_NODE)
-            registerArgs(tree, start_node, LEFT_NODE, index);
-        if (RIGHT_NODE)
-            registerArgs(tree, start_node, RIGHT_NODE, index);
-    }
-
-    if (NODE_TYPE == VARIABLE)
-    {
-        NODE_TYPE = LOCAL_VARIABLE;
-    }
-    if (NODE_TYPE == LOCAL_VARIABLE)
-    {
-        tree->arg_vars_positions[VALUE.var_value] = *index;
-        fixLocalVarsInBody(start_node, VALUE.var_value);
-        (*index)++;
-    }
-}
-
-void registerLocalVars(Tree *tree, Node *start_node, Node *node, size_t *index)
-{
-    assert(tree != nullptr);
-    assert(start_node != nullptr);
-    assert(node != nullptr);
-    assert(index != nullptr);
-
-    if (NODE_TYPE == FICTIVE_NODE)
-    {
-        if (LEFT_NODE)
-            registerLocalVars(tree, start_node, LEFT_NODE, index);
-        if (RIGHT_NODE)
-            registerLocalVars(tree, start_node, RIGHT_NODE, index);
-    }
-
-    if (NODE_TYPE == VAR_DEC)
-    {
-        NODE_TYPE = LOCAL_VARIABLE;
-    }
-    if (NODE_TYPE == LOCAL_VARIABLE)
-    {
-//        fprintf(stderr, "assert: %zu\n", tree->arg_vars_positions[VALUE.var_value] == *index);
-        tree->arg_vars_positions[VALUE.var_value] = *index;
-//        fixLocalVarsInBody(start_node, VALUE.var_value);
-        (*index)++;
-    }
-}
-
-void fixLocalVarsInBody(Node *node, size_t index)
-{
-    assert(node != nullptr);
-
-    if (LEFT_NODE)
-        fixLocalVarsInBody(LEFT_NODE, index);
-    if (RIGHT_NODE)
-        fixLocalVarsInBody(RIGHT_NODE, index);
-    if (NODE_TYPE == VARIABLE && VALUE.var_value == index)
-    {
-        NODE_TYPE = LOCAL_VARIABLE;
-    }
 }
 
 #define CHECK_NULLPTR_ARGS            \
@@ -152,7 +59,10 @@ void fixLocalVarsInBody(Node *node, size_t index)
         assert((func_fp) != nullptr); \
     }
 
-void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assemble_node(Tree *tree,
+                   Node *node,
+                   FILE *main_fp,
+                   FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
@@ -169,7 +79,7 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
                              "POP [%zu]\n", VALUE.dec_value);
             break;
         case OPERATOR:
-            compileOperator(tree, node, main_fp, func_fp);
+            assembleOperator(tree, node, main_fp, func_fp);
             break;
         case NUMBER:
             fprintf(main_fp, "PUSH %d\n", VALUE.num_value);
@@ -178,28 +88,25 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             fprintf(main_fp, "PUSH [%zu]\n", VALUE.var_value);
             break;
         case WHILE:
-            compileWhile(tree, node, main_fp, func_fp);
+            assembleWhile(tree, node, main_fp, func_fp);
             break;
         case IF:
-            compileIf(tree, node, main_fp, func_fp);
+            assembleIf(tree, node, main_fp, func_fp);
             break;
         case IF2:
             fprintf(stderr, "GOT IF ACTIONS WITHOUT CONDITION\n");
             break;
         case DEF:
-            compileDef(tree, node, main_fp, func_fp);
+            assembleDef(tree, node, main_fp, func_fp);
             break;
         case CALL:
-            compileCall(tree, node, main_fp, func_fp);
+            assembleCall(tree, node, main_fp, func_fp);
             break;
         case RETURN:
-            compileReturn(tree, node, main_fp, func_fp);
+            assembleReturn(tree, node, main_fp, func_fp);
             break;
-//        case LOCAL_VARIABLE:
-//            fprintf(stderr, "local var: %zu\n", VALUE.var_value);
-//            break;
         case LOCAL_VARIABLE:
-            compileArgVariable(tree, node, main_fp, func_fp);
+            assembleLocalVariable(tree, node, main_fp, func_fp);
             break;
         case INCORRECT_TYPE:
             fprintf(stderr, "INCORRECT NODE TYPE: %d\n", NODE_TYPE);
@@ -210,14 +117,17 @@ void assemble_node(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     }
 }
 
-void compileOperator(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assembleOperator(Tree *tree,
+                      Node *node,
+                      FILE *main_fp,
+                      FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
     switch (VALUE.op_value)
     {
         case ASSIGN_OP:
-            compileAssign(tree, node, main_fp, func_fp);
+            assembleAssign(tree, node, main_fp, func_fp);
             break;
 
 #define CASE_OPER(asm_name)                                \
@@ -340,12 +250,15 @@ void compileOperator(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     }
 }
 
-void compileAssign(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assembleAssign(Tree *tree,
+                    Node *node,
+                    FILE *main_fp,
+                    FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
     assemble_node(tree, RIGHT_NODE, main_fp, func_fp);
-    if (LEFT_NODE->node_type == VARIABLE)
+    if (LEFT_TYPE == VARIABLE)
     {
         fprintf(main_fp,
                 "POP [%zu]\n"
@@ -355,44 +268,30 @@ void compileAssign(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     }
     else
     {
-        size_t index =
-            tree->arg_vars_positions[LEFT_NODE->value.var_value];
-
-        size_t num_args = index;
-        size_t arg_index = VALUE.var_value + 1;
-
-        while (num_args
-            < tree->arg_vars_positions[arg_index])
-        {
-            num_args =
-                tree->arg_vars_positions[arg_index];
-            arg_index++;
-        }
-        num_args++;
-//        fprintf(stderr, "num_args: %zu\n", num_args);
-        // set rax to rax + i - n
+        size_t index = LEFT_NODE->value.var_value;
+        // set rax to rax - index
         fprintf(main_fp, "PUSH rax\n"
                          "PUSH %zu\n"
-                         "ADD\n"
-                         "PUSH %zu\n"
                          "SUB\n"
-                         "POP rax\n", index, num_args);
+                         "POP rax\n", index);
 
+        // assign value and return it to stack
         fprintf(main_fp,
                 "POP [rax]\n"
                 "PUSH [rax]\n");
 
-        // set rax + i - n to rax
+        // set rax - index to rax
         fprintf(main_fp, "PUSH rax\n"
                          "PUSH %zu\n"
-                         "SUB\n"
-                         "PUSH %zu\n"
                          "ADD\n"
-                         "POP rax\n", index, num_args);
+                         "POP rax\n", index);
     }
 }
 
-void compileWhile(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assembleWhile(Tree *tree,
+                   Node *node,
+                   FILE *main_fp,
+                   FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
@@ -417,7 +316,10 @@ void compileWhile(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(main_fp, ":label_not_cond_%p\n", code_node);
 }
 
-void compileIf(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assembleIf(Tree *tree,
+                Node *node,
+                FILE *main_fp,
+                FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
@@ -448,7 +350,10 @@ void compileIf(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(main_fp, ":label_exit_if_%p\n", node);
 }
 
-void compileDef(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void assembleDef(Tree *tree,
+                 Node *node,
+                 FILE *main_fp,
+                 FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
@@ -456,13 +361,24 @@ void compileDef(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
             ":func_%s\n",
             tree->func_name_table[VALUE.def_value]);
 
+    // get number of parameters of function
     size_t num_args = 0;
-    registerArgs(tree, RIGHT_NODE, LEFT_NODE, &num_args);
+    countNodes(LEFT_NODE, VARIABLE, &num_args);
 
+    // get number of parameters of function + number of local variables
     size_t num_all_vars = num_args;
-//    fprintf(stderr, "here\n");
-    registerLocalVars(tree, RIGHT_NODE, RIGHT_NODE, &num_all_vars);
-//    fprintf(stderr, "%zu %zu\n", num_all_vars, num_args);
+    countNodes(RIGHT_NODE, VAR_DEC, &num_all_vars);
+
+    // change values of nodes that are parameters of function
+    size_t args_counter = 0;
+    // search VARIABLE in LEFT_NODE and replace these nodes in RIGHT_NODE
+    changeLocalVarsNodesValues(LEFT_NODE,
+                               RIGHT_NODE,
+                               VARIABLE,
+                               &args_counter,
+                               num_all_vars);
+    // search VAR_DEC in RIGHT_NODE and replace these nodes in RIGHT_NODE
+//    changeArgsNodeValues(RIGHT_NODE, RIGHT_NODE, VAR_DEC, &args_counter, num_all_vars);
 
     tree->func_num_args[VALUE.def_value] = num_all_vars;
 
@@ -492,7 +408,80 @@ void compileDef(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     assemble_node(tree, RIGHT_NODE, func_fp, func_fp);
 }
 
-void compileCall(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
+void countNodes(Node *node,
+                NodeType search_value,
+                size_t *index)
+{
+    assert(node != nullptr);
+    assert(index != nullptr);
+
+    if (LEFT_NODE)
+        countNodes(LEFT_NODE, search_value, index);
+    if (RIGHT_NODE)
+        countNodes(RIGHT_NODE, search_value, index);
+
+    if (NODE_TYPE == search_value)
+        (*index)++;
+}
+
+void changeLocalVarsNodesValues(Node *node,
+                                Node *body_node,
+                                NodeType search_value,
+                                size_t *index,
+                                size_t num_variables)
+{
+    assert(node != nullptr);
+    assert(body_node != nullptr);
+    assert(index != nullptr);
+
+    if (LEFT_NODE)
+        changeLocalVarsNodesValues(LEFT_NODE,
+                                   body_node,
+                                   search_value,
+                                   index,
+                                   num_variables);
+    if (RIGHT_NODE)
+        changeLocalVarsNodesValues(RIGHT_NODE,
+                                   body_node,
+                                   search_value,
+                                   index,
+                                   num_variables);
+
+    if (NODE_TYPE == search_value)
+    {
+        changeLocalVarsNodesValuesInBody(body_node,
+                                         VALUE.var_value,
+                                         num_variables - *index);
+        NODE_TYPE = LOCAL_VARIABLE;
+        VALUE.var_value = *index;
+        (*index)++;
+    }
+}
+
+void changeLocalVarsNodesValuesInBody(Node *node,
+                                      size_t old_value,
+                                      size_t new_value)
+{
+    if (LEFT_NODE)
+        changeLocalVarsNodesValuesInBody(LEFT_NODE,
+                                         old_value,
+                                         new_value);
+    if (RIGHT_NODE)
+        changeLocalVarsNodesValuesInBody(RIGHT_NODE,
+                                         old_value,
+                                         new_value);
+
+    if (NODE_TYPE == VARIABLE && VALUE.var_value == old_value)
+    {
+        NODE_TYPE = LOCAL_VARIABLE;
+        VALUE.var_value = new_value;
+    }
+}
+
+void assembleCall(Tree *tree,
+                  Node *node,
+                  FILE *main_fp,
+                  FILE *func_fp)
 {
     CHECK_NULLPTR_ARGS
 
@@ -514,85 +503,6 @@ void compileCall(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
     fprintf(main_fp,
             "call :func_%s\n",
             tree->func_name_table[VALUE.def_value]);
-}
-
-void compileReturn(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
-
-{
-    assert(tree != nullptr);
-    assert(node != nullptr);
-    assert(main_fp != nullptr);
-    assert(func_fp != nullptr);
-
-    assemble_node(tree, LEFT_NODE, func_fp, func_fp);
-
-    bool found = false;
-    size_t func_id = -1;
-    searchWhereCall(tree->root, node, &found, &func_id);
-
-    fprintf(func_fp, "PUSH rax\n"
-                     "PUSH %zu\n"
-                     "SUB\n"
-                     "POP rax\n"
-                     "RET\n", tree->func_num_args[func_id]);
-}
-
-void compileArgVariable(Tree *tree, Node *node, FILE *main_fp, FILE *func_fp)
-{
-    CHECK_NULLPTR_ARGS
-
-    size_t index = tree->arg_vars_positions[VALUE.var_value];
-    size_t num_args = index;
-    size_t arg_index = VALUE.var_value + 1;
-
-    while (num_args < tree->arg_vars_positions[arg_index])
-    {
-        num_args = tree->arg_vars_positions[arg_index];
-        arg_index++;
-    }
-    num_args++;
-
-    // set rax to rax + i - n
-    fprintf(main_fp, "PUSH rax\n"
-                     "PUSH %zu\n"
-                     "ADD\n"
-                     "PUSH %zu\n"
-                     "SUB\n"
-                     "POP rax\n"
-                     "PUSH [rax]\n", index, num_args);// PUSH[rax + i - n]
-
-    // set rax + i - n to rax
-    fprintf(main_fp, "PUSH rax\n"
-                     "PUSH %zu\n"
-                     "SUB\n"
-                     "PUSH %zu\n"
-                     "ADD\n"
-                     "POP rax\n", index, num_args);
-}
-
-void pushArgs(Tree *tree,
-              Node *node,
-              FILE *fp,
-              size_t *new_arg_id,
-              size_t last_num_args)
-{
-    assert(tree != nullptr);
-    assert(node != nullptr);
-    assert(fp != nullptr);
-    assert(new_arg_id != nullptr);
-
-    if (NODE_TYPE == FICTIVE_NODE)
-    {
-        if (LEFT_NODE)
-            pushArgs(tree, LEFT_NODE, fp, new_arg_id, last_num_args);
-        if (RIGHT_NODE)
-            pushArgs(tree, RIGHT_NODE, fp, new_arg_id, last_num_args);
-    }
-    else
-    {
-        assemble_node(tree, node, fp, fp);
-        (*new_arg_id)++;
-    }
 }
 
 void searchWhereCall(Node *nodeSearchIn,
@@ -631,3 +541,80 @@ void searchWhereCall(Node *nodeSearchIn,
     if (nodeSearchIn->right)
         searchWhereCall(nodeSearchIn->right, node, found, func_id);
 }
+
+void pushArgs(Tree *tree,
+              Node *node,
+              FILE *fp,
+              size_t *new_arg_id,
+              size_t last_num_args)
+{
+    assert(tree != nullptr);
+    assert(node != nullptr);
+    assert(fp != nullptr);
+    assert(new_arg_id != nullptr);
+
+    if (NODE_TYPE == FICTIVE_NODE)
+    {
+        if (LEFT_NODE)
+            pushArgs(tree, LEFT_NODE, fp, new_arg_id, last_num_args);
+        if (RIGHT_NODE)
+            pushArgs(tree, RIGHT_NODE, fp, new_arg_id, last_num_args);
+    }
+    else
+    {
+        assemble_node(tree, node, fp, fp);
+        (*new_arg_id)++;
+    }
+}
+
+void assembleReturn(Tree *tree,
+                    Node *node,
+                    FILE *main_fp,
+                    FILE *func_fp)
+
+{
+    assert(tree != nullptr);
+    assert(node != nullptr);
+    assert(main_fp != nullptr);
+    assert(func_fp != nullptr);
+
+    assemble_node(tree, LEFT_NODE, func_fp, func_fp);
+
+    bool found = false;
+    size_t func_id = -1;
+    searchWhereCall(tree->root, node, &found, &func_id);
+
+    fprintf(func_fp, "PUSH rax\n"
+                     "PUSH %zu\n"
+                     "SUB\n"
+                     "POP rax\n"
+                     "RET\n", tree->func_num_args[func_id]);
+}
+
+void assembleLocalVariable(Tree *tree,
+                           Node *node,
+                           FILE *main_fp,
+                           FILE *func_fp)
+{
+    CHECK_NULLPTR_ARGS
+
+    size_t index = VALUE.var_value;
+
+    // set rax to rax - index
+    fprintf(main_fp, "PUSH rax\n"
+                     "PUSH %zu\n"
+                     "SUB\n"
+                     "POP rax\n", index);
+
+    // push value from [rax] stack
+    fprintf(main_fp,
+            "PUSH [rax]\n");
+
+    // set rax - index to rax
+    fprintf(main_fp, "PUSH rax\n"
+                     "PUSH %zu\n"
+                     "ADD\n"
+                     "POP rax\n", index);
+}
+
+

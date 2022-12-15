@@ -1,16 +1,6 @@
 #include <stdlib.h>
 #include "stdio.h"
 
-void convertStandardTreeToBackendTree()
-{
-    system("cmake --build . --target backfrontend_run");
-    system("executable_files/backfrontend_run internal/standard_tree.txt examples/code.txt");
-
-    system("cmake --build . --target frontend_run");
-    system("executable_files/frontend_run examples/code.txt internal/standard_tree.txt internal/backend_tree.txt");
-}
-
-
 //#define code_file "examples/program.txt"
 //#define code_file "examples/test.txt"
 //#define code_file "examples/fib.txt"
@@ -27,12 +17,12 @@ int main(int argc, char *argv[])
         char command[1024] = "";
         sprintf(command,
                 "executable_files/frontend_run %s "
-                "internal/standard_tree.txt internal/backend_tree.txt",
+                "internal/standard_tree.txt",
                 code_filename);
     }
     else
     {
-        system("executable_files/frontend_run " code_file " internal/standard_tree.txt internal/backend_tree.txt");
+        system("executable_files/frontend_run " code_file " internal/standard_tree.txt");
     }
 
     system("cmake --build . --target backfrontend_run");
@@ -41,10 +31,8 @@ int main(int argc, char *argv[])
     system("cmake --build . --target middleend_run");
     system("executable_files/middleend_run internal/standard_tree.txt internal/standard_tree.txt");
 
-    convertStandardTreeToBackendTree();
-
     system("cmake --build . --target backend_run");
-    system("executable_files/backend_run internal/backend_tree.txt internal/lang.asm internal/func_def.asm");
+    system("executable_files/backend_run internal/standard_tree.txt internal/lang.asm internal/func_def.asm");
 
     system("cmake --build ./processor --target main");
     system("cd processor; ./main");

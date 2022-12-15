@@ -83,28 +83,23 @@ Node *createNode(NodeType node_type,
 
 size_t treeSaveToFile(Tree *tree,
                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                      FILE *standard_file,
-                      FILE *backend_file)
+                      FILE *fp)
 {
     CHECK_NULLPTR_ERROR(tree, TREE_IS_NULLPTR)
 
-    printVariables(tree->root, name_table, standard_file, backend_file);
-    printFunctions(tree->root, name_table, standard_file, backend_file);
+    printVariables(tree->root, name_table, fp);
+    printFunctions(tree->root, name_table, fp);
 
-    size_t error = NO_ERRORS;
-    error = nodePreOrderPrint(tree->root, backend_file, 0);
-    error = nodePreOrderPrint(tree->root, standard_file, 0);
-    return error;
+    return nodePreOrderPrint(tree->root, fp, 0);
 }
 
 void printVariables(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *standard_file,
-                    FILE *backend_file)
+                    FILE *fp)
 {
     assert(node != nullptr);
     assert(name_table != nullptr);
-    assert(standard_file != nullptr);
+    assert(fp != nullptr);
 
     size_t var_table[BUFFER_SIZE] = {};
     size_t func_ids_table[BUFFER_SIZE] = {};
@@ -113,23 +108,10 @@ void printVariables(Node *node,
 
     getVariables(node, &var_table, &func_ids_table, &length, &func_id);
 
-    fprintf(standard_file, "%zu\n", length);
-    if (backend_file)
-        fprintf(backend_file, "%zu\n", length);
-
+    fprintf(fp, "%zu\n", length);
     for (size_t i = 0; i < length; i++)
-    {
-        fprintf(standard_file, "%s\n", (*name_table)[var_table[i]]);
+        fprintf(fp, "%s\n", (*name_table)[var_table[i]]);
 
-        if (backend_file)
-        {
-            if (func_ids_table[i] != size_t(-1))
-                fprintf(backend_file, "%s_%s\n", (*name_table)[func_ids_table[i]], (*name_table)[var_table[i]]);
-            else
-                fprintf(backend_file, "%s\n", (*name_table)[var_table[i]]);
-        }
-
-    }
 
     // change values in nodes with variables,
     // because their indexes were changed
@@ -206,27 +188,20 @@ void getVariables(Node *node,
 
 void printFunctions(Node *node,
                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
-                    FILE *standard_file,
-                    FILE *backend_file)
+                    FILE *fp)
 {
     assert(node != nullptr);
     assert(name_table != nullptr);
-    assert(standard_file != nullptr);
+    assert(fp != nullptr);
 
     size_t func_table[BUFFER_SIZE] = {};
     size_t length = 0;
 
     getFunctions(node, &func_table, &length);
 
-    fprintf(standard_file, "%zu\n", length);
-    if (backend_file)
-        fprintf(backend_file, "%zu\n", length);
+    fprintf(fp, "%zu\n", length);
     for (size_t i = 0; i < length; i++)
-    {
-        fprintf(standard_file, "%s\n", (*name_table)[func_table[i]]);
-        if (backend_file)
-            fprintf(backend_file, "%s\n", (*name_table)[func_table[i]]);
-    }
+        fprintf(fp, "%s\n", (*name_table)[func_table[i]]);
 
     // change values in nodes with functions,
     // because their indexes were changed
@@ -252,10 +227,10 @@ void fixFunctions(Node *node,
             }
         }
     }
-    if (node->left)
-        fixFunctions(node->left, func_table, length);
-    if (node->right)
-        fixFunctions(node->right, func_table, length);
+    if (LEFT_NODE)
+        fixFunctions(LEFT_NODE, func_table, length);
+    if (RIGHT_NODE)
+        fixFunctions(RIGHT_NODE, func_table, length);
 }
 
 void getFunctions(Node *node,
@@ -271,10 +246,10 @@ void getFunctions(Node *node,
         (*func_table)[*length] = VALUE.def_value;
         (*length)++;
     }
-    if (node->left)
-        getFunctions(node->left, func_table, length);
-    if (node->right)
-        getFunctions(node->right, func_table, length);
+    if (LEFT_NODE)
+        getFunctions(LEFT_NODE, func_table, length);
+    if (RIGHT_NODE)
+        getFunctions(RIGHT_NODE, func_table, length);
 }
 
 size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
@@ -314,15 +289,15 @@ size_t nodePreOrderPrint(Node *node, FILE *fp, size_t num_spaces)
                 node->node_type,
                 node->value.call_value);
 
-    if (node->left)
-        error = nodePreOrderPrint(node->left,
+    if (LEFT_NODE)
+        error = nodePreOrderPrint(LEFT_NODE,
                                   fp,
                                   num_spaces + LOGS_NUM_SPACES);
     if (error)
         return error;
 
-    if (node->right)
-        error = nodePreOrderPrint(node->right,
+    if (RIGHT_NODE)
+        error = nodePreOrderPrint(RIGHT_NODE,
                                   fp,
                                   num_spaces + LOGS_NUM_SPACES);
     if (error)

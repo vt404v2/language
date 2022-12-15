@@ -228,8 +228,8 @@ void getValueOfNode(Tree *tree,
                     tree->var_name_table[node->value.var_value]);
             break;
         case LOCAL_VARIABLE:
-            sprintf(*node_value, "LOCAL_VARIABLE '%s'",
-                    tree->var_name_table[VALUE.var_value]);
+            sprintf(*node_value, "LOCAL_VARIABLE '%zu'",
+                    VALUE.var_value);
             break;
         case IF:
             sprintf(*node_value, "IF OPERATOR");
