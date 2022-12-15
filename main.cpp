@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "stdio.h"
 
 void convertStandardTreeToBackendTree()
 {
@@ -16,10 +17,23 @@ void convertStandardTreeToBackendTree()
 #define code_file "examples/quadratic.txt"
 //#define code_file "examples/factorial.txt"
 
-int main()
+
+int main(int argc, char *argv[])
 {
     system("cmake --build . --target frontend_run");
-    system("executable_files/frontend_run " code_file " internal/standard_tree.txt internal/backend_tree.txt");
+    if (argc == 2)
+    {
+        const char *code_filename = argv[1];
+        char command[1024] = "";
+        sprintf(command,
+                "executable_files/frontend_run %s "
+                "internal/standard_tree.txt internal/backend_tree.txt",
+                code_filename);
+    }
+    else
+    {
+        system("executable_files/frontend_run " code_file " internal/standard_tree.txt internal/backend_tree.txt");
+    }
 
     system("cmake --build . --target backfrontend_run");
     system("executable_files/backfrontend_run internal/standard_tree.txt examples/code.txt");
