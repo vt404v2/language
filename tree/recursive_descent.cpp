@@ -588,7 +588,7 @@ Node *getNegativeExpression(Tokens *tokens,
     {
         (*index)++;
         Node *negativeExpression = createNode(NUMBER,
-                                              {.num_value = 0},
+                                              {.num_value = -1},
                                               nullptr,
                                               nullptr);
         Node *expression = getLogOp(tokens,
