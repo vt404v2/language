@@ -78,6 +78,7 @@ Node *createNode(NodeType node_type,
     RIGHT_NODE = right_node;
     NODE_TYPE = node_type;
     VALUE = node_value;
+    return node;
 }
 
 size_t treeSaveToFile(Tree *tree,

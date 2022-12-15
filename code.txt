@@ -2,7 +2,7 @@ var d = 0
 def solve_square(a, b, c)
 {
     var x = 42
-    x = 1000 - 7
+    x = 993
     if (a == 0)
     {
         solve_linear(b, c)
