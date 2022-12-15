@@ -1,7 +1,7 @@
 #include "logs.h"
 
 FILE *TREE_LOG_FILE = stderr;
-const char *TREE_GRAPH_LOG_FILENAME = "logs.html";
+const char *TREE_GRAPH_LOG_FILENAME = "logs/logs.html";
 
 size_t TREE_GRAPH_LOG_VERSION = 0;
 
@@ -36,7 +36,7 @@ size_t treeDump(Tree *tree)
     char photo_name[128] = "";
 
     sprintf(photo_name,
-            "log_v.%zu.jpg",
+            "logs/log_v.%zu.jpg",
             TREE_GRAPH_LOG_VERSION);
 
     fprintf(TREE_LOG_FILE, "<pre>\n");

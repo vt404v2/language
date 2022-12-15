@@ -27,3 +27,5 @@ add_executable(backfrontend_run backfrontend/main.cpp backfrontend/backfrontend.
         tree/recursive_descent.cpp tree/tree.cpp tree/logs.cpp common/utils.cpp)
 add_executable(backend_run backend/main.cpp backend/backend.cpp tokenizer/tokenizer.cpp
         tree/recursive_descent.cpp tree/tree.cpp tree/logs.cpp common/utils.cpp)
+set_target_properties(frontend_run middleend_run backfrontend_run backend_run
+        PROPERTIES RUNTIME_OUTPUT_DIRECTORY "executable_files")
