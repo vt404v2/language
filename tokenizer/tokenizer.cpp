@@ -186,7 +186,7 @@ size_t getIdFromNameTable(char *word,
         }
     }
     *success = false;
-    return -1;
+    return POISONED_SIZE_T;
 }
 
 void getWord(char **readPtr, char *word, size_t *word_length)

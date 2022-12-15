@@ -14,6 +14,7 @@ const size_t BUFFER_SIZE = 1024;
 const double EXP = exp(1);
 const double EPS = 1e-5;
 const size_t MAX_WORD_LENGTH = 666;
+const size_t POISONED_SIZE_T = -1;
 
 enum TokenType
 {

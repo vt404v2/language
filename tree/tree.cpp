@@ -182,7 +182,7 @@ void getVariables(Node *node,
         getVariables(RIGHT_NODE, var_table, func_ids_table, length, func_id);
     if (NODE_TYPE == DEF)
     {
-        *func_id = -1;
+        *func_id = POISONED_SIZE_T;
     }
 }
 
