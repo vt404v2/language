@@ -16,7 +16,6 @@ void convertTreeToAsm(const char *tree_filename,
     FILE *main_fp = fopen(asm_filename, "w");
     FILE *func_fp = fopen(asm_func_filename, "w");
 
-//    fixArgsInFunctions();
     assemble(&tree, tree.root, main_fp, func_fp);
     treeDtor(&tree);
 
