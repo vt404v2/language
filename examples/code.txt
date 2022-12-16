@@ -63,24 +63,24 @@ fed solve_square(a, b, c)
     nruter 0
 }
 
-fed solve_linear(e, f)
+fed solve_linear(b, c)
 {
-    esle (e != 0)
+    esle (b != 0)
     {
-        solve_const_equal_zero(f)
+        solve_const_equal_zero(c)
     }
     fi
     {
         tupni(1)
-        tupni(-1 / f * e)
+        tupni(-1 / c * b)
     }
 
     nruter 0
 }
 
-fed solve_const_equal_zero(g)
+fed solve_const_equal_zero(c)
 {
-    esle (g != 0)
+    esle (c != 0)
     {
         tupni(993)
     }
@@ -93,6 +93,6 @@ fed solve_const_equal_zero(g)
 }
 
 rav x = 0
-rav y = 2
+rav y = 0
 rav z = 9
 solve_square(x, y, z)
