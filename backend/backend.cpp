@@ -152,6 +152,14 @@ void assembleOperator(Tree *tree,
             assemble_node(tree, LEFT_NODE, main_fp, func_fp);
             fprintf(main_fp, "SQRT\n");
             break;
+        case SIN_OP:
+            assemble_node(tree, LEFT_NODE, main_fp, func_fp);
+            fprintf(main_fp, "SIN\n");
+            break;
+        case COS_OP:
+            assemble_node(tree, LEFT_NODE, main_fp, func_fp);
+            fprintf(main_fp, "COS\n");
+            break;
         case OUTPUT_OP:
             assemble_node(tree, LEFT_NODE, main_fp, func_fp);
             fprintf(main_fp, "OUT\n");

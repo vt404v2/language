@@ -16,8 +16,9 @@ void convertTreeToCode(const char *tree_filename, const char *code_filename)
 void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 {
     assert(tree != nullptr);
-    assert(node != nullptr);
     assert(fp != nullptr);
+//    if (node == nullptr)
+//        return;
 
     switch (NODE_TYPE)
     {
@@ -28,7 +29,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 RIGHT_NODE->left->node_type == OPERATOR &&
                 RIGHT_NODE->left->value.op_value == ASSIGN_OP)
             {
-                printSpaces(num_spaces, fp);
+//                printSpaces(num_spaces, fp);
                 fprintf(fp,
                         "rav "); // <cringe> var </cringe>
                 printNode(tree, RIGHT_NODE->left, fp, 0);
@@ -36,7 +37,10 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces);
                 break;
             }
-            printSpaces(num_spaces, fp);
+            if (RIGHT_NODE && LEFT_NODE->node_type != FICTIVE_NODE && RIGHT_NODE->node_type != FICTIVE_NODE)
+                printSpaces(num_spaces, fp);
+            if (LEFT_NODE->node_type == RETURN)
+                printSpaces(num_spaces, fp);
             if (LEFT_NODE)
                 printNode(tree, LEFT_NODE, fp, num_spaces);
             if (RIGHT_NODE)
@@ -139,6 +143,8 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
+            if (RIGHT_NODE->node_type != FICTIVE_NODE)
+                printSpaces(num_spaces + NUM_SPACES, fp);
             printNode(tree, RIGHT_NODE->left, fp, num_spaces + NUM_SPACES);
             fprintf(fp, "\n");
             printSpaces(num_spaces, fp);
@@ -150,6 +156,8 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 fprintf(fp, "fi\n"); // <cringe> else </cringe>
                 printSpaces(num_spaces, fp);
                 fprintf(fp, "{\n");
+                if (RIGHT_NODE->node_type != FICTIVE_NODE)
+                    printSpaces(num_spaces + NUM_SPACES, fp);
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces + NUM_SPACES);
                 fprintf(fp, "\n");
                 printSpaces(num_spaces, fp);
@@ -170,7 +178,11 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
+            if (RIGHT_NODE->node_type != FICTIVE_NODE)
+                printSpaces(num_spaces + NUM_SPACES, fp);
+
             printNode(tree, RIGHT_NODE, fp, num_spaces + NUM_SPACES);
+//            fprintf(fp, "spaces: %zu", num_spaces);
             printSpaces(num_spaces, fp);
             fprintf(fp, "}\n");
             break;
@@ -207,13 +219,15 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
 void printArgs(Tree *tree, Node *node, FILE *fp)
 {
+//    if (node == nullptr)
+//        return;
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
             printArgs(tree, LEFT_NODE, fp);
         if (RIGHT_NODE)
         {
-            if (RIGHT_NODE->right)
+            if (RIGHT_NODE->right || RIGHT_NODE->node_type == VARIABLE)
             {
                 fprintf(fp, ", ");
             }

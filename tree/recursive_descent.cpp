@@ -197,6 +197,55 @@ Node *getSqrt(Tokens *tokens,
     return nullptr;
 }
 
+Node *getSin(Tokens *tokens,
+              size_t *index,
+              char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("sin")) // <cringe> sin </cringe>
+    {
+        (*index)++;
+
+        Node *value_node =
+            getPrimaryExpression(tokens, index, name_table);
+
+        Node *sin_node = createNode(OPERATOR,
+                                    {.op_value = SIN_OP},
+                                    value_node,
+                                    nullptr);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          sin_node, nullptr);
+    }
+    return nullptr;
+}
+
+Node *getCos(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+
+    if (TOKEN.type == KEYWORD_TOKEN && IS_NAME_TOKEN("cos")) // <cringe> cos </cringe>
+    {
+        (*index)++;
+
+        Node *value_node =
+            getPrimaryExpression(tokens, index, name_table);
+
+        Node *sin_node = createNode(OPERATOR,
+                                    {.op_value = COS_OP},
+                                    value_node,
+                                    nullptr);
+        return createNode(FICTIVE_NODE,
+                          {},
+                          sin_node, nullptr);
+    }
+    return nullptr;
+}
 
 Node *getInputFunction(Tokens *tokens,
                        size_t *index,
@@ -633,6 +682,12 @@ Node *getPrimaryExpression(Tokens *tokens,
     value = getSqrt(tokens, index, name_table);
     if (value)
         return value;
+    value = getSin(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getCos(tokens, index, name_table);
+    if (value)
+        return value;
     value = getInputFunction(tokens, index, name_table);
     if (value)
         return value;
@@ -726,5 +781,7 @@ bool is_keyword(char *word)
            strcasecmp(word, "elihw")  == 0 || // <cringe> while </cringe>
            strcasecmp(word, "tupni")  == 0 || // <cringe> print </cringe>
            strcasecmp(word, "tnirp")  == 0 || // <cringe> input </cringe>
-           strcasecmp(word, "nruter") == 0;   // <cringe> return </cringe>
+           strcasecmp(word, "nruter") == 0 || // <cringe> input </cringe>
+           strcasecmp(word, "sin")    == 0 || // <cringe> input </cringe>
+           strcasecmp(word, "cos")    == 0;   // <cringe> return </cringe>
 }

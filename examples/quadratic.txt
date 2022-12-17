@@ -1,4 +1,4 @@
-rav d = 0
+rav d = 100
 fed solve_square(a, b, c)
 {
     rav x = 42

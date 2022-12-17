@@ -1,10 +1,6 @@
 rav z = 7
-fed f(x, y)
+fed f()
 {
-    tupni(x)
-    tupni(y)
-    rav z = 9
-    tupni(z)
     nruter 0
 }
 rav a = 2

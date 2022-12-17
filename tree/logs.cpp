@@ -84,21 +84,54 @@ size_t createGraphNodes(Tree *tree,
     char node_value[BUFFER_SIZE] = "";
     getValueOfNode(tree, node, &node_value);
 
+    const char *color = nullptr;
+    switch (NODE_TYPE)
+    {
+        case VARIABLE:
+            color = "red";
+            break;
+        case VAR_DEC:
+            color = "darkseagreen1";
+            break;
+        case NUMBER:
+            color = "aqua";
+            break;
+        case OPERATOR:
+            color = "cadetblue1";
+            break;
+        case DEF:
+            color = "dodgerblue";
+            break;
+        case CALL:
+            color = "darkgoldenrod1";
+            break;
+        case IF:
+            color = "chocolate";
+            break;
+        case IF2:
+            color = "coral";
+            break;
+        case WHILE:
+            color = "darkolivegreen1";
+            break;
+        case FICTIVE_NODE:
+            color = "azure3";
+            break;
+        default:
+            color = "chartreuse";
+            break;
+    }
     fprintf(fp,
             "    node_%p[shape=\"record\", \n"
             "        color=%s,"
             "        fillcolor=%s, \n"
             "        style=\"rounded, filled\", \n"
             "        label=\"\n"
-            "            {%s |\n"
-            "            {{LEFT | %p} | {INDEX | %p} | {RIGHT | %p}}}\"]\n",
+            "            %s\"]\n",
             node,
             GREEN_COLOR,
-            LIGHT_GREEN_COLOR,
-            node_value,
-            node->left,
-            node,
-            node->right);
+            color,
+            node_value);
 
     if (node->left)
         error = createGraphNodes(tree, node->left, fp);
@@ -173,6 +206,12 @@ void getValueOfNode(Tree *tree,
                 case SQRT_OP:
                     sprintf(*node_value, "SQRT");
                     break;
+                case SIN_OP:
+                    sprintf(*node_value, "SIN");
+                    break;
+                case COS_OP:
+                    sprintf(*node_value, "SIN");
+                    break;
                 case INPUT_OP:
                     sprintf(*node_value, "INPUT");
                     break;
@@ -218,7 +257,7 @@ void getValueOfNode(Tree *tree,
             }
             break;
         case FICTIVE_NODE:
-            sprintf(*node_value, "FICTIVE_NODE");
+            sprintf(*node_value, "");
             break;
         case NUMBER:
             sprintf(*node_value, "%d", node->value.num_value);

@@ -46,6 +46,8 @@ enum OperationType
     OR_OP         = 15,
     AND_OP        = 16,
     ASSIGN_OP     = 17,
+    SIN_OP        = 100,
+    COS_OP        = 101,
 };
 
 union TokenValue

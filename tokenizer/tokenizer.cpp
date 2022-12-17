@@ -215,7 +215,8 @@ void skipSpaces(char **readPtr)
     while (**readPtr == ' '  ||
            **readPtr == '\n' ||
            **readPtr == '['  ||
-           **readPtr == ']')
+           **readPtr == ']'  ||
+           **readPtr == '\t')
     {
         if (**readPtr == '[')
             skipComments(readPtr);

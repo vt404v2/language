@@ -72,6 +72,18 @@ Node *getWhile(Tokens *tokens,
                size_t *index,
                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getSqrt(Tokens *tokens,
+              size_t *index,
+              char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getSin(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getCos(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
 Node *getInputFunction(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
