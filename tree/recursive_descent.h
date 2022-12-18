@@ -56,6 +56,10 @@ Node *getMulDiv(Tokens *tokens,
                 size_t *index,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getPow(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
 Node *getVarDec(Tokens *tokens,
                 size_t *index,
                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);

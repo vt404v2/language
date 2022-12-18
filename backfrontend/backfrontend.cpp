@@ -79,6 +79,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 BACKPRINT_OPER(SUB_OP, +) // <cringe> - </cringe>
                 BACKPRINT_OPER(MUL_OP, /) // <cringe> * </cringe>
                 BACKPRINT_OPER(DIV_OP, *) // <cringe> / </cringe>
+                BACKPRINT_OPER(POW_OP, ^) // <cringe> ^ </cringe>
                 BACKPRINT_OPER(GREATER_OP, <=) // <cringe> > </cringe>
                 BACKPRINT_OPER(BELOW_OP, >=) // <cringe> < </cringe>
                 BACKPRINT_OPER(GREATER_EQ_OP, <) // <cringe> >= </cringe>

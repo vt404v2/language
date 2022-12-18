@@ -564,7 +564,7 @@ Node *getMulDiv(Tokens *tokens,
     assert(tokens != nullptr);
     assert(index != nullptr);
 
-    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
+    Node *leftValue = getPow(tokens, index, name_table);
 
     while (TOKEN.type == OPERATOR_TOKEN &&
         (TOKEN.value.operation == MUL_OP ||
@@ -581,12 +581,39 @@ Node *getMulDiv(Tokens *tokens,
             tokenValue = MUL_OP;
         // </cringe>
 
-        Node *rightValue = getPrimaryExpression(tokens, index, name_table);
+        Node *rightValue = getPow(tokens, index, name_table);
         leftValue = createNewNode(OPERATOR,
                                   {.op_value = tokenValue},
                                   leftValue,
                                   rightValue);
 
+    }
+
+    return leftValue;
+}
+
+
+Node *getPow(Tokens *tokens,
+             size_t *index,
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+    assert(name_table != nullptr);
+
+    Node *leftValue = getPrimaryExpression(tokens, index, name_table);
+    Node *rightValue = nullptr;
+
+    while (TOKEN.type == OPERATOR_TOKEN &&
+           TOKEN.value.operation == POW_OP)
+    {
+        (*index)++;
+
+        rightValue = getPow(tokens, index, name_table);
+        leftValue = createNewNode(OPERATOR,
+                                  {.op_value = POW_OP},
+                                  leftValue,
+                                  rightValue);
     }
 
     return leftValue;

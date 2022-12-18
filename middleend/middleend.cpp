@@ -94,6 +94,8 @@ void convConst(Node *node, bool *changed)
         else OPER_SIMPLIFY(NOT_EQ_OP, !=)
         else OPER_SIMPLIFY(AND_OP, &&)
         else OPER_SIMPLIFY(OR_OP, ||)
+        else if (IS_OP(POW_OP))
+            VAL_VALUE = (int) pow(LEFT_VALUE, RIGHT_VALUE);
         else if (IS_OP(NOT_OP))
             VAL_VALUE = !LEFT_VALUE;
         else if (IS_OP(INCORRECT_OP))
@@ -121,23 +123,27 @@ void deleteNeutralElements(Node *node, bool *changed)
     if (LEFT_NODE == nullptr || RIGHT_NODE == nullptr)
         return;
 
-    // 0 * f(x), 0 / f(x), f(x) * 0
-    if ((IS_ZERO_LEFT  && (IS_OP(MUL_OP) ||
-                           IS_OP(DIV_OP))) ||
+    // 1 ^ f(x), f(x) ^ 0
+    if ((IS_ONE_LEFT || IS_ZERO_RIGHT) && IS_OP(POW_OP))
+        changeNodeTypeToNumber(node, 1, changed);
+    // 0 ^ f(x), 0 * f(x), 0 / f(x), f(x) * 0
+    else if ((IS_ZERO_LEFT  && (IS_OP(POW_OP) ||
+        IS_OP(MUL_OP) ||
+        IS_OP(DIV_OP))) ||
         (IS_ZERO_RIGHT && IS_OP(MUL_OP)))
         changeNodeTypeToNumber(node, 0, changed);
-        // f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
-    else if ((IS_ONE_RIGHT && (
+    // f(x) ^ 1, f(x) * 1, f(x) / 1, f(x) + 0, f(x) - 0
+    else if ((IS_ONE_RIGHT  && (IS_OP(POW_OP) ||
         IS_OP(MUL_OP) ||
         IS_OP(DIV_OP))) ||
         (IS_ZERO_RIGHT && (IS_OP(ADD_OP)||
             IS_OP(SUB_OP))))
         moveNodeUp(node, LEFT_NODE, RIGHT_NODE, changed);
-        // 0 + f(x), 1 * f(x)
+    // 0 + f(x), 1 * f(x)
     else if ((IS_ZERO_LEFT && IS_OP(ADD_OP)) ||
         (IS_ONE_LEFT && IS_OP(MUL_OP)))
         moveNodeUp(node, RIGHT_NODE, LEFT_NODE, changed);
-        // 0 - f(x)
+    // 0 - f(x)
     else if (IS_ZERO_LEFT && IS_OP(SUB_OP))
     {
         LEFT_VALUE = -1;

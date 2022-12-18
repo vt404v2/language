@@ -142,6 +142,7 @@ void assembleOperator(Tree *tree,
         CASE_OPER(SUB)
         CASE_OPER(MUL)
         CASE_OPER(DIV)
+        CASE_OPER(POW)
 
 #undef CASE_OPER
 

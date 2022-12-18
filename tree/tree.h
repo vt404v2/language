@@ -46,6 +46,7 @@ enum OperationType
     OR_OP         = 15,
     AND_OP        = 16,
     ASSIGN_OP     = 17,
+    POW_OP        = 18,
     SIN_OP        = 100,
     COS_OP        = 101,
 };
