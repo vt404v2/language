@@ -88,4 +88,3 @@ rav x = 0
 rav y = 2
 rav z = 9
 solve_square(x, y, z)
-tupni(5 ^ 3)
