@@ -29,7 +29,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 RIGHT_NODE->left->node_type == OPERATOR &&
                 RIGHT_NODE->left->value.op_value == ASSIGN_OP)
             {
-//                printSpaces(num_spaces, fp);
+                printSpaces(num_spaces, fp);
                 fprintf(fp,
                         "rav "); // <cringe> var </cringe>
                 printNode(tree, RIGHT_NODE->left, fp, 0);
@@ -37,10 +37,10 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces);
                 break;
             }
-            if (RIGHT_NODE && LEFT_NODE->node_type != FICTIVE_NODE && RIGHT_NODE->node_type != FICTIVE_NODE)
-                printSpaces(num_spaces, fp);
-            if (LEFT_NODE->node_type == RETURN)
-                printSpaces(num_spaces, fp);
+//            if (RIGHT_NODE && LEFT_NODE->node_type != FICTIVE_NODE && RIGHT_NODE->node_type != FICTIVE_NODE)
+//                printSpaces(num_spaces, fp);
+//            if (LEFT_NODE->node_type == RETURN)
+//                printSpaces(num_spaces, fp);
             if (LEFT_NODE)
                 printNode(tree, LEFT_NODE, fp, num_spaces);
             if (RIGHT_NODE)
@@ -50,6 +50,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             }
             break;
         case VAR_DEC:
+            printSpaces(num_spaces, fp);
             fprintf(fp,
                     "rav %s",
                     tree->var_name_table[VALUE.dec_value]); // <cringe> var </cringe>
@@ -59,6 +60,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             switch (VALUE.op_value)
             {
                 case ASSIGN_OP:
+                    printSpaces(num_spaces, fp);
                     fprintf(fp,
                             "%s = ",
                             tree->var_name_table[LEFT_NODE->value.dec_value]);
@@ -89,19 +91,33 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 #undef BACKPRINT_OPER
 
                 case SQRT_OP:
+                    printSpaces(num_spaces, fp);
                     fprintf(fp, "trqs(");  // <cringe> sqrt( </cringe>
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
+                case SIN_OP:
+                    printSpaces(num_spaces, fp);
+                    fprintf(fp, "sin(");  // <cringe> sin( </cringe>
+                    printNode(tree, LEFT_NODE, fp, 0);
+                    fprintf(fp, ")");
+                case COS_OP:
+                    printSpaces(num_spaces, fp);
+                    fprintf(fp, "cos(");  // <cringe> cos( </cringe>
+                    printNode(tree, LEFT_NODE, fp, 0);
+                    fprintf(fp, ")");
                 case INPUT_OP:
+                    printSpaces(num_spaces, fp);
                     fprintf(fp, "tnirp()"); // <cringe> input() </cringe>
                     break;
                 case OUTPUT_OP:
+                    printSpaces(num_spaces, fp);
                     fprintf(fp, "tupni("); // <cringe> print( </cringe>
                     printNode(tree, LEFT_NODE, fp, 0);
                     fprintf(fp, ")");
                     break;
                 case NOT_OP:
+                    printSpaces(num_spaces, fp);
                     fprintf(fp, " ! ");
                     printNode(tree, LEFT_NODE, fp, 0);
                     break;
@@ -117,9 +133,11 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             break;
         }
         case NUMBER:
+            printSpaces(num_spaces, fp);
             fprintf(fp, "%d", VALUE.num_value);
             break;
         case VARIABLE:
+            printSpaces(num_spaces, fp);
             fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
             break;
         case WHILE:
@@ -137,27 +155,24 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case IF:
         {
+            printSpaces(num_spaces, fp);
             fprintf(fp, "esle ("); // <cringe> if </cringe>
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, ")\n");
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
-            if (RIGHT_NODE->node_type != FICTIVE_NODE)
-                printSpaces(num_spaces + NUM_SPACES, fp);
             printNode(tree, RIGHT_NODE->left, fp, num_spaces + NUM_SPACES);
             fprintf(fp, "\n");
             printSpaces(num_spaces, fp);
             fprintf(fp, "}\n");
 
-            printSpaces(num_spaces, fp);
             if (RIGHT_NODE->right)
             {
+                printSpaces(num_spaces, fp);
                 fprintf(fp, "fi\n"); // <cringe> else </cringe>
                 printSpaces(num_spaces, fp);
                 fprintf(fp, "{\n");
-                if (RIGHT_NODE->node_type != FICTIVE_NODE)
-                    printSpaces(num_spaces + NUM_SPACES, fp);
                 printNode(tree, RIGHT_NODE->right, fp, num_spaces + NUM_SPACES);
                 fprintf(fp, "\n");
                 printSpaces(num_spaces, fp);
@@ -171,24 +186,25 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         case DEF:
         {
             fprintf(fp,
-                    "fed %s(",  // <cringe> def </cringe>
+                    "\nfed %s(",  // <cringe> def </cringe>
                     tree->func_name_table[VALUE.def_value]);
             printArgs(tree, LEFT_NODE, fp);
             fprintf(fp, ")\n");
 
             printSpaces(num_spaces, fp);
             fprintf(fp, "{\n");
-            if (RIGHT_NODE->node_type != FICTIVE_NODE)
-                printSpaces(num_spaces + NUM_SPACES, fp);
+//            if (RIGHT_NODE->node_type != FICTIVE_NODE)
+//                printSpaces(num_spaces + NUM_SPACES, fp);
 
             printNode(tree, RIGHT_NODE, fp, num_spaces + NUM_SPACES);
 //            fprintf(fp, "spaces: %zu", num_spaces);
             printSpaces(num_spaces, fp);
-            fprintf(fp, "}\n");
+            fprintf(fp, "}\n\n");
             break;
         }
         case CALL:
         {
+            printSpaces(num_spaces, fp);
             fprintf(fp,
                     "%s(",
                     tree->func_name_table[VALUE.call_value]);
@@ -198,6 +214,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case RETURN:
         {
+            printSpaces(num_spaces, fp);
             fprintf(fp, "nruter "); // <cringe> return </cringe>
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, "\n");
@@ -205,6 +222,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
         }
         case LOCAL_VARIABLE:
         {
+            printSpaces(num_spaces, fp);
             fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
             break;
         }
@@ -219,8 +237,6 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
 
 void printArgs(Tree *tree, Node *node, FILE *fp)
 {
-//    if (node == nullptr)
-//        return;
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)

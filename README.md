@@ -25,39 +25,135 @@ After '{':
 * (optional) left and right node if exists
 
 ### Node types
-* INCORRECT_TYPE   = -1, 
-* FICTIVE_NODE     =  0, node for storing code block in its' left nonde
-* NUMBER           =  1, node with int number
-* VARIABLE         =  2, node with variable id id variable_name_table
-* IF               =  3, node represents condition of 'if' operator in its left node and 'IF2' in its right node
-* IF2              =  4, node represents positive branch of 'if' operator in its left node and negative branch in in right node
-* WHILE            =  5, node represents condition of 'if' operator in its left node and action subtree in its right node
-* OPERATOR         =  6, node with operator
-* VAR_DEC          =  7, node represents variable declaration
-* DEF              =  8, node represents function definition, with id of function in function_name_table, its parameters in left node and its body in right node
-* CALL             =  9, node represents function call with its' id in function_name_table, with function argumnets in left node
-* RETURN           = 10, 
-* LOCAL_VARIABLE   = 11, // not in standard, my own node type
+| Node name       | Value | Description                                                                                                                             |
+|-----------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| INCORRECT_TYPE  | -1    | Incorrect node                                                                                                                          |
+| FICTIVE_NODE    | 0     | node for storing code block in its' left nonde                                                                                          |                                                                                            
+| NUMBER          | 1     | node with int number                                                                                                                    |                                                                                               
+| VARIABLE        | 2     | node with variable id id variable_name_table                                                                                            |                                                                                           
+| IF              | 3     | node represents condition of 'if' operator in its left node and 'IF2' in its right node                                                 |                                                 
+| IF2             | 4     | node represents positive branch of 'if' operator in its left node and negative branch in in right node                                  |                    
+| WHILE           | 5     | node represents condition of 'if' operator in its left node and action subtree in its right node                                        |                    
+| OPERATOR        | 6     | node with operator                                                                                                                      |                                                                                                              
+| VAR_DEC         | 7     | node represents variable declaration                                                                                                    |                                                                                                
+| DEF             | 8     | node represents function definition, with id of function in function_name_table, its parameters in left node and its body in right node | 
+| CALL            | 9     | node represents function call with its' id in function_name_table, with function argumnets in left node                                 |                              
+| RETURN          | 10    |                                                                                                                                         |                            
+| LOCAL_VARIABLE  | 11    | not in standard, my own node type, variables if funcions                                                                                |                                                                              |                     
 
 ### Supported operator types
-* INCORRECT_OP  = -1,
-* ADD_OP        =  1,
-* SUB_OP        =  2,
-* MUL_OP        =  3,
-* DIV_OP        =  4,
-* SQRT_OP       =  5,
-* INPUT_OP      =  6,
-* OUTPUT_OP     =  7,
-* EQUAL_OP      =  8,
-* GREATER_OP    =  9,
-* BELOW_OP      = 10,
-* GREATER_EQ_OP = 11,
-* BELOW_EQ_OP   = 12,
-* NOT_EQ_OP     = 13,
-* NOT_OP        = 14,
-* OR_OP         = 15,
-* AND_OP        = 16,
-* ASSIGN_OP     = 17
+| Operation name | Value |
+|----------------|-------|
+| INCORRECT_OP   | -1    |
+| ADD_OP         | 1     |
+| SUB_OP         | 2     |
+| MUL_OP         | 3     |
+| DIV_OP         | 4     |
+| SQRT_OP        | 5     |
+| INPUT_OP       | 6     |
+| OUTPUT_OP      | 7     |
+| EQUAL_OP       | 8     |
+| GREATER_OP     | 9     |
+| BELOW_OP       | 10    |
+| GREATER_EQ_OP  | 11    |
+| BELOW_EQ_OP    | 12    |
+| NOT_EQ_OP      | 13    |
+| NOT_OP         | 14    |
+| OR_OP          | 15    |
+| AND_OP         | 16    |
+| ASSIGN_OP      | 17    |
+
+### Tree example
+
+Here you can see simple program that calculates factorial and its tree.
+
+Program:
+```text
+rav y = 6
+fed fact(n)
+{
+    esle (n > 1)
+    {
+        nruter 1
+    }
+    nruter fact(n + 1) / n
+}
+tupni(fact(tnirp()))
+```
+
+Its tree
+```text
+2
+y
+n
+1
+fact
+{ 0  0 
+    { 7  0 }
+    { 0  0 
+        { 6  17 
+            { 2  0 }
+            { 1  6 }
+        }
+        { 0  0 
+            { 8  0 
+                { 0  0 
+                    { 2  1 }
+                    { 0  0 }
+                }
+                { 0  0 
+                    { 3  0 
+                        { 6  12 
+                            { 2  1 }
+                            { 1  1 }
+                        }
+                        { 4  0 
+                            { 0  0 
+                                { 10  0 
+                                    { 1  1 }
+                                }
+                            }
+                        }
+                    }
+                    { 0  0 
+                        { 10  0 
+                            { 6  3 
+                                { 0  0 
+                                    { 9  0 
+                                        { 0  0 
+                                            { 6  2 
+                                                { 2  1 }
+                                                { 1  1 }
+                                            }
+                                            { 0  0 }
+                                        }
+                                    }
+                                }
+                                { 2  1 }
+                            }
+                        }
+                    }
+                }
+            }
+            { 0  0 
+                { 6  7 
+                    { 0  0 
+                        { 9  0 
+                            { 0  0 
+                                { 0  0 
+                                    { 6  6 }
+                                }
+                                { 0  0 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 
 ## Project structure
 

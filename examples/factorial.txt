@@ -7,4 +7,4 @@ fed fact(n)
     }
     nruter fact(n + 1) / n
 }
-tupni(cos(fact(6)))
+tupni(cos(fact(tnirp())))
