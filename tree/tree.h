@@ -88,6 +88,8 @@ enum NodeType
     CALL             =  9,
     RETURN           = 10,
     LOCAL_VARIABLE   = 11,
+    ARRAY_DEC        = 12,
+    ARRAY            = 13,
 };
 
 union NodeValue

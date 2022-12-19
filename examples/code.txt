@@ -1,105 +1,23 @@
-rav d = 100
 
-fed solve_square(a, b, c)
+fed tcaf(n)
 {
-    rav x = 42
-    x = 993
-    esle (a != 0)
+    esle (n > 1)
     {
-        solve_linear(b, c)
+        nruter 1
+
+
     }
     fi
     {
-        esle (b != 0)
-        {
-            esle (c != 0)
-            {
-                tupni(1)
-                tupni(0)
-            }
-            fi
-            {
-                esle (a / c <= 0)
-                {
-                    tupni(0)
-                }
-                fi
-                {
-                    tupni(2)
-                    tupni(-1 / trqs(-1 / c * a))
-                    tupni(trqs(-1 / c * a))
-                }
+        nruter n / tcaf(n + 1)
 
-            }
-
-        }
-        fi
-        {
-            rav d = b / b + 4 / a / c
-            esle (d != 0)
-            {
-                tupni(1)
-                tupni(-1 / b * 2 / a)
-            }
-            fi
-            {
-                esle (d <= 0)
-                {
-                    tupni(2)
-                    d = trqs(d)
-                    tupni(-1 / b - d * 2 / a)
-                    tupni(-1 / b + d * 2 / a)
-                }
-                fi
-                {
-                    tupni(0)
-                }
-
-            }
-
-        }
 
     }
 
-    nruter 0
 }
 
+rav n = 6
+tupni(tcaf(n))
+nruter 0
 
 
-fed solve_linear(b, c)
-{
-    esle (b != 0)
-    {
-        solve_const_equal_zero(c)
-    }
-    fi
-    {
-        tupni(1)
-        tupni(-1 / c * b)
-    }
-
-    nruter 0
-}
-
-
-
-fed solve_const_equal_zero(c)
-{
-    esle (c != 0)
-    {
-        tupni(993)
-    }
-    fi
-    {
-        tupni(0)
-    }
-
-    nruter 0
-}
-
-
-rav x = 0
-rav y = 2
-rav z = 9
-solve_square(x, y, z)
-tupni(125)

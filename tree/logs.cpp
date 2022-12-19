@@ -297,6 +297,12 @@ void getValueOfNode(Tree *tree,
         case RETURN:
             sprintf(*node_value, "RETURN FROM FUNC");
             break;
+        case ARRAY_DEC:
+            sprintf(*node_value, "ARRAY_DEC: %zu", node->value.var_value);
+            break;
+        case ARRAY:
+            sprintf(*node_value, "ARRAY: %zu", node->value.var_value);
+            break;
         case INCORRECT_TYPE:
             sprintf(*node_value, "%s", "INCORRECT_TYPE");
             break;

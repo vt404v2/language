@@ -101,9 +101,11 @@ size_t tokenize(const char *filename,
         else ONE_CHAR_OPERATOR('!', NOT_OP)
 #undef ONE_CHAR_OPERATOR
         else if (*readPtr == '(' ||
-            *readPtr == ')' ||
-            *readPtr == '{' ||
-            *readPtr == '}')
+                 *readPtr == ')' ||
+                 *readPtr == '{' ||
+                 *readPtr == '}' ||
+                 *readPtr == '$' ||
+                 *readPtr == '@')
         {
             tokens->tokens[tokens->size].type = BRACKET_TOKEN;
             tokens->tokens[tokens->size].value.bracket = *readPtr;

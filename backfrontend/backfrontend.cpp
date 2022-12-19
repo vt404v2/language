@@ -189,7 +189,8 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             fprintf(fp,
                     "\nfed %s(",  // <cringe> def </cringe>
                     tree->func_name_table[VALUE.def_value]);
-            printArgs(tree, LEFT_NODE, fp);
+            size_t num_args = 0;
+            printArgs(tree, LEFT_NODE, fp, &num_args);
             fprintf(fp, ")\n");
 
             printSpaces(num_spaces, fp);
@@ -200,7 +201,7 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             printNode(tree, RIGHT_NODE, fp, num_spaces + NUM_SPACES);
 //            fprintf(fp, "spaces: %zu", num_spaces);
             printSpaces(num_spaces, fp);
-            fprintf(fp, "}\n\n");
+            fprintf(fp, "}\n");
             break;
         }
         case CALL:
@@ -209,7 +210,8 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             fprintf(fp,
                     "%s(",
                     tree->func_name_table[VALUE.call_value]);
-            printArgs(tree, LEFT_NODE, fp);
+            size_t num_args = 0;
+            printArgs(tree, LEFT_NODE, fp, &num_args);
             fprintf(fp, ")");
             break;
         }
@@ -236,24 +238,26 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
     }
 }
 
-void printArgs(Tree *tree, Node *node, FILE *fp)
+void printArgs(Tree *tree, Node *node, FILE *fp, size_t *num_args)
 {
     if (NODE_TYPE == FICTIVE_NODE)
     {
         if (LEFT_NODE)
-            printArgs(tree, LEFT_NODE, fp);
+            printArgs(tree, LEFT_NODE, fp, num_args);
         if (RIGHT_NODE)
         {
             if (RIGHT_NODE->right || RIGHT_NODE->node_type == VARIABLE)
             {
-                fprintf(fp, ", ");
+                if (*num_args)
+                    fprintf(fp, ", ");
             }
-            printArgs(tree, RIGHT_NODE, fp);
+            printArgs(tree, RIGHT_NODE, fp, num_args);
         }
     }
     else
     {
         printNode(tree, node, fp, 0);
+        (*num_args)++;
     }
 }
 

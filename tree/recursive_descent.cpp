@@ -26,6 +26,9 @@
 #define IS_NAME_TOKEN(name)                                     \
 strcasecmp((*name_table)[TOKEN.value.id_in_table], (name)) == 0
 
+size_t ARRAY_ID = 300;
+size_t ARRAY_IDS[BUFFER_SIZE] = {0};
+
 Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -43,6 +46,46 @@ Node *recursiveDescent(Tokens *tokens,
     }
 
     return root;
+}
+
+Node *getArrayDec(Tokens *tokens,
+                  size_t *index,
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+    assert(index != nullptr);
+    size_t start_index = *index;
+
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        (strcasecmp((*name_table)[TOKEN.value.id_in_table],
+                    "arr") == 0))  // <cringe> var </cringe>
+    {
+        (*index)++;
+        if (TOKEN.type == KEYWORD_TOKEN)
+        {
+            Node *declared_array = createNode(ARRAY_DEC,
+                                              {.dec_value = ARRAY_ID},
+                                              nullptr,
+                                              nullptr);
+            ARRAY_IDS[TOKEN.value.id_in_table] = ARRAY_ID;
+            (*index)++;
+
+            Node *brackets_value =
+                getPrimaryExpression(tokens, index, name_table);
+            declared_array->left = brackets_value;
+
+            Node *fictive_node = createNode(FICTIVE_NODE,
+                                            {},
+                                            declared_array,
+                                            nullptr);
+
+            ARRAY_ID += brackets_value->value.num_value;
+            return fictive_node;
+        }
+        (*index)--;
+    }
+    *index = start_index;
+    return nullptr;
 }
 
 Node *getVarDec(Tokens *tokens,
@@ -108,6 +151,44 @@ Node *getVarInit(Tokens *tokens,
         }
         (*index)--;
     }
+    return nullptr;
+}
+
+Node *getArrayInit(Tokens *tokens,
+                   size_t *index,
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    size_t start_index = *index;
+    if (TOKEN.type == KEYWORD_TOKEN &&
+        !is_keyword((*name_table)[TOKEN.value.id_in_table]))
+    {
+        size_t variable_id = TOKEN.value.id_in_table;
+        (*index)++;
+        if (TOKEN.type == BRACKET_TOKEN && TOKEN.value.bracket == '$' && ARRAY_IDS[variable_id] != 0)
+        {
+            Node *array_index = getPrimaryExpression(tokens, index, name_table);
+
+
+            if (TOKEN.type == OPERATOR_TOKEN &&
+                TOKEN.value.operation == ASSIGN_OP)
+            {
+                (*index)++;
+                Node *var_node = createNode(ARRAY,
+                                            {.var_value = ARRAY_IDS[variable_id]},
+                                            array_index,
+                                            nullptr);
+                Node *init_value = getLogOp(tokens, index, name_table);
+                Node *init_node = createNode(OPERATOR,
+                                             {.op_value=ASSIGN_OP},
+                                             var_node,
+                                             init_value);
+
+                return createNode(FICTIVE_NODE, {}, init_node, nullptr);
+            }
+            (*index)--;
+        }
+    }
+    *index = start_index;
     return nullptr;
 }
 
@@ -694,10 +775,17 @@ Node *getPrimaryExpression(Tokens *tokens,
     ASSERT_OK(TOKEN.value.bracket != '}',
               "Expected not }, but got _%c_\n",
               TOKEN.value.bracket)
-    Node *value = getVarDec(tokens, index, name_table);
+    Node *value = nullptr;
+    value = getArrayDec(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getVarDec(tokens, index, name_table);
     if (value)
         return value;
     value = getVarInit(tokens, index, name_table);
+    if (value)
+        return value;
+    value = getArrayInit(tokens, index, name_table);
     if (value)
         return value;
     value = getIf(tokens, index, name_table);
@@ -738,6 +826,16 @@ Node *getPrimaryExpression(Tokens *tokens,
         value = getCodeBlock(tokens, index, name_table);
         ASSERT_OK(TOKEN.value.bracket == '}',
                   "Expected }, but got _%c_\n",
+                  TOKEN.value.bracket)
+        (*index)++;
+    }
+    else if (TOKEN.type == BRACKET_TOKEN &&
+             TOKEN.value.bracket == '$')
+    {
+        (*index)++;
+        value = getLogOp(tokens, index, name_table);
+        ASSERT_OK(TOKEN.value.bracket == '$',
+                  "Expected $, but got _%d_\n",
                   TOKEN.value.bracket)
         (*index)++;
     }
@@ -808,7 +906,8 @@ bool is_keyword(char *word)
            strcasecmp(word, "elihw")  == 0 || // <cringe> while </cringe>
            strcasecmp(word, "tupni")  == 0 || // <cringe> print </cringe>
            strcasecmp(word, "tnirp")  == 0 || // <cringe> input </cringe>
-           strcasecmp(word, "nruter") == 0 || // <cringe> input </cringe>
-           strcasecmp(word, "sin")    == 0 || // <cringe> input </cringe>
-           strcasecmp(word, "cos")    == 0;   // <cringe> return </cringe>
+           strcasecmp(word, "nruter") == 0 || // <cringe> return </cringe>
+           strcasecmp(word, "sin")    == 0 || // <cringe> sin </cringe>
+           strcasecmp(word, "cos")    == 0 ||// <cringe> cos </cringe>
+           strcasecmp(word, "arr")    == 0;
 }

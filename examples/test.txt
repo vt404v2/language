@@ -1,9 +1,7 @@
-rav z = 7
-fed f()
-{
-    nruter 0
-}
-rav a = 2
-rav b = 3
-f(a, b)
-tupni(z)
+rav a = 9
+arr x$5$
+arr y$10$
+x$3$ = 6
+y$a$ = 999
+a = 8
+tupni(993)

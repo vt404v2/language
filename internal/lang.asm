@@ -24,8 +24,6 @@ PUSH [4]
 PUSH [5]
 PUSH [6]
 call :func_solve_square
-PUSH 125
-OUT
 HLT
 :func_solve_square
 PUSH rax
@@ -91,8 +89,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55575cc7d600
-:label_0x55575cc7d4b0
+jbe :label_0x5645cafc84e0
+:label_0x5645cafc8390
 PUSH rax
 PUSH 4
 SUB
@@ -112,8 +110,8 @@ PUSH 3
 ADD
 POP rax
 call :func_solve_linear
-jmp :label_exit_if_0x55575cc7d3c0
-:label_0x55575cc7d600
+jmp :label_exit_if_0x5645cafc82a0
+:label_0x5645cafc84e0
 PUSH rax
 PUSH 4
 SUB
@@ -126,8 +124,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55575cc7e050
-:label_0x55575cc7d720
+jbe :label_0x5645cafc8f30
+:label_0x5645cafc8600
 PUSH rax
 PUSH 3
 SUB
@@ -140,14 +138,14 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55575cc7d960
-:label_0x55575cc7d840
+jbe :label_0x5645cafc8840
+:label_0x5645cafc8720
 PUSH 1
 OUT
 PUSH 0
 OUT
-jmp :label_exit_if_0x55575cc7d750
-:label_0x55575cc7d960
+jmp :label_exit_if_0x5645cafc8630
+:label_0x5645cafc8840
 PUSH rax
 PUSH 5
 SUB
@@ -170,12 +168,12 @@ MUL
 PUSH 0
 A
 PUSH 0
-jbe :label_0x55575cc7db70
-:label_0x55575cc7dae0
+jbe :label_0x5645cafc8a50
+:label_0x5645cafc89c0
 PUSH 0
 OUT
-jmp :label_exit_if_0x55575cc7d990
-:label_0x55575cc7db70
+jmp :label_exit_if_0x5645cafc8870
+:label_0x5645cafc8a50
 PUSH 2
 OUT
 PUSH -1
@@ -226,12 +224,12 @@ DIV
 MUL
 SQRT
 OUT
-jmp :label_exit_if_0x55575cc7d990
-:label_exit_if_0x55575cc7d990
-jmp :label_exit_if_0x55575cc7d750
-:label_exit_if_0x55575cc7d750
-jmp :label_exit_if_0x55575cc7d630
-:label_0x55575cc7e050
+jmp :label_exit_if_0x5645cafc8870
+:label_exit_if_0x5645cafc8870
+jmp :label_exit_if_0x5645cafc8630
+:label_exit_if_0x5645cafc8630
+jmp :label_exit_if_0x5645cafc8510
+:label_0x5645cafc8f30
 PUSH 0
 POP [0]
 PUSH rax
@@ -281,8 +279,8 @@ PUSH [0]
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55575cc7e680
-:label_0x55575cc7e410
+jbe :label_0x5645cafc9560
+:label_0x5645cafc92f0
 PUSH 1
 OUT
 PUSH -1
@@ -309,14 +307,14 @@ MUL
 DIV
 MUL
 OUT
-jmp :label_exit_if_0x55575cc7e320
-:label_0x55575cc7e680
+jmp :label_exit_if_0x5645cafc9200
+:label_0x5645cafc9560
 PUSH [0]
 PUSH 0
 A
 PUSH 0
-jbe :label_0x55575cc7edd0
-:label_0x55575cc7e7a0
+jbe :label_0x5645cafc9cb0
+:label_0x5645cafc9680
 PUSH 2
 OUT
 PUSH [0]
@@ -375,18 +373,18 @@ POP rax
 MUL
 DIV
 OUT
-jmp :label_exit_if_0x55575cc7e6b0
-:label_0x55575cc7edd0
+jmp :label_exit_if_0x5645cafc9590
+:label_0x5645cafc9cb0
 PUSH 0
 OUT
-jmp :label_exit_if_0x55575cc7e6b0
-:label_exit_if_0x55575cc7e6b0
-jmp :label_exit_if_0x55575cc7e320
-:label_exit_if_0x55575cc7e320
-jmp :label_exit_if_0x55575cc7d630
-:label_exit_if_0x55575cc7d630
-jmp :label_exit_if_0x55575cc7d3c0
-:label_exit_if_0x55575cc7d3c0
+jmp :label_exit_if_0x5645cafc9590
+:label_exit_if_0x5645cafc9590
+jmp :label_exit_if_0x5645cafc9200
+:label_exit_if_0x5645cafc9200
+jmp :label_exit_if_0x5645cafc8510
+:label_exit_if_0x5645cafc8510
+jmp :label_exit_if_0x5645cafc82a0
+:label_exit_if_0x5645cafc82a0
 PUSH 0
 PUSH rax
 PUSH 5
@@ -436,8 +434,8 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55575cc7f250
-:label_0x55575cc7f160
+jbe :label_0x5645cafca130
+:label_0x5645cafca040
 PUSH rax
 PUSH 1
 SUB
@@ -448,8 +446,8 @@ PUSH 1
 ADD
 POP rax
 call :func_solve_const_equal_zero
-jmp :label_exit_if_0x55575cc7f070
-:label_0x55575cc7f250
+jmp :label_exit_if_0x5645cafc9f50
+:label_0x5645cafca130
 PUSH 1
 OUT
 PUSH -1
@@ -474,8 +472,8 @@ POP rax
 DIV
 MUL
 OUT
-jmp :label_exit_if_0x55575cc7f070
-:label_exit_if_0x55575cc7f070
+jmp :label_exit_if_0x5645cafc9f50
+:label_exit_if_0x5645cafc9f50
 PUSH 0
 PUSH rax
 PUSH 2
@@ -512,16 +510,16 @@ POP rax
 PUSH 0
 E
 PUSH 0
-jbe :label_0x55575cc7f790
-:label_0x55575cc7f700
+jbe :label_0x5645cafca670
+:label_0x5645cafca5e0
 PUSH 993
 OUT
-jmp :label_exit_if_0x55575cc7f610
-:label_0x55575cc7f790
+jmp :label_exit_if_0x5645cafca4f0
+:label_0x5645cafca670
 PUSH 0
 OUT
-jmp :label_exit_if_0x55575cc7f610
-:label_exit_if_0x55575cc7f610
+jmp :label_exit_if_0x5645cafca4f0
+:label_exit_if_0x5645cafca4f0
 PUSH 0
 PUSH rax
 PUSH 1
