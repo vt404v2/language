@@ -1,15 +1,15 @@
 #include "recursive_descent.h"
 
-#define ADD_NODE                 \
-    if (last_node)               \
-    {                            \
-        last_node->right = value;\
-        last_node = value;       \
-    }                            \
-    else                         \
-    {                            \
-        root = value;            \
-        last_node = value;       \
+#define ADD_NODE                  \
+    if (last_node)                \
+    {                             \
+        last_node->right = value; \
+        last_node = value;        \
+    }                             \
+    else                          \
+    {                             \
+        root = value;             \
+        last_node = value;        \
     }
 
 #define IS_LOGICAL(operation)        \
@@ -26,7 +26,7 @@
 #define IS_NAME_TOKEN(name)                                     \
 strcasecmp((*name_table)[TOKEN.value.id_in_table], (name)) == 0
 
-size_t ARRAY_ID = 300;
+size_t ARRAY_ID = BUFFER_SIZE;
 size_t ARRAY_IDS[BUFFER_SIZE] = {0};
 
 Node *recursiveDescent(Tokens *tokens,

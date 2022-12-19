@@ -42,11 +42,12 @@ void assemble(Tree *tree,
     assert(main_fp != nullptr);
     assert(func_fp != nullptr);
 
-    fprintf(main_fp, "PUSH 666\n"
+    fprintf(main_fp, "PUSH 8000\n"
                      "POP rax\n");
 
     assemble_node(tree, node, main_fp, func_fp);
 
+    fprintf(main_fp, "SHOW_RAM\n");
     fprintf(main_fp, "HLT");
 }
 

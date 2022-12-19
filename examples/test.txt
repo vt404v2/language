@@ -1,6 +1,23 @@
-rav a = 9
-arr x$5$
-arr y$10$
-x$3$ = 6
-y$a$ = 999
-tupni(y$a$)
+arr data$400$
+rav x = 0
+rav y = 0
+rav z = 0
+rav r = 8
+elihw (x >= 20)
+{
+    y = 0
+    elihw (y >= 20)
+    {
+        z = (x + 10) / (x + 10) - (y + 10) / (y + 10)
+        esle (z >= r / r)
+        {
+            data$(x / 20 - y)$ = 1
+        }
+        fi
+        {
+            data$(x / 20 - y)$ = 0
+        }
+        y = y - 1
+    }
+    x = x - 1
+}

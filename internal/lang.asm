@@ -1,28 +1,112 @@
-PUSH 666
+PUSH 8000
 POP rax
 PUSH 0
 POP [0]
-PUSH 9
+PUSH 0
 POP [0]
 PUSH [0]
-PUSH 6
-PUSH 3
-PUSH 300
+PUSH 0
+POP [1]
+PUSH 0
+POP [1]
+PUSH [1]
+PUSH 0
+POP [2]
+PUSH 0
+POP [2]
+PUSH [2]
+PUSH 0
+POP [3]
+PUSH 8
+POP [3]
+PUSH [3]
+PUSH 20
+PUSH [0]
+A
+PUSH 0
+jbe :label_not_cond_0x5621a95b2fd0
+:label_0x5621a95b2fd0
+PUSH 0
+POP [1]
+PUSH [1]
+PUSH 20
+PUSH [1]
+A
+PUSH 0
+jbe :label_not_cond_0x5621a95b3180
+:label_0x5621a95b3180
+PUSH [0]
+PUSH 10
+SUB
+PUSH [0]
+PUSH 10
+SUB
+MUL
+PUSH [1]
+PUSH 10
+SUB
+PUSH [1]
+PUSH 10
+SUB
+MUL
+ADD
+POP [2]
+PUSH [2]
+PUSH [3]
+PUSH [3]
+MUL
+PUSH [2]
+A
+PUSH 0
+jbe :label_0x5621a95b3810
+:label_0x5621a95b3660
+PUSH 1
+PUSH [0]
+PUSH 20
+MUL
+PUSH [1]
+ADD
+PUSH 700
 ADD
 POP rbx
 POP [rbx]
 PUSH [rbx]
-PUSH 999
+jmp :label_exit_if_0x5621a95b3510
+:label_0x5621a95b3810
+PUSH 0
 PUSH [0]
-PUSH 305
+PUSH 20
+MUL
+PUSH [1]
+ADD
+PUSH 700
 ADD
 POP rbx
 POP [rbx]
 PUSH [rbx]
-PUSH [0]
-PUSH 305
+jmp :label_exit_if_0x5621a95b3510
+:label_exit_if_0x5621a95b3510
+PUSH [1]
+PUSH 1
 ADD
-POP rbx
-PUSH [rbx]
-OUT
+POP [1]
+PUSH [1]
+PUSH 20
+PUSH [1]
+A
+PUSH 0
+ja :label_0x5621a95b3180
+:label_not_cond_0x5621a95b3180
+PUSH [0]
+PUSH 1
+ADD
+POP [0]
+PUSH [0]
+PUSH 20
+PUSH [0]
+A
+PUSH 0
+ja :label_0x5621a95b2fd0
+:label_not_cond_0x5621a95b2fd0
+SHOW_RAM
 HLT
