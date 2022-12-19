@@ -67,12 +67,15 @@ Node *getArrayDec(Tokens *tokens,
                                               {.dec_value = ARRAY_ID},
                                               nullptr,
                                               nullptr);
+
             ARRAY_IDS[TOKEN.value.id_in_table] = ARRAY_ID;
             (*index)++;
 
+            (*index)++;
             Node *brackets_value =
-                getPrimaryExpression(tokens, index, name_table);
+                getValue(tokens, index, name_table);
             declared_array->left = brackets_value;
+            (*index)++;
 
             Node *fictive_node = createNode(FICTIVE_NODE,
                                             {},
@@ -164,7 +167,9 @@ Node *getArrayInit(Tokens *tokens,
     {
         size_t variable_id = TOKEN.value.id_in_table;
         (*index)++;
-        if (TOKEN.type == BRACKET_TOKEN && TOKEN.value.bracket == '$' && ARRAY_IDS[variable_id] != 0)
+        if (TOKEN.type == BRACKET_TOKEN &&
+            TOKEN.value.bracket == '$' &&
+            ARRAY_IDS[variable_id] != 0)
         {
             Node *array_index = getPrimaryExpression(tokens, index, name_table);
 
@@ -716,6 +721,36 @@ Node *getVariable(Tokens *tokens,
     return value;
 }
 
+Node *getArray(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
+{
+    assert(tokens != nullptr);
+
+    size_t start_index = *index;
+    size_t variable_id = TOKEN.value.id_in_table;
+    (*index)++;
+
+    if (TOKEN.value.bracket == '$')
+    {
+        (*index)++;
+        Node *init_value = getLogOp(tokens, index, name_table);
+        if (TOKEN.value.bracket == '$')
+        {
+            (*index)++;
+
+            Node *var_node = createNode(ARRAY,
+                                        {.var_value = ARRAY_IDS[variable_id]},
+                                        init_value,
+                                        nullptr);
+
+            return var_node;
+        }
+    }
+    *index = start_index;
+    return nullptr;
+}
+
 Node *getValue(Tokens *tokens,
                size_t *index,
                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE])
@@ -852,10 +887,16 @@ Node *getPrimaryExpression(Tokens *tokens,
                   TOKEN.value.bracket)
         (*index)++;
     }
-    else if (TOKEN.type == KEYWORD_TOKEN)
-        value = getVariable(tokens, index, name_table);
     else
-        value = getValue(tokens, index, name_table);
+    {
+        value = getArray(tokens, index, name_table);
+        if (value)
+            return value;
+        else if (TOKEN.type == KEYWORD_TOKEN)
+            value = getVariable(tokens, index, name_table);
+        else
+            value = getValue(tokens, index, name_table);
+    }
 
     return value;
 }

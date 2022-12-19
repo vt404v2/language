@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
 //    system("cmake --build . --target backfrontend_run");
 //    system("executable_files/backfrontend_run internal/standard_tree.txt examples/code.txt");
 //
-//    system("cmake --build . --target backend_run");
-//    system("executable_files/backend_run internal/standard_tree.txt internal/lang.asm internal/func_def.asm");
-//
-//    system("cmake --build ./processor --target main");
-//    system("cd processor; ./main");
-//
+    system("cmake --build . --target backend_run");
+    system("executable_files/backend_run internal/standard_tree.txt internal/lang.asm internal/func_def.asm");
+
+    system("cmake --build ./processor --target main");
+    system("cd processor; ./main");
+
     return 0;
 }
 

@@ -3,5 +3,4 @@ arr x$5$
 arr y$10$
 x$3$ = 6
 y$a$ = 999
-a = 8
-tupni(993)
+tupni(y$a$)

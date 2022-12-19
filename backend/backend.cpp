@@ -107,6 +107,12 @@ void assemble_node(Tree *tree,
         case LOCAL_VARIABLE:
             assembleLocalVariable(tree, node, main_fp, func_fp);
             break;
+        case ARRAY_DEC:
+            assembleArrayDec(tree, node, main_fp, func_fp);
+            break;
+        case ARRAY:
+            assembleArray(tree, node, main_fp, func_fp);
+            break;
         case INCORRECT_TYPE:
             fprintf(stderr, "INCORRECT NODE TYPE: %d\n", NODE_TYPE);
             break;
@@ -114,6 +120,27 @@ void assemble_node(Tree *tree,
             fprintf(stderr, "UNKNOWN NODE TYPE: %d\n", NODE_TYPE);
             break;
     }
+}
+
+void assembleArrayDec(Tree *tree,
+                      Node *node,
+                      FILE *main_fp,
+                      FILE *func_fp)
+{
+    // nothing to do
+}
+
+void assembleArray(Tree *tree,
+                   Node *node,
+                   FILE *main_fp,
+                   FILE *func_fp)
+{
+    // push LEFT_NODE
+    assemble_node(tree, LEFT_NODE, main_fp, func_fp);
+    fprintf(main_fp, "PUSH %zu\n"
+                     "ADD\n"
+                     "POP rbx\n"
+                     "PUSH [rbx]\n", VALUE.var_value);
 }
 
 void assembleOperator(Tree *tree,
@@ -272,6 +299,17 @@ void assembleAssign(Tree *tree,
                 "POP [%zu]\n"
                 "PUSH [%zu]\n",
                 LEFT_NODE->value.var_value,
+                LEFT_NODE->value.var_value);
+    }
+    else if (LEFT_TYPE == ARRAY)
+    {
+        assemble_node(tree, LEFT_NODE->left, main_fp, func_fp);
+        fprintf(main_fp,
+                "PUSH %zu\n"
+                "ADD\n"
+                "POP rbx\n"
+                "POP [rbx]\n"
+                "PUSH [rbx]\n",
                 LEFT_NODE->value.var_value);
     }
     else

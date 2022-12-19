@@ -1,3 +1,133 @@
 digraph TREE {
     rankdir=TB;
-}
+    node_0x5627a94dba80[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbab0[shape="record", 
+        color="#6be871",        fillcolor=darkseagreen1, 
+        style="rounded, filled", 
+        label="
+            VARIABLE DECLARATION: 'a'"]
+    node_0x5627a94dbae0[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbb10[shape="record", 
+        color="#6be871",        fillcolor=cadetblue1, 
+        style="rounded, filled", 
+        label="
+            ="]
+    node_0x5627a94dbb40[shape="record", 
+        color="#6be871",        fillcolor=red, 
+        style="rounded, filled", 
+        label="
+            VARIABLE 'a'"]
+    node_0x5627a94dbb70[shape="record", 
+        color="#6be871",        fillcolor=aqua, 
+        style="rounded, filled", 
+        label="
+            9"]
+    node_0x5627a94dbba0[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbbd0[shape="record", 
+        color="#6be871",        fillcolor=chartreuse, 
+        style="rounded, filled", 
+        label="
+            ARRAY_DEC: 300"]
+    node_0x5627a94dbc00[shape="record", 
+        color="#6be871",        fillcolor=aqua, 
+        style="rounded, filled", 
+        label="
+            5"]
+    node_0x5627a94dbc30[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbc60[shape="record", 
+        color="#6be871",        fillcolor=chartreuse, 
+        style="rounded, filled", 
+        label="
+            ARRAY_DEC: 305"]
+    node_0x5627a94dbc90[shape="record", 
+        color="#6be871",        fillcolor=aqua, 
+        style="rounded, filled", 
+        label="
+            10"]
+    node_0x5627a94dbcc0[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbcf0[shape="record", 
+        color="#6be871",        fillcolor=cadetblue1, 
+        style="rounded, filled", 
+        label="
+            ="]
+    node_0x5627a94dbd20[shape="record", 
+        color="#6be871",        fillcolor=chartreuse, 
+        style="rounded, filled", 
+        label="
+            ARRAY: 300"]
+    node_0x5627a94dbd50[shape="record", 
+        color="#6be871",        fillcolor=aqua, 
+        style="rounded, filled", 
+        label="
+            3"]
+    node_0x5627a94dbd80[shape="record", 
+        color="#6be871",        fillcolor=aqua, 
+        style="rounded, filled", 
+        label="
+            6"]
+    node_0x5627a94dbdb0[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbde0[shape="record", 
+        color="#6be871",        fillcolor=cadetblue1, 
+        style="rounded, filled", 
+        label="
+            ="]
+    node_0x5627a94dbe10[shape="record", 
+        color="#6be871",        fillcolor=chartreuse, 
+        style="rounded, filled", 
+        label="
+            ARRAY: 305"]
+    node_0x5627a94dbe40[shape="record", 
+        color="#6be871",        fillcolor=red, 
+        style="rounded, filled", 
+        label="
+            VARIABLE 'a'"]
+    node_0x5627a94dbe70[shape="record", 
+        color="#6be871",        fillcolor=aqua, 
+        style="rounded, filled", 
+        label="
+            999"]
+    node_0x5627a94dbea0[shape="record", 
+        color="#6be871",        fillcolor=azure3, 
+        style="rounded, filled", 
+        label="
+            "]
+    node_0x5627a94dbed0[shape="record", 
+        color="#6be871",        fillcolor=cadetblue1, 
+        style="rounded, filled", 
+        label="
+            OUTPUT"]
+    node_0x5627a94dbf00[shape="record", 
+        color="#6be871",        fillcolor=chartreuse, 
+        style="rounded, filled", 
+        label="
+            ARRAY: 305"]
+    node_0x5627a94dbf30[shape="record", 
+        color="#6be871",        fillcolor=red, 
+        style="rounded, filled", 
+        label="
+            VARIABLE 'a'"]
+    node_0x5627a94dba80->node_0x5627a94dbab0[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dba80->node_0x5627a94dbae0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbae0->node_0x5627a94dbb10[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbb10->node_0x5627a94dbb40[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbb10->node_0x5627a94dbb70[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbae0->node_0x5627a94dbba0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbba0->node_0x5627a94dbbd0[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbbd0->node_0x5627a94dbc00[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbba0->node_0x5627a94dbc30[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbc30->node_0x5627a94dbc60[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbc60->node_0x5627a94dbc90[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbc30->node_0x5627a94dbcc0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbcc0->node_0x5627a94dbcf0[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbcf0->node_0x5627a94dbd20[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbd20->node_0x5627a94dbd50[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbcf0->node_0x5627a94dbd80[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbcc0->node_0x5627a94dbdb0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbdb0->node_0x5627a94dbde0[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbde0->node_0x5627a94dbe10[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbe10->node_0x5627a94dbe40[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbde0->node_0x5627a94dbe70[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbdb0->node_0x5627a94dbea0[color="#a66be8", fontcolor="#e87b6b"];    node_0x5627a94dbea0->node_0x5627a94dbed0[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbed0->node_0x5627a94dbf00[color="#a66be8", fontcolor="#6be871"];    node_0x5627a94dbf00->node_0x5627a94dbf30[color="#a66be8", fontcolor="#6be871"];}

@@ -17,6 +17,16 @@ void assemble_node(Tree *tree,
                    FILE *main_fp,
                    FILE *func_fp);
 
+void assembleArrayDec(Tree *tree,
+                      Node *node,
+                      FILE *main_fp,
+                      FILE *func_fp);
+
+void assembleArray(Tree *tree,
+                   Node *node,
+                   FILE *main_fp,
+                   FILE *func_fp);
+
 void assembleOperator(Tree *tree,
                       Node *node,
                       FILE *main_fp,

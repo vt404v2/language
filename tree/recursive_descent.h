@@ -68,6 +68,14 @@ Node *getVarInit(Tokens *tokens,
                  size_t *index,
                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
+Node *getArrayInit(Tokens *tokens,
+                   size_t *index,
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getArrayDec(Tokens *tokens,
+                  size_t *index,
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
 Node *getIf(Tokens *tokens,
             size_t *index,
             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
@@ -131,6 +139,10 @@ Node *getValue(Tokens *tokens,
 Node *getVariable(Tokens *tokens,
                   size_t *index,
                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+
+Node *getArray(Tokens *tokens,
+               size_t *index,
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 bool is_keyword(char *word);
 
