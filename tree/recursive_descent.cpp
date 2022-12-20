@@ -1013,6 +1013,6 @@ bool is_keyword(char *word)
            strcasecmp(word, "tnirp")  == 0 || // <cringe> input </cringe>
            strcasecmp(word, "nruter") == 0 || // <cringe> return </cringe>
            strcasecmp(word, "sin")    == 0 || // <cringe> sin </cringe>
-           strcasecmp(word, "cos")    == 0 ||// <cringe> cos </cringe>
+           strcasecmp(word, "cos")    == 0 || // <cringe> cos </cringe>
            strcasecmp(word, "arr")    == 0;
 }

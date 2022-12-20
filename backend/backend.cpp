@@ -424,8 +424,6 @@ void assembleDef(Tree *tree,
                                VARIABLE,
                                &args_counter,
                                num_all_vars);
-    // search VAR_DEC in RIGHT_NODE and replace these nodes in RIGHT_NODE
-//    changeArgsNodeValues(RIGHT_NODE, RIGHT_NODE, VAR_DEC, &args_counter, num_all_vars);
 
     tree->func_num_args[VALUE.def_value] = num_all_vars;
 
