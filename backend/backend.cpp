@@ -42,7 +42,7 @@ void assemble(Tree *tree,
     assert(main_fp != nullptr);
     assert(func_fp != nullptr);
 
-    fprintf(main_fp, "PUSH 8000\n"
+    fprintf(main_fp, "PUSH 9999\n"
                      "POP rax\n");
 
     assemble_node(tree, node, main_fp, func_fp);
@@ -319,7 +319,7 @@ void assembleAssign(Tree *tree,
         // set rax to rax - index
         fprintf(main_fp, "PUSH rax\n"
                          "PUSH %zu\n"
-                         "SUB\n"
+                         "ADD\n"
                          "POP rax\n", index);
 
         // assign value and return it to stack
@@ -330,7 +330,7 @@ void assembleAssign(Tree *tree,
         // set rax - index to rax
         fprintf(main_fp, "PUSH rax\n"
                          "PUSH %zu\n"
-                         "ADD\n"
+                         "SUB\n"
                          "POP rax\n", index);
     }
 }
@@ -433,22 +433,22 @@ void assembleDef(Tree *tree,
     {
         fprintf(func_fp, "PUSH rax\n"
                          "PUSH %zu\n"
-                         "ADD\n"
-                         "PUSH %zu\n"
                          "SUB\n"
+                         "PUSH %zu\n"
+                         "ADD\n"
                          "POP rax\n", num_args - 1, i);
 
         fprintf(func_fp, "POP [rax]\n"
                          "PUSH rax\n"
                          "PUSH %zu\n"
-                         "SUB\n"
-                         "PUSH %zu\n"
                          "ADD\n"
+                         "PUSH %zu\n"
+                         "SUB\n"
                          "POP rax\n", num_args - 1, i);
     }
     fprintf(func_fp, "PUSH rax\n"
                      "PUSH %zu\n"
-                     "ADD\n"
+                     "SUB\n"
                      "POP rax\n", num_all_vars);
 
 
@@ -633,7 +633,7 @@ void assembleReturn(Tree *tree,
 
     fprintf(func_fp, "PUSH rax\n"
                      "PUSH %zu\n"
-                     "SUB\n"
+                     "ADD\n"
                      "POP rax\n"
                      "RET\n", tree->func_num_args[func_id]);
 }
@@ -650,7 +650,7 @@ void assembleLocalVariable(Tree *tree,
     // set rax to rax - index
     fprintf(main_fp, "PUSH rax\n"
                      "PUSH %zu\n"
-                     "SUB\n"
+                     "ADD\n"
                      "POP rax\n", index);
 
     // push value from [rax] stack
@@ -660,7 +660,7 @@ void assembleLocalVariable(Tree *tree,
     // set rax - index to rax
     fprintf(main_fp, "PUSH rax\n"
                      "PUSH %zu\n"
-                     "ADD\n"
+                     "SUB\n"
                      "POP rax\n", index);
 }
 

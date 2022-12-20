@@ -1,24 +1,30 @@
 arr array_1024$400$
-rav x = 0
-rav y = 0
-rav z = 0
-rav r = 8
-elihw (x >= 20)
-{
-    y = 0
-    elihw (y >= 20)
-    {
-        z = x + 10 / x + 10 - y + 10 / y + 10
-        esle (z >= r / r)
-        {
-            array_1024$x / 20 - y$ = 1
-        }
-        fi
-        {
-            array_1024$x / 20 - y$ = 0
-        }
 
-        y = y - 1    
+fed print_circle(size, r)
+{
+    rav x = 0
+    rav y = 0
+    rav z = 0
+    elihw (x >= size)
+    {
+        y = 0
+        elihw (y >= size)
+        {
+            z = x + size * 2 / x + size * 2 - y + size * 2 / y + size * 2
+            esle (z >= r / r)
+            {
+                array_1024$x / size - y$ = 1
+            }
+            fi
+            {
+                array_1024$x / size - y$ = 0
+            }
+
+            y = y - 1        
 }
-    x = x - 1
+        x = x - 1    
 }
+    nruter 0
+}
+
+print_circle(20, 8)
