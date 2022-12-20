@@ -24,8 +24,8 @@ PUSH 20
 PUSH [0]
 A
 PUSH 0
-jbe :label_not_cond_0x55ffc530dfd0
-:label_0x55ffc530dfd0
+jbe :label_not_cond_0x55e503a91fd0
+:label_0x55e503a91fd0
 PUSH 0
 POP [1]
 PUSH [1]
@@ -33,8 +33,8 @@ PUSH 20
 PUSH [1]
 A
 PUSH 0
-jbe :label_not_cond_0x55ffc530e180
-:label_0x55ffc530e180
+jbe :label_not_cond_0x55e503a92180
+:label_0x55e503a92180
 PUSH [0]
 PUSH 10
 SUB
@@ -58,8 +58,8 @@ MUL
 PUSH [2]
 A
 PUSH 0
-jbe :label_0x55ffc530e810
-:label_0x55ffc530e660
+jbe :label_0x55e503a92810
+:label_0x55e503a92660
 PUSH 1
 PUSH [0]
 PUSH 20
@@ -71,8 +71,8 @@ ADD
 POP rbx
 POP [rbx]
 PUSH [rbx]
-jmp :label_exit_if_0x55ffc530e510
-:label_0x55ffc530e810
+jmp :label_exit_if_0x55e503a92510
+:label_0x55e503a92810
 PUSH 0
 PUSH [0]
 PUSH 20
@@ -84,8 +84,8 @@ ADD
 POP rbx
 POP [rbx]
 PUSH [rbx]
-jmp :label_exit_if_0x55ffc530e510
-:label_exit_if_0x55ffc530e510
+jmp :label_exit_if_0x55e503a92510
+:label_exit_if_0x55e503a92510
 PUSH [1]
 PUSH 1
 ADD
@@ -95,8 +95,8 @@ PUSH 20
 PUSH [1]
 A
 PUSH 0
-ja :label_0x55ffc530e180
-:label_not_cond_0x55ffc530e180
+ja :label_0x55e503a92180
+:label_not_cond_0x55e503a92180
 PUSH [0]
 PUSH 1
 ADD
@@ -106,7 +106,7 @@ PUSH 20
 PUSH [0]
 A
 PUSH 0
-ja :label_0x55ffc530dfd0
-:label_not_cond_0x55ffc530dfd0
+ja :label_0x55e503a91fd0
+:label_not_cond_0x55e503a91fd0
 SHOW_RAM
 HLT
