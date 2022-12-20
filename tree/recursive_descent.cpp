@@ -953,7 +953,7 @@ Node *getPrimaryExpression(Tokens *tokens,
     }
     else
     {
-        value = getArray(tokens, index, name_table);
+        value = getArray(tokens, index, name_table, array_info);
         if (value)
             return value;
         else if (TOKEN.type == KEYWORD_TOKEN)
