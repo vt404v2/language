@@ -40,81 +40,106 @@
 // getValue ::= [double] | getVariable
 // getVariable ::= ['x'-'z', 'X'-'Z']
 
+struct ArrayInfo
+{
+    size_t array_id = BUFFER_SIZE;
+    size_t array_ids[BUFFER_SIZE] = {0};
+};
+
+
 Node *recursiveDescent(Tokens *tokens,
                        size_t *index,
                        char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
 
 Node *getLogOp(Tokens *tokens,
                size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+               ArrayInfo *array_info);
 
 Node *getAddSub(Tokens *tokens,
                 size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                ArrayInfo *array_info);
 
 Node *getMulDiv(Tokens *tokens,
                 size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                ArrayInfo *array_info);
 
 Node *getPow(Tokens *tokens,
              size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+             ArrayInfo *array_info);
 
 Node *getVarDec(Tokens *tokens,
                 size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                ArrayInfo *array_info);
 
 Node *getVarInit(Tokens *tokens,
                  size_t *index,
-                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                 char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                 ArrayInfo *array_info);
 
 Node *getArrayInit(Tokens *tokens,
                    size_t *index,
-                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                   ArrayInfo *array_info);
 
 Node *getArrayDec(Tokens *tokens,
                   size_t *index,
-                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                  ArrayInfo *array_info);
 
 Node *getIf(Tokens *tokens,
             size_t *index,
-            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+            ArrayInfo *array_info);
 
 Node *getWhile(Tokens *tokens,
                size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+               ArrayInfo *array_info);
 
 Node *getSqrt(Tokens *tokens,
               size_t *index,
-              char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+              char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+              ArrayInfo *array_info);
 
 Node *getSin(Tokens *tokens,
              size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+             ArrayInfo *array_info);
 
 Node *getCos(Tokens *tokens,
              size_t *index,
-             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+             char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+             ArrayInfo *array_info);
 
 Node *getInputFunction(Tokens *tokens,
                        size_t *index,
-                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                       char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                       ArrayInfo *array_info);
 
 Node *getOutFunction(Tokens *tokens,
                      size_t *index,
-                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                     ArrayInfo *array_info);
 
 Node *getReturn(Tokens *tokens,
                 size_t *index,
-                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                ArrayInfo *array_info);
 
 Node *getCodeBlock(Tokens *tokens,
                    size_t *index,
-                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                   char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                   ArrayInfo *array_info);
 
 Node *getDefFunction(Tokens *tokens,
                      size_t *index,
-                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                     char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                     ArrayInfo *array_info);
 
 void changeFuncVarsToArgVariables(Node *node, Node *params);
 
@@ -122,27 +147,33 @@ void checkId(Node *node, Node *params, bool *is_arg_var);
 
 Node *getCallFunction(Tokens *tokens,
                       size_t *index,
-                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                      char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                      ArrayInfo *array_info);
 
 Node *getNegativeExpression(Tokens *tokens,
                             size_t *index,
-                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                            char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                            ArrayInfo *array_info);
 
 Node *getPrimaryExpression(Tokens *tokens,
                            size_t *index,
-                           char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                           char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                           ArrayInfo *array_info);
 
 Node *getValue(Tokens *tokens,
                size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+               ArrayInfo *array_info);
 
 Node *getVariable(Tokens *tokens,
                   size_t *index,
-                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+                  char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+                  ArrayInfo *array_info);
 
 Node *getArray(Tokens *tokens,
                size_t *index,
-               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE]);
+               char (*name_table)[BUFFER_SIZE][BUFFER_SIZE],
+               ArrayInfo *array_info);
 
 bool is_keyword(char *word);
 
