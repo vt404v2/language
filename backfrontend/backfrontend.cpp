@@ -61,10 +61,20 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             {
                 case ASSIGN_OP:
                     printSpaces(num_spaces, fp);
-                    fprintf(fp,
-                            "%s = ",
-                            tree->var_name_table[LEFT_NODE->value.dec_value]);
-                    printNode(tree, RIGHT_NODE, fp, 0);
+                    if (LEFT_TYPE == ARRAY)
+                    {
+                        fprintf(fp, "array_%zu$", LEFT_NODE->value.var_value);
+                        printNode(tree, LEFT_NODE->left, fp, 0);
+                        fprintf(fp, "$ = ");
+                        printNode(tree, RIGHT_NODE, fp, 0);
+                    }
+                    else
+                    {
+                        fprintf(fp,
+                                "%s = ",
+                                tree->var_name_table[LEFT_NODE->value.dec_value]);
+                        printNode(tree, RIGHT_NODE, fp, 0);
+                    }
                     break;
 #define BACKPRINT_OPER(oper, value)         \
     case ((oper)):                          \
@@ -141,8 +151,19 @@ void printNode(Tree *tree, Node *node, FILE *fp, int num_spaces)
             printSpaces(num_spaces, fp);
             fprintf(fp, "%s", tree->var_name_table[VALUE.var_value]);
             break;
+        case ARRAY_DEC:
+            printSpaces(num_spaces, fp);
+            fprintf(fp, "arr array_%zu$%zu$", VALUE.var_value, LEFT_NODE->value.var_value);
+            break;
+        case ARRAY:
+            printSpaces(num_spaces, fp);
+            fprintf(fp, "array_%zu$", VALUE.var_value);
+            printNode(tree, LEFT_NODE, fp, 0);
+            fprintf(fp, "$");
+            break;
         case WHILE:
         {
+            printSpaces(num_spaces, fp);
             fprintf(fp, "elihw ("); // <cringe> while </cringe>
             printNode(tree, LEFT_NODE, fp, 0);
             fprintf(fp, ")\n");
