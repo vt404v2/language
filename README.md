@@ -154,6 +154,9 @@ fact
 }
 ```
 
+Tree image example:
+
+![tree example](internal/tree.jpg)
 
 ## Project structure
 
