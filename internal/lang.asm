@@ -63,8 +63,8 @@ POP rax
 PUSH [2]
 A
 PUSH 0
-jbe :label_not_cond_0x55e475c90630
-:label_0x55e475c90630
+jbe :label_not_cond_0x55bec5c4d630
+:label_0x55bec5c4d630
 PUSH 0
 POP [3]
 PUSH [3]
@@ -80,8 +80,8 @@ POP rax
 PUSH [3]
 A
 PUSH 0
-jbe :label_not_cond_0x55e475c907e0
-:label_0x55e475c907e0
+jbe :label_not_cond_0x55bec5c4d7e0
+:label_0x55bec5c4d7e0
 PUSH [2]
 PUSH rax
 PUSH 5
@@ -161,8 +161,8 @@ MUL
 PUSH [4]
 A
 PUSH 0
-jbe :label_0x55e475c90ff0
-:label_0x55e475c90e40
+jbe :label_0x55bec5c4dff0
+:label_0x55bec5c4de40
 PUSH 1
 PUSH [2]
 PUSH rax
@@ -182,8 +182,8 @@ ADD
 POP rbx
 POP [rbx]
 PUSH [rbx]
-jmp :label_exit_if_0x55e475c90cf0
-:label_0x55e475c90ff0
+jmp :label_exit_if_0x55bec5c4dcf0
+:label_0x55bec5c4dff0
 PUSH 0
 PUSH [2]
 PUSH rax
@@ -203,8 +203,8 @@ ADD
 POP rbx
 POP [rbx]
 PUSH [rbx]
-jmp :label_exit_if_0x55e475c90cf0
-:label_exit_if_0x55e475c90cf0
+jmp :label_exit_if_0x55bec5c4dcf0
+:label_exit_if_0x55bec5c4dcf0
 PUSH [3]
 PUSH 1
 ADD
@@ -222,8 +222,8 @@ POP rax
 PUSH [3]
 A
 PUSH 0
-ja :label_0x55e475c907e0
-:label_not_cond_0x55e475c907e0
+ja :label_0x55bec5c4d7e0
+:label_not_cond_0x55bec5c4d7e0
 PUSH [2]
 PUSH 1
 ADD
@@ -241,8 +241,8 @@ POP rax
 PUSH [2]
 A
 PUSH 0
-ja :label_0x55e475c90630
-:label_not_cond_0x55e475c90630
+ja :label_0x55bec5c4d630
+:label_not_cond_0x55bec5c4d630
 PUSH 0
 PUSH rax
 PUSH 5
